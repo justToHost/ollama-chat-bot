@@ -4,6 +4,9 @@ import { sendAndDisplayMessage } from "./handle-submit-message"
 
 
 const fetchResponse = async(userQuestion) => {
+
+  const loading = 'thinking...'
+  sendAndDisplayMessage(loading,'systemMsg')
   const response = await axios.post('/api/submitQuestion', {question:userQuestion})
 
   console.log(response, 'response')
