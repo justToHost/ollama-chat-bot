@@ -2,11 +2,23 @@
 import express from "express"
 import {Ollama} from "ollama"
 import axios from "axios"
+import dotenv from "dotenv"
+import OpenAI from "openai"
+
+
+dotenv.config()
 
 const ollama = new Ollama()
 const app = express()
 app.use(express.json())
-const model = 'gemma3:1b'
+
+
+const client = new OpenAI({
+    apiKey: process.env.GROQ_API_KEY,
+    baseURL: "https://api.groq.com/openai/v1",
+});
+
+
 
 
 app.post('/api/submitQuestion', async(req,res)=>{
@@ -16,55 +28,63 @@ app.post('/api/submitQuestion', async(req,res)=>{
     if(!question) return res.json({message : 'no message provided !'})
     
         // step 1 detect language of question
-    const askedLang = detectLanguage(question)
-     
-  
+    const askedLang = await detectLanguage(question)
+       
      const relevantInfo =  await searchKnowledgeBase(question)
-     console.log('answered question in english so far ', relevantInfo)
+      console.log('answered question in english so far ', relevantInfo)
 
     //  step 3 translate the english text back to user questoin language
 
-    console.log(askedLang, ' this should usually be persian ')
-   
   try {
-   const answer = await ollama.generate({
-      model: model, 
-      prompt: ` answer the question ${question} as precise as possible 
-      looking up the context ${context}  but dont say based on the provided text.`
-    });
+    const response = await client.responses.create({
+    model: process.env.CURRENT_MODEL,
+    input: ` answer the question ${question} 
+    only based on this context ${relevantInfo}. 
+    and if the question was irrelevant , 
+    respond : "sorry , its irrevant !" in the language of asked question `
+});
 
-    const simplifiedAnswer =  answer.response.replace(/\*\*/g, '')
+    const simplifiedAnswer =  response.output_text
 
-     const targetLanguageAnswer = await translateWithOllama(answer.response, askedLang)
+     console.log(simplifiedAnswer, ' the answer ', ' in ', askedLang)
 
+     const  targetLanguageAnswer = await translateText(simplifiedAnswer, askedLang)
 
-     return console.log(targetLanguageAnswer)
 
     res.json({
         success : true,
         answer : targetLanguageAnswer
     })
   } catch (e) {
-    console.log(`❌ ${model} failed`);
+    console.log(`❌ model failed with an error`);
   }
 
 })
 
+async function detectLanguage(question) {
+  
+  const response = await client.responses.create({
+    model: process.env.CURRENT_MODEL,
+    input: ` you are a master class translator,  
+    give me the exact language of this ${question}
+     return just the name of the language. Ex : "pasho" or "dari" or "persian" `
+});
 
-// auto detect the language
-
-function detectLanguage(question) {
-  // Detects both Dari AND Pashto (same Arabic script)
-  return /[\u0600-\u06FF]/.test(question) ? 'afghan' : 'english';
+console.log('output of the confirmation language', response.output)
+return response.output_text
 }
 
- async function translateWithOllama(askedText, targetLang) {
-    
-    const response = await ollama.generate({
-        model: model,
-        prompt: `Translate "${askedText}" to "${targetLang} for educational purpose !"`
-    });
-        return response.response
+ async function translateText(askedText, targetLang) {  
+  const response = await client.responses.create({
+    model: process.env.CURRENT_MODEL,
+    input: `Translate this "${askedText}" to "${targetLang} 
+    only if text is in other than english , 
+    otherwise give it as is without revealing it is in english`
+});
+
+ console.log('translated text ',response.output_text)
+
+        return response.output_text
 }
 
 // You also need the searchKnowledgeBase function
@@ -74,12 +94,7 @@ async function searchKnowledgeBase(question) {
 console.log('the question to be translated to english', question)
 
 //tep 2 : question question should be translated to english since data is in english
-//    const translatedQuestion = await translateWithOllama(question,'English')
-const nationalLang = 'fa' || 'ps'
-
-const translatedQuestion = await translateText(question,'fa','en')
-
-  return console.log(`translated question ${askedLang} to english  `, translatedQuestion)
+//    const translatedQuestion = await translateText(question,'English')
 
 
   const companyData = [
@@ -95,24 +110,7 @@ const translatedQuestion = await translateText(question,'fa','en')
       temperatures ever recorded on Earth.`
   ];
   
-//   const keywords = translatedQuestion.toLowerCase().split(' ');
-
-//   const relevant = companyData.filter(info => 
-//     keywords.some(keyword => info.toLowerCase().includes(keyword))
-//   );
-  
-//   return relevant.join(' ') || "No specific information found in our database";
 return companyData;
-}
-
-async function translateText(text, fromLang, toLang) {
-  const response = await axios.post('https://libretranslate.com/translate', {
-      q: text,
-      source: fromLang, // 'ps' or 'fa'
-      target: toLang    // 'en' or vice versa
-  });
-     console.log(response, 'response of libre translation ')
-  return response
 }
 
 app.listen(3001, ()=>{
