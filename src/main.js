@@ -7,7 +7,9 @@ document.querySelector('#app').innerHTML = `
   <div class="bot">Robot</div>
 
   <div class="container">
-        <div class="chats-area"></div>
+        <div class="chats-area">
+          <p class="systemMsg message" >How can i help you ?</p>
+        </div>
 
         <div class="chat-input-panel">
             <input class="inputMsg" type="text" placeholder="add your question">
