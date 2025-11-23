@@ -5,7 +5,12 @@ import fetchResponse from "./fetchResponse.js"
 export function sendQuestion(element){
 
    element.addEventListener('click', async()=>{
+
+
     let input = document.querySelector('.inputMsg')
+
+    if(input.value  === '') return alert('please provide your question !')
+        
     const inputMessage = input.value
     sendAndDisplayMessage(inputMessage, 'user-message')
     await fetchResponse(inputMessage)

@@ -41,7 +41,7 @@ body{
   height: 95%;
   overflow: auto;
   border-radius: 10px;
-  display: none;
+  /* display: none; */
 }
 
 
@@ -84,14 +84,38 @@ body{
     outline: none;
     border: none;
     background-color: none;
+    padding: 10px;
 }
 
-.chat-input-panel button{
-    outline: none;
-    background: purple;
-    border: 1px solid purple;
-    color: #fff;
-    padding: 10px 17px;
-    border-radius: 14px;
+.chat-input-panel .file-upload-buttons{
+    display: flex;
+   align-items: center;
+   justify-content: end;
+   gap: 3px;
+
 }
+
+
+.chat-input-panel button{
+       outline: none;
+    /* background: purple; */
+    border: 1px solid purple;
+    /* color: #fff; */
+    padding: 10px 17px;
+    padding: 5px 7px;
+    border-radius: 30px;
+}
+
+.chat-input-panel button:hover{
+    background-color: purple;
+}
+
+.chat-input-panel button:hover svg{
+    fill: #efefef !important;
+}
+.chat-input-panel button svg{
+    width: 20px;
+    height: 20px;
+}
+
 
