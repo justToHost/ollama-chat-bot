@@ -2,6 +2,7 @@ import '../styles/style.css'
 import { sendQuestion } from './handle-submit-message.js'
 import handleBotClick from './handleBotClick.js'
 import handleUploadFile from './handleUploadFile.js'
+import handlePastedFile from './handlePastedFile.js'
 document.querySelector('#app').innerHTML = `
 
   <div class="bot">Robot</div>
@@ -12,6 +13,7 @@ document.querySelector('#app').innerHTML = `
         </div>
 
         <div class="chat-input-panel">
+              <div id="preview"></div>
             <input class="inputMsg" type="text" required placeholder="add your question">
              <div class="file-upload-buttons">
                 <button class="upload-file">
@@ -31,3 +33,4 @@ sendQuestion(document.querySelector('.submit-question-btn'))
 handleBotClick()
 
 handleUploadFile(document.querySelector('.upload-file'))
+handlePastedFile()

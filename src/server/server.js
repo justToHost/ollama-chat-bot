@@ -1,5 +1,5 @@
 
-import express from "express"
+import express, { response } from "express"
 import {Ollama} from "ollama"
 import axios from "axios"
 import dotenv from "dotenv"
@@ -10,6 +10,8 @@ const require = createRequire(import.meta.url);
 const {PDFParse} = require('pdf-parse');
 import path, { parse } from "path"
 import { fileURLToPath } from "url"
+import Tesseract from "tesseract.js"
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -134,6 +136,35 @@ const text = await parser.getText()
  
 return text.pages[0].text
 }
+
+
+// scanning file upload
+
+app.post('/api/upload/doc', async(req,res)=>{
+
+  const {file} = req.body
+
+
+  if(!file) return res.json({message : 'invalid or unknown file'})
+
+  const result = await Tesseract.recognize(
+    file,
+    'eng', // language
+    { logger: m => console.log(m) } // optional logger
+  );
+  
+  const text = result.data.text
+  return console.log(text)
+  const cleanText = Buffer.from(text, 'binary').toString('utf8'); // Rarely needed
+  console.log(cleanText, 'clean text')
+
+  res.json({
+    success : true,
+    parsedText : text,
+    message : 'success parse'
+  })
+
+})
 
 app.listen(3001, ()=>{
     console.log('now running on port 3001')
