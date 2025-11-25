@@ -1,6 +1,8 @@
 
 import fetchResponse from "./fetchResponse.js"
-// import fixHeight from "./fixHeight.js"
+import { parseFile } from "./handleUploadFile.js"
+import handlePastedFile from "./handlePastedFile.js"
+
 
 export function sendQuestion(element){
 
@@ -8,13 +10,20 @@ export function sendQuestion(element){
 
 
     let input = document.querySelector('.inputMsg')
+    const inputPanel = document.querySelector('.chat-input-panel')
 
-    if(input.value  === '') return alert('please provide your question !')
+    const pt = sessionStorage.getItem('parsedText')
+
+    if(input.value  === '' && !pt ) return alert('please provide your question !')
         
-    const inputMessage = input.value
+    const parsedText = sessionStorage.getItem('parsedText')
+    const inputMessage = input.value || parsedText
+
     sendAndDisplayMessage(inputMessage, 'user-message')
     await fetchResponse(inputMessage)
     input.value = ''
+    sessionStorage.removeItem('parsedText')
+    document.querySelector('#preview').innerHTML = ''
    })
 }
 

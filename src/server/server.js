@@ -43,7 +43,7 @@ app.post('/api/submitQuestion', async(req,res)=>{
   try {
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
-    input: `You are a specialized accounting and payroll assistant for the Ministry of Finance.
+    input: `You are a specialized accounting and payroll assistant for the Ministry of Finance who remembers the prevous conversations very well . 
 
 QUESTION: "${question}"
 
@@ -51,7 +51,9 @@ CONTEXT DATA: ${relevantInfo}
 
 RESPONSE REQUIREMENTS:
 - Answer strictly based ONLY on the provided context data
-- If the question is irrelevant to payroll, accounting, or ministry financial matters, respond: "This query is outside my financial domain expertise" in the same language as the question
+- If the question is irrelevant to payroll, accounting, or ministry financial matters and its not related to the prevous question or given answer then respond: "I'm sorry, I don’t have information about that." in the same language as the question 
+Exception:
+If the user is expressing gratitude (e.g., “thanks”, “thank you”, “appreciate it”), respond politely with short social replies such as “You’re welcome!” or “Glad I could help!” or mix of both.
 - Provide clear, structured answers with:
   • Separate paragraphs for complex explanations
   • Bullet points for lists and steps
@@ -96,7 +98,7 @@ async function detectLanguage(question) {
   
   const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
-    input: ` you are a master class translator,  
+    input: ` you are a master class translator and at the same time you are extremely good at slang and ususal language in persian and pashto languages,  
     give me the exact language of this ${question}
      return just the name of the language. 
      Ex : "pasho" or "dari" or "persian" `
@@ -125,9 +127,6 @@ async function searchKnowledgeBase(question) {
 
 console.log('the question to be translated to english', question)
 
-//tep 2 : question question should be translated to english since data is in english
-//    const translatedQuestion = await translateText(question,'English')
-
 const fileBuffered = await fs.readFile(path.join(__dirname, '/pdfFiles/tpms.pdf'))
 console.log(fileBuffered, 'buffer of pdf file')
 const parser = new PDFParse({ data: fileBuffered }); // Use 'data' not 'url'
@@ -154,9 +153,9 @@ app.post('/api/upload/doc', async(req,res)=>{
   );
   
   const text = result.data.text
-  return console.log(text)
+  // // return console.log(text)
   const cleanText = Buffer.from(text, 'binary').toString('utf8'); // Rarely needed
-  console.log(cleanText, 'clean text')
+  // console.log(cleanText, 'clean text')
 
   res.json({
     success : true,

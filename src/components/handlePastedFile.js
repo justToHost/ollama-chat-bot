@@ -1,4 +1,6 @@
 import { parseFile } from "./handleUploadFile"
+import { compressImage } from "./handleUploadFile"
+import { readAndBufferFile } from "./handleUploadFile"
 
 const handlePastedFile = () => {
     const input = document.querySelector('.inputMsg')
@@ -14,18 +16,19 @@ const handlePastedFile = () => {
                 const imageUrl = URL.createObjectURL(file)
 
                 const preview = document.querySelector('#preview')
-                const imgEl = `<img src="${imageUrl}" />`
-                    preview.innerHTML = imgEl
 
-                    // now extract it 
-                  readAndBufferFile(file)
-                  return console.log(pastedFile)
+                    preview.innerHTML = 'parsing...'
 
+                    const compressedImage = await compressImage(file)
 
-                   console.log(base64String, 'buffered pasted file')
+                   // now extract it 
+                  const base64 = await readAndBufferFile(compressedImage)
+
+                   console.log(base64, 'buffered pasted file')
                     
-                   console.log('parsing ...', base64String)
-                    const parsedPastedFile = await parseFile(base64String)
+                   console.log('parsing ...', base64)
+                    const parsedText = await parseFile(base64,preview)
+                    sessionStorage.setItem('parsedText', parsedText)
 
             }
         }

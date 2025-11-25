@@ -5,57 +5,55 @@ import fetchResponse from "./fetchResponse"
 
 const handleUploadFile = (element) => {
 
-    async function pickAndParseFile(el){
-        const file = el.target.files[0]
-        const compressedImage = await compressImage(file)
-
-      
-        const base64 = readAndBufferFile(compressedImage)
-
-        const imgUrl = URL.createObjectURL(file)
-
-        const chatInputPanel = document.querySelector('.chat-input-panel')
-        console.log(chatInputPanel)
-        const preview = document.getElementById('preview')
-        console.log(preview)
-
-        const imgEl = `<img src="${imgUrl}" />`
-        preview.innerHTML = imgEl
-
-          const parsedText = await parseFile(base64)
-          const question_inputEl = document.querySelector('.inputMsg')
-          question_inputEl.value = parsedText
-    }
-
    element.addEventListener('click',()=>{
      console.log('file clicked')
      const fileInput = document.querySelector('.file-input')
      const file = fileInput.files
+
      fileInput.addEventListener('change', async(e)=>{
         await pickAndParseFile(e)
      })
-    //  pickAndParseFile(file)
      fileInput.click()
    })
 }
 
+async function pickAndParseFile(el){
+        const file = el.target.files[0]
 
-function readAndBufferFile(compressedFile){
-   let readFile;
-   const reader = new FileReader()
-    reader.onload = async(e)=>{    
-      
-      readFile =  e.target.result
-      console.log(readFile)
-      return readFile
+          const chatInputPanel = document.querySelector('.chat-input-panel')
+          console.log(chatInputPanel)
+          const preview = document.getElementById('preview')
+          console.log(preview)
+
+          preview.innerHTML = 'parsing ...'
+
+          // first compress the file to get ready for server
+        const compressedImage = await compressImage(file)
+
+        //bufferize the compressed file to be  accepted by api
+        const base64 = await readAndBufferFile(compressedImage)
+
+        console.log('base 64 returned ', base64)
+
+      // parsed text out of the file
+        const parsedText = await parseFile(base64,preview)
+        sessionStorage.setItem('parsedText', parsedText)
+    }
+
+
+async function readAndBufferFile(compressedFile){
+
+   return new Promise((resolve, reject)=>{
+     const reader = new FileReader()
+
+      reader.onload = (e)=> resolve(e.target.result)
+      reader.onerror = reject
+
+      reader.readAsDataURL(compressedFile)
+   })
 }
-  reader.readAsDataURL(compressedFile)
-   
-}
 
-async function parseFile(file){
-
-//  return console.log(file)
+async function parseFile(file,filePreview){
 
   const response = await axios.post('/api/upload/doc',{file})
 
@@ -63,6 +61,9 @@ async function parseFile(file){
 
   if(response.status === 200 && response.data.success){
     console.log(response.data)
+
+     const imgEl = `<img src="${file}" />`
+    filePreview.innerHTML = imgEl
 
     const {parsedText} = response.data
 
@@ -93,4 +94,4 @@ function compressImage(file, maxWidth = 800) {
 }
 
 export default handleUploadFile 
-export {parseFile}
+export {parseFile, compressImage, readAndBufferFile}
