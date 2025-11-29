@@ -11,6 +11,7 @@ const {PDFParse} = require('pdf-parse');
 import path, { parse } from "path"
 import { fileURLToPath } from "url"
 import Tesseract from "tesseract.js"
+import paymentSystemTrainingData from "./trainedData.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -36,42 +37,46 @@ app.post('/api/submitQuestion', async(req,res)=>{
     const askedLang = await detectLanguage(question)
        
      const relevantInfo =  await searchKnowledgeBase(question)
-      console.log('answered question in english so far ', relevantInfo)
+      console.log('answered ', relevantInfo)
 
     //  step 3 translate the english text back to user questoin language
 
   try {
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
-    input: `You are a specialized accounting and payroll assistant for the Ministry of Finance who remembers the prevous conversations very well . 
+    input: `You are a specialized accounting and payroll assistant for the Ministry of Finance who remembers the previous conversations very well.
 
 QUESTION: "${question}"
 
 CONTEXT DATA: ${relevantInfo}
 
 RESPONSE REQUIREMENTS:
-- Answer strictly based ONLY on the provided context data
-- If the question is irrelevant to payroll, accounting, or ministry financial matters and its not related to the prevous question or given answer then respond: "I'm sorry, I don’t have information about that." in the same language as the question 
+- MY system is structured so that salary managers across different administrations can only access their own administration's data for adding, updating, deleting, and reading records, with some exceptions requiring system support staff assistance.
+- Salary managers cannot access other institutions' data and are not developers.
+- Direct users based on their authority levels and privileges, noting that full access is reserved for support managers in the capital.
+
+- Answer strictly based ONLY on the provided context and previous conversation flow.
+- If the question is irrelevant to payroll, accounting, or ministry financial matters and unrelated to previous discussions, respond: "I'm sorry, I don't have information about that." in the same language as the question.
+
 Exception:
-If the user is expressing greeting or gratitude (e.g., "hi", "helo", “thanks”, “thank you”, “appreciate it”), respond in your own way.
+- Respond appropriately to greetings or gratitude.
+- Answer follow-up questions related to previous discussions based on your knowledge.
 
 - Provide clear, structured answers with:
   • Separate paragraphs for complex explanations
   • Bullet points for lists and steps
-  • Bold section headings without using markdown symbols
+  • Bold section headings (without markdown)
   • Precise numerical data when available
 
 SPECIALIZED FOCUS AREAS:
-• Salary calculations and deductions
-• Tax regulations and compliance
-• Employee payroll records
-• Financial reporting standards
-• Government accounting procedures
-• Budget allocation and management
-• Audit requirements and documentation
+• TPMS payroll system operations
+• Salary calculations and deductions (کسرات)
+• Employee attendance (حاضری) and leave management
+• M16, M41 reports and banking documents
+• Financial reporting and compliance
+• System troubleshooting and error resolution
 
-Maintain professional tone suitable for ministry-level financial operations.`
-});
+Maintain professional tone suitable for ministry-level financial operations.`});
 
     const simplifiedAnswer =  response.output_text
 
@@ -125,16 +130,37 @@ return response.output_text
 // You also need the searchKnowledgeBase function
 async function searchKnowledgeBase(question) {
 
+   const shortAnswer = getQuickAnswer(question)
 
-console.log('the question to be translated to english', question)
+ console.log('the short answer from trained data', shortAnswer)
+ if(shortAnswer) {
+  return shortAnswer.answer;
+ }else{
+const detailedData = await getDetailedDataForQuestion();
+ return detailedData;
 
-const fileBuffered = await fs.readFile(path.join(__dirname, '/pdfFiles/tpms.pdf'))
+ }
+
+
+}
+
+async function getDetailedDataForQuestion() {
+  const fileBuffered = await fs.readFile(path.join(__dirname, '/pdfFiles/tpms.pdf'))
 console.log(fileBuffered, 'buffer of pdf file')
 const parser = new PDFParse({ data: fileBuffered }); // Use 'data' not 'url'
 
 const text = await parser.getText()
- 
-return text.pages[0].text
+  return text;
+
+}
+// For AI quick responses:
+function getQuickAnswer(userQuestion) {
+const foundAnswer =  paymentSystemTrainingData.find(item => 
+    item.keywords.some(keyword => userQuestion.includes(keyword))
+  );
+
+   console.log('found answer', foundAnswer)
+   return foundAnswer;
 }
 
 

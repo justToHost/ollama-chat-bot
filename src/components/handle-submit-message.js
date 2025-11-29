@@ -17,9 +17,19 @@ export function sendQuestion(element){
     if(input.value  === '' && !pt ) return alert('please provide your question !')
         
     const parsedText = sessionStorage.getItem('parsedText')
-    const inputMessage = input.value || parsedText
+    const userMessage =  input.value
+    const inputMessage = parsedText ? parsedText + userMessage : userMessage
 
-    sendAndDisplayMessage(inputMessage, 'user-message')
+    const base64Img = inputPanel.querySelector('img') ? inputPanel.querySelector('img').src : null  
+
+    const chatData = {
+      image : base64Img,
+      message : userMessage
+    }
+
+    console.log(chatData.image, 'image in base64  ')
+
+    sendAndDisplayMessage(chatData, 'user-message')
     await fetchResponse(inputMessage)
     input.value = ''
     sessionStorage.removeItem('parsedText')
@@ -27,10 +37,22 @@ export function sendQuestion(element){
    })
 }
 
-function sendAndDisplayMessage(message,classes){
+function sendAndDisplayMessage(chatData,classes){
+  
     const userMsgEl = document.createElement('p')
     userMsgEl.classList.add(classes, 'message')
-    userMsgEl.innerHTML = formatMessage(message)
+    userMsgEl.innerHTML = classes === 'user-message' ?
+
+      `${chatData.image ?
+     `<img class="message-image" style="width: 40px; height : 40px;" 
+       src="${chatData.image ? chatData.image : ''}" />
+      `:`
+        ${chatData.message ? formatMessage(chatData.message) : '' }
+
+      `}
+    `
+    :
+      formatMessage(chatData)
 
     document.querySelector('.chats-area').append(userMsgEl)
      
@@ -45,6 +67,8 @@ function sendAndDisplayMessage(message,classes){
 
 // Format the message with proper HTML
 function formatMessage(text) {
+
+ console.log('formatting message text ', text)
     return text
         // Convert line breaks to <br> first
         .replace(/\n/g, '<br>')
