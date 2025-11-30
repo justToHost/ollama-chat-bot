@@ -125,4 +125,11 @@ body{
     height: 20px;
 }
 
+.file-upload-buttons .submit-question-btn{
+    display: none;
+}
+
+.submit-question-btn.show{
+    display: inline-block;
+}
 
