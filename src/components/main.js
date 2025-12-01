@@ -49,9 +49,6 @@ handlePastedFile()
 handleVoiceRecord()
 const inputMsg = document.querySelector('.inputMsg')
 
-
-toggleSendIcon()
-
 inputMsg.addEventListener('input', toggleSendIcon)
 
 
@@ -64,3 +61,5 @@ sendBtn.classList.add('show')
  sendBtn.classList.remove('show')  
 }
 }
+
+export default toggleSendIcon

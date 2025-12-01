@@ -78,7 +78,7 @@ SPECIALIZED FOCUS AREAS:
 
 Maintain professional tone suitable for ministry-level financial operations.`});
 
-    const simplifiedAnswer =  response.output_text
+    const simplifiedAnswer = response.output_text
 
      console.log(simplifiedAnswer, ' the answer ', ' in ', askedLang)
 

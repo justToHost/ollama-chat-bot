@@ -2,6 +2,7 @@
 import fetchResponse from "./fetchResponse.js"
 import { parseFile } from "./handleUploadFile.js"
 import handlePastedFile from "./handlePastedFile.js"
+import toggleSendIcon from "./main.js"
 
 
 export function sendQuestion(element){
@@ -27,13 +28,14 @@ export function sendQuestion(element){
       message : userMessage
     }
 
-    console.log(chatData.image, 'image in base64  ')
 
     sendAndDisplayMessage(chatData, 'user-message')
     await fetchResponse(inputMessage)
     input.value = ''
     sessionStorage.removeItem('parsedText')
     document.querySelector('#preview').innerHTML = ''
+    toggleSendIcon()
+
    })
 }
 
@@ -44,7 +46,9 @@ function sendAndDisplayMessage(chatData,classes){
     userMsgEl.innerHTML = classes === 'user-message' ?
 
       `${chatData.image ?
-     `<img class="message-image" style="width: 40px; height : 40px;" 
+     `
+     <p class="message-text">${chatData.message ? formatMessage(chatData.message) : '' }</p> 
+     <img class="message-image" style="width: 80px; height : 50px;" 
        src="${chatData.image ? chatData.image : ''}" />
       `:`
         ${chatData.message ? formatMessage(chatData.message) : '' }
