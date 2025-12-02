@@ -43,7 +43,9 @@ function sendAndDisplayMessage(chatData,classes){
   
     const userMsgEl = document.createElement('p')
     userMsgEl.classList.add(classes, 'message')
-    userMsgEl.innerHTML = classes === 'user-message' ?
+    userMsgEl.innerHTML = 
+    
+    classes === 'user-message' ?
 
       `${chatData.image ?
      `
@@ -51,12 +53,20 @@ function sendAndDisplayMessage(chatData,classes){
      <img class="message-image" style="width: 80px; height : 50px;" 
        src="${chatData.image ? chatData.image : ''}" />
       `:`
+
         ${chatData.message ? formatMessage(chatData.message) : '' }
 
       `}
     `
     :
-      formatMessage(chatData)
+      `${!chatData.includes('thinking') ? 
+  `${formatMessage(chatData)}
+    <small style="display:block; margin-top:5px; color: #555;">was it useful ? 
+      <button class="feedback-btn" data-feedback="helpful">👍</button>
+      <button class="feedback-btn" data-feedback="not-helpful">👎</button>
+    </small>
+  ` 
+  : formatMessage(chatData)}`
 
     document.querySelector('.chats-area').append(userMsgEl)
      

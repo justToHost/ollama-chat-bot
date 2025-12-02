@@ -14,7 +14,8 @@ let transcript = '';
 
         if(!isRecording){
 
-        
+         transcript = ''  // reset transcript for new recording
+         
          recognition = new webkitSpeechRecognition()
 
           recognition.continuous = true;  // Keep listening until manually stopped
