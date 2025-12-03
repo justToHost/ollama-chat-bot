@@ -12,12 +12,14 @@ import path, { parse } from "path"
 import { fileURLToPath } from "url"
 import Tesseract from "tesseract.js"
 import paymentSystemTrainingData from "./trainedData.js"
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+
+import db from "./DB/seed.js"
+
 dotenv.config()
-// console.log('pdf', stringify(pdf, '', 2))
+
 const ollama = new Ollama()
 const app = express()
 app.use(express.json())
