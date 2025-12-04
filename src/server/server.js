@@ -16,8 +16,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 
-import db from "./DB/seed.js"
-
 dotenv.config()
 
 const ollama = new Ollama()
@@ -38,8 +36,13 @@ app.post('/api/submitQuestion', async(req,res)=>{
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
        
-     const relevantInfo =  await searchKnowledgeBase(question)
-      console.log('answered ', relevantInfo)
+    console.log('language ', askedLang)
+
+     const relevantInfo = searchKnowledgeBase(question)
+
+      console.log(relevantInfo, 'releveant info')
+   
+
 
     //  step 3 translate the english text back to user questoin language
 
@@ -53,35 +56,20 @@ QUESTION: "${question}"
 CONTEXT DATA: ${relevantInfo}
 
 RESPONSE REQUIREMENTS:
-- MY system is structured so that salary managers across different administrations can only access their own administration's data for adding, updating, deleting, and reading records, with some exceptions requiring system support staff assistance.
-- Salary managers cannot access other institutions' data and are not developers.
-- Direct users based on their authority levels and privileges, noting that full access is reserved for support managers in the capital.
 
 - Answer strictly based ONLY on the provided context and previous conversation flow.
 - If the question is irrelevant to payroll, accounting, or ministry financial matters and unrelated to previous discussions, respond: "I'm sorry, I don't have information about that." in the same language as the question.
+- Dont make it too lengthy unnecessarily. 
 
 Exception:
 - Respond appropriately to greetings or gratitude.
 - Answer follow-up questions related to previous discussions based on your knowledge.
 
-- Provide clear, structured answers with:
-  • Separate paragraphs for complex explanations
-  • Bullet points for lists and steps
-  • Bold section headings (without markdown)
-  • Precise numerical data when available
-
-SPECIALIZED FOCUS AREAS:
-• TPMS payroll system operations
-• Salary calculations and deductions (کسرات)
-• Employee attendance (حاضری) and leave management
-• M16, M41 reports and banking documents
-• Financial reporting and compliance
-• System troubleshooting and error resolution
-
-Maintain professional tone suitable for ministry-level financial operations.`});
+`});
 
     const simplifiedAnswer = response.output_text
 
+      console.log(simplifiedAnswer, 'simlified answer')
      console.log(simplifiedAnswer, ' the answer ', ' in ', askedLang)
 
      const  targetLanguageAnswer = await translateText(simplifiedAnswer, askedLang)
@@ -102,17 +90,25 @@ Maintain professional tone suitable for ministry-level financial operations.`});
 
 })
 
+function searchKnowledgeBase(q){
+  const questonsPieces =  q.split(' ')
+
+  const trainedData = JSON.stringify(paymentSystemTrainingData, null, 2)
+  paymentSystemTrainingData.map(data => data)
+}
+
 async function detectLanguage(question) {
   
+    console.log(question, 'question ')
   const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
+
     input: ` you are a master class translator and at the same time you are extremely good at slang and ususal language in persian and pashto languages,  
     give me the exact language of this ${question}
      return just the name of the language. 
      Ex : "pasho" or "dari" or "persian" `
 });
 
-console.log('output of the confirmation language', response.output)
 return response.output_text
 }
 
@@ -129,23 +125,6 @@ return response.output_text
         return response.output_text
 }
 
-// You also need the searchKnowledgeBase function
-async function searchKnowledgeBase(question) {
-
-   const shortAnswer = getQuickAnswer(question)
-
- console.log('the short answer from trained data', shortAnswer)
- if(shortAnswer) {
-  return shortAnswer.answer;
- }else{
-const detailedData = await getDetailedDataForQuestion();
- return detailedData;
-
- }
-
-
-}
-
 async function getDetailedDataForQuestion() {
   const fileBuffered = await fs.readFile(path.join(__dirname, '/pdfFiles/tpms.pdf'))
 console.log(fileBuffered, 'buffer of pdf file')
@@ -155,15 +134,9 @@ const text = await parser.getText()
   return text;
 
 }
-// For AI quick responses:
-function getQuickAnswer(userQuestion) {
-const foundAnswer =  paymentSystemTrainingData.find(item => 
-    item.keywords.some(keyword => userQuestion.includes(keyword))
-  );
 
-   console.log('found answer', foundAnswer)
-   return foundAnswer;
-}
+
+
 
 
 // scanning file upload
