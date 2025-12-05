@@ -1,6 +1,5 @@
 
-import express, { response } from "express"
-import {Ollama} from "ollama"
+import express from "express"
 import axios from "axios"
 import dotenv from "dotenv"
 import OpenAI from "openai"
@@ -12,13 +11,12 @@ import path, { parse } from "path"
 import { fileURLToPath } from "url"
 import Tesseract from "tesseract.js"
 import paymentSystemTrainingData from "./trainedData.js"
+// import { unkownErrors } from "./trainedData.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-
 dotenv.config()
 
-const ollama = new Ollama()
 const app = express()
 app.use(express.json())
 
@@ -35,31 +33,46 @@ app.post('/api/submitQuestion', async(req,res)=>{
     
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
-       
-    console.log('language ', askedLang)
-
+      
      const relevantInfo = searchKnowledgeBase(question)
 
-      console.log(relevantInfo, 'releveant info')
-   
-
-
-    //  step 3 translate the english text back to user questoin language
+     console.log(relevantInfo, 'releveant info')
 
   try {
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
-    input: `You are a specialized accounting and payroll assistant for the Ministry of Finance who remembers the previous conversations very well.
+   input : `You are a payroll system expert for Afghanistan Ministry of Finance.
 
-QUESTION: "${question}"
+USER QUESTION: "${question}"
 
-CONTEXT DATA: ${relevantInfo}
+AVAILABLE KNOWLEDGE BASE (JSON array):
+${JSON.stringify(relevantInfo, null, 2)}
+
+INSTRUCTIONS:
+1. FIRST, filter the knowledge base to find entries MOST RELEVANT to the user's question
+2. RELEVANCE CRITERIA:
+   - Entry's "question_dari" field should contain keywords from user's question
+   - Entry's "tags" array should contain words from user's question  
+   - Entry's "user_friendly_title" should be similar to user's question
+3. If NO entries match the criteria, respond: "I don't have specific information about this issue. Please contact the relevant department."
+4. If MULTIPLE entries match, choose the ONE with highest relevance score
+5. ANSWER ONLY in Dari, using simple, non-technical language
+6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
+7. Structure response: Problem → Solution → Who to contact
+
+EXAMPLE:
+    "question_dari": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
+    "answer": "الف: حذف ام 41 و ام 16 باید حذف باشند بعدا کوشش شود."
+  "user_friendly_title": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
+    "simple_explanation": "الف: حذف ام 41 و ام 16 باید حذف باشند بعدا کوشش شود
+
+NOW, answer the user's question based on the knowledge base above: 
 
 RESPONSE REQUIREMENTS:
 
 - Answer strictly based ONLY on the provided context and previous conversation flow.
 - If the question is irrelevant to payroll, accounting, or ministry financial matters and unrelated to previous discussions, respond: "I'm sorry, I don't have information about that." in the same language as the question.
-- Dont make it too lengthy unnecessarily. 
+
 
 Exception:
 - Respond appropriately to greetings or gratitude.
@@ -69,10 +82,9 @@ Exception:
 
     const simplifiedAnswer = response.output_text
 
-      console.log(simplifiedAnswer, 'simlified answer')
-     console.log(simplifiedAnswer, ' the answer ', ' in ', askedLang)
-
-     const  targetLanguageAnswer = await translateText(simplifiedAnswer, askedLang)
+     const  targetLanguageAnswer = await 
+     translateText(simplifiedAnswer, askedLang)
+       console.log(targetLanguageAnswer, ' the answer ')
 
      const cleanAnswer = targetLanguageAnswer
         .replace(/\*\*/g, '')  // Remove bold markers
@@ -80,9 +92,11 @@ Exception:
         .replace(/\n\s*\n/g, '\n\n') // Clean multiple newlines
         .trim();
 
+        console.log(cleanAnswer, 'the clean answer ')
+
     res.json({
         success : true,
-        answer : cleanAnswer
+        answer :  cleanAnswer
     })
   } catch (e) {
     console.log(`❌ model failed with an error`);
@@ -91,10 +105,31 @@ Exception:
 })
 
 function searchKnowledgeBase(q){
-  const questonsPieces =  q.split(' ')
-
-  const trainedData = JSON.stringify(paymentSystemTrainingData, null, 2)
-  paymentSystemTrainingData.map(data => data)
+  const words = q.split(' ').filter(w => w.length > 1);
+  const query = q.toLowerCase();
+  
+  const scoredResults = paymentSystemTrainingData.map(data => {
+    let score = 0;
+    
+    // Check each word
+    words.forEach(word => {
+      if (data.question_dari?.includes(word)) score += 3;
+      if (data.tags?.some(tag => tag.includes(word))) score += 2;
+      if (data.user_friendly_title?.includes(word)) score += 2;
+      if (data.question_english?.includes(word)) score += 1;
+      if (data.error_signature?.includes(word)) score += 1;
+    });
+    
+    // Exact matches get bonus
+    if (data.question_dari?.includes(query)) score += 5;
+    
+    return { ...data, score };
+  })
+  .filter(item => item.score > 1) // Only items with some match
+  .sort((a, b) => b.score - a.score) // Highest score first
+  .slice(0, 3); // Top 3 matches
+  
+  return scoredResults;
 }
 
 async function detectLanguage(question) {
@@ -150,8 +185,12 @@ app.post('/api/upload/doc', async(req,res)=>{
 
   const result = await Tesseract.recognize(
     file,
-    'eng', // language
-    { logger: m => console.log(m) } // optional logger
+    'eng',
+    {
+    logger: m => console.log(m), // Keep logger for debugging
+    // Use CDN to avoid local file issues
+    corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.0.0/',
+  }
   );
   
   const text = result.data.text

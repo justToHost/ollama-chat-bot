@@ -29,6 +29,7 @@
     "pdf2json": "^4.0.0",
     "pdfjs-dist": "^5.4.394",
     "resolve": "^1.22.11",
-    "tesseract.js": "^6.0.1"
+    "tesseract.js": "^6.0.1",
+    "tesseract.js-core": "^6.0.0"
   }
 }
