@@ -54,8 +54,13 @@ body{
     width: fit-content;
     border-radius: 20px;
     margin: 10px 17px;
-    direction: rtl;
+    /* direction: rtl; */
 }
+.newChatBtn{
+    margin: 18px 50px 0 50px;
+    padding: 5px 9px;
+}
+
 
 .chats-area .systemMsg{
     margin-right: auto;
@@ -65,6 +70,9 @@ body{
 .chats-area .user-message{
     margin-left: auto;
     background-color: orangered;
+}
+.message.rightSide{
+    direction: rtl;
 }
 
 .chat-input-panel{

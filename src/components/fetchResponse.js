@@ -5,19 +5,33 @@ import { sendAndDisplayMessage } from "./handle-submit-message"
 
 const fetchResponse = async(userQuestion) => {
 
-  const loading = 'thinking...'
-  sendAndDisplayMessage(loading,'systemMsg')
+   createMessageLoading()
+
   const response = await axios.post('/api/submitQuestion', {question:userQuestion})
 
    console.log(response, 'response')
 
   if(response.status === 200 && response.data.success){
-    console.log('proceed !')
 
+    document.querySelector('.thinking').remove()
     const text = response.data.answer
     console.log('text answer from server ', text)
-    sendAndDisplayMessage(text,'systemMsg')
+
+    const lang = response.data.lang
+
+    sendAndDisplayMessage(text,'systemMsg', lang)
   }
 }
+
+function createMessageLoading(){
+  const El = document.createElement('p')
+  El.classList.add('systemMsg', 'thinking','message')
+
+  El.textContent = "thinking..."
+  document.querySelector('.chats-area').append(El)
+  
+}
+
+
 
 export default fetchResponse

@@ -1,8 +1,7 @@
 
 import fetchResponse from "./fetchResponse.js"
-import { parseFile } from "./handleUploadFile.js"
-import handlePastedFile from "./handlePastedFile.js"
-import toggleSendIcon from "./main.js"
+
+import { toggleSendIcon } from "./handleSendIconToggle.js"
 
 
 export function sendQuestion(element){
@@ -30,52 +29,66 @@ export function sendQuestion(element){
 
 
     sendAndDisplayMessage(chatData, 'user-message')
+
     await fetchResponse(inputMessage)
+
     input.value = ''
     sessionStorage.removeItem('parsedText')
     document.querySelector('#preview').innerHTML = ''
-    toggleSendIcon()
+    toggleSendIcon(
+      document.querySelector('.inputMsg'), 
+      document.querySelector('.submit-question-btn')
+    )
 
    })
 }
 
-function sendAndDisplayMessage(chatData,classes){
+
+function sendAndDisplayMessage(chatData,classes, lang = null){
+    const userMsgEl = createMessage(chatData,classes, lang)
+    
+    document.querySelector('.chats-area').append(userMsgEl)     
+    scrollToBottom()
+}
+
+function scrollToBottom() {
+const chatsArea = document.querySelector('.chats-area');
+chatsArea.scrollTop = chatsArea.scrollHeight;
+}
+
+function createMessage(chat,classes, lang = null){
   
-    const userMsgEl = document.createElement('p')
+  const userMsgEl = document.createElement('p')
     userMsgEl.classList.add(classes, 'message')
-    userMsgEl.innerHTML = 
+    userMsgEl.style.direction = lang === 'persian' || lang === 'pashto' ? 'rtl' : 'ltr'
+     userMsgEl.innerHTML = 
     
     classes === 'user-message' ?
 
-      `${chatData.image ?
+      `${chat.image ?
      `
-     <p class="message-text">${chatData.message ? formatMessage(chatData.message) : '' }</p> 
+     <p class="message-text">${chat.message ? 
+      formatMessage(chat.message) : '' }</p> 
      <img class="message-image" style="width: 80px; height : 50px;" 
-       src="${chatData.image ? chatData.image : ''}" />
+       src="${chat.image ? chat.image : ''}" />
       `:`
 
-        ${chatData.message ? formatMessage(chatData.message) : '' }
+        ${chat.message ? formatMessage(chat.message) : '' }
 
       `}
     `
     :
-      `${!chatData.includes('thinking') ? 
-  `${formatMessage(chatData)}
+      `${!chat.includes('thinking') ? 
+  `${formatMessage(chat)}
     <small style="display:block; margin-top:5px; color: #555;">was it useful ? 
       <button class="feedback-btn" data-feedback="helpful">👍</button>
       <button class="feedback-btn" data-feedback="not-helpful">👎</button>
     </small>
   ` 
-  : formatMessage(chatData)}`
+  : 
+  formatMessage(chat)}`;
 
-    document.querySelector('.chats-area').append(userMsgEl)
-     
-      scrollToBottom()
-   }
-
-   function scrollToBottom() {
-    const chatsArea = document.querySelector('.chats-area');
-    chatsArea.scrollTop = chatsArea.scrollHeight;
+  return userMsgEl
 }
 
 

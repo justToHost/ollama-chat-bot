@@ -11,6 +11,7 @@ import path, { parse } from "path"
 import { fileURLToPath } from "url"
 import Tesseract from "tesseract.js"
 import paymentSystemTrainingData from "./trainedData.js"
+import db from "./DB/seed.js"
 // import { unkownErrors } from "./trainedData.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -31,6 +32,15 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     if(!question) return res.json({message : 'no message provided !'})
     
+      // saveConversationTodb(question)
+
+      // const newConversation= db.prepare(`
+      //   INSERT INTO messages(conversation_id,role, content)
+      //   VALUES(?,?,?,?)
+      // `)
+
+      // newConversation
+
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
       
@@ -38,12 +48,20 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
      console.log(relevantInfo, 'releveant info')
 
+     const knowledgeBase = await getDetailedDataForQuestion()
+
   try {
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
    input : `You are a payroll system expert for Afghanistan Ministry of Finance.
 
 USER QUESTION: "${question}"
+
+Generate:
+1. 5 different ways a user might ask this same question (in ${askedLang})
+by generate i mean find out but do not render in the output
+2. Key technical terms and their synonyms
+3. Common misspellings or alternative phrasings
 
 AVAILABLE KNOWLEDGE BASE (JSON array):
 ${JSON.stringify(relevantInfo, null, 2)}
@@ -54,7 +72,11 @@ INSTRUCTIONS:
    - Entry's "question_dari" field should contain keywords from user's question
    - Entry's "tags" array should contain words from user's question  
    - Entry's "user_friendly_title" should be similar to user's question
-3. If NO entries match the criteria, respond: "I don't have specific information about this issue. Please contact the relevant department."
+
+3. If NO entries match the criteria, look on this knowledge base : 
+${knowledgeBase} and if still not match found then
+
+respond: "I don't have specific information about this issue. Please contact the relevant department."
 4. If MULTIPLE entries match, choose the ONE with highest relevance score
 5. ANSWER ONLY in Dari, using simple, non-technical language
 6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
@@ -84,7 +106,7 @@ Exception:
 
      const  targetLanguageAnswer = await 
      translateText(simplifiedAnswer, askedLang)
-       console.log(targetLanguageAnswer, ' the answer ')
+       console.log(targetLanguageAnswer, ' the answer')
 
      const cleanAnswer = targetLanguageAnswer
         .replace(/\*\*/g, '')  // Remove bold markers
@@ -96,7 +118,8 @@ Exception:
 
     res.json({
         success : true,
-        answer :  cleanAnswer
+        answer :  cleanAnswer,
+        lang : askedLang
     })
   } catch (e) {
     console.log(`❌ model failed with an error`);

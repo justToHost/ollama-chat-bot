@@ -1040,7 +1040,51 @@ const paymentSystemTrainingData = [
   "who_to_contact": "تیم توسعه نرم‌افزار - بخش دیتابیس",
   "technical_note": "Entity Framework Core InsertAsync failed due to unique constraint violation on index TX_EmployeeAttendance_Jazkin_FetchMonthly_FiscalYearId in table idbo_EmployeeAttendance. Duplicate composite key: (AttendanceCode: '1401-0401-953901', EmployeeId: 10052, FiscalYearId: 16). The SQL statement was terminated by the database engine.",
   "reference_code": "DB-DUPKEY-EF-002"
+},
+{
+  "type": "error",
+  "id": 1014,
+  "question_dari": "گزارش کارمندان به دلیل نداشتن شماره TIN بارگذاری نمی‌شود",
+  "question_english": "Employee report cannot load due to missing TIN numbers",
+  "answer": "سیستم نمی‌تواند گزارش کارمندان را ایجاد کند زیرا اطلاعات شماره TIN (شماره شناسایی مالیاتی) برای برخی کارمندان تکمیل نشده است. گزارش نیازمند این اطلاعات است.",
+  "category": "employee_management",
+  "tags": ["کارمندان", "TIN", "گزارش", "اطلاعات ناقص"],
+  "error_signature": "Invalid - Column called withoutAccountTimbpin can't be accessed for type Employee",
+  "user_friendly_title": "گزارش کارمندان به دلیل نداشتن شماره TIN ایجاد نمی‌شود",
+  "simple_explanation": "برای ایجاد گزارش کارمندان، سیستم نیاز دارد که شماره TIN (شناسه مالیاتی) همه کارمندان ثبت شده باشد. یک یا چند کارمند این اطلاعات را ندارند.",
+  "user_actions": [
+    "به صفحه مدیریت کارمندان بروید",
+    "کارمندانی که شماره TIN ندارند را پیدا کنید (معمولاً ستون 'TIN' یا 'Tax Number' خالی است)",
+    "شماره TIN معتبر برای هر کارمند را وارد کنید",
+    "اگر کارمند واقعاً شماره TIN ندارد، با بخش مالی درباره روش جایگزین مشورت کنید",
+    "پس از تکمیل اطلاعات، دوباره گزارش را اجرا کنید"
+  ],
+  "who_to_contact": "مدیر منابع انسانی یا مسئول ثبت اطلاعات کارمندان",
+  "technical_note": "پروسیجر 'ApplyVEmployeeuSearch' نیازمند ستون TIN برای همه رکوردهای Employee است. رکوردهای بدون TIN باعث خطای دسترسی می‌شوند.",
+  "reference_code": "EMP-TIN-MISSING-007"
+},
+{
+  "type": "error",
+  "id": 1015,
+  "question_dari": "شماره حساب  بانکی کارمند تکراری است",
+  "question_english": "Cannot insert duplicate key row in object 'dbo.Employees' with unique index 'IX_Employees_AccountNumber'",
+  "answer": "سیستم نمی‌تواند این کارمند را ثبت کند زیرا شماره حساب 1001230003416 قبلاً به کارمند دیگری اختصاص داده شده است. این ممکن است به دلیل انتقال کارمند از موسسه دیگری باشد که شماره حسابش هنوز در سیستم قبلی رزرو است.",
+  "category": "employee_management",
+  "tags": ["کارمند", "شماره حساب", "تکراری", "انتقال"],
+  "error_signature": "Cannot insert duplicate key row in object 'dbo.Employees' with unique index 'IX_Employees_AccountNumber'",
+  "user_friendly_title": "شماره حساب تکراری کارمند",
+  "simple_explanation": "این کارمند قبلاً در سیستم ثبت شده است. شماره حساب 1001230003416 در حال حاضر به کارمند دیگری تخصیص داده شده یا این کارمند از موسسه دیگری انتقال یافته و شماره حسابش هنوز در سیستم قبلی رزرو است.",
+  "user_actions": [
+    "با منابع بشری تماس بگیرید تا تأیید کنند آیا این کارمند انتقالی است",
+    "از موسسه قبلی بخواهید شماره حساب را در سیستم خود آزاد کنند",
+    "یا برای کارمند در موسسه جدید یک شماره حساب جدید ایجاد کنید",
+    "هرگز سعی نکنید کارمند را دوباره ایجاد کنید تا این مشکل حل شود"
+  ],
+  "who_to_contact": "دپارتمان منابع بشری - تیم انتقالات",
+  "technical_note": "شماره حساب درگیر: 1001230003416 - این شماره در ایندکس IX_Employees_AccountNumber ثبت شده و منحصر به فرد باید باشد.",
+  "reference_code": "ACC-DUPLICATE-002"
 }
+
 ];
 
 export default paymentSystemTrainingData;
