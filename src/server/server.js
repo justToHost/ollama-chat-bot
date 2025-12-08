@@ -28,18 +28,10 @@ const client = new OpenAI({
 
 app.post('/api/submitQuestion', async(req,res)=>{
 
-    const {question} = req.body
+    const {question} = req.body.toServer
 
+   console.log(req.body, 'coming from client')
     if(!question) return res.json({message : 'no message provided !'})
-    
-      // saveConversationTodb(question)
-
-      // const newConversation= db.prepare(`
-      //   INSERT INTO messages(conversation_id,role, content)
-      //   VALUES(?,?,?,?)
-      // `)
-
-      // newConversation
 
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)

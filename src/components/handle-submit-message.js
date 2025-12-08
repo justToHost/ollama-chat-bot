@@ -62,7 +62,6 @@ function createMessage(chat,classes, lang = null){
     userMsgEl.classList.add(classes, 'message')
     userMsgEl.style.direction = lang === 'persian' || lang === 'pashto' ? 'rtl' : 'ltr'
      userMsgEl.innerHTML = 
-    
     classes === 'user-message' ?
 
       `${chat.image ?

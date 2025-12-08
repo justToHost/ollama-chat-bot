@@ -12,7 +12,7 @@ import handleSendIconToggle from './handleSendIconToggle.js'
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
 
-
+sessionStorage.setItem('tab_init', 'true')
 function homeFirstLoad(){
   return  `
     

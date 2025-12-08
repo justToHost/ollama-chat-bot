@@ -7,7 +7,27 @@ const fetchResponse = async(userQuestion) => {
 
    createMessageLoading()
 
-  const response = await axios.post('/api/submitQuestion', {question:userQuestion})
+  let toServer = null;
+  const newTabOpened = appFirstLoad()
+  console.log(newTabOpened)
+
+  if(newTabOpened){
+
+    toServer = 
+    {
+      newTab : true,
+      question : userQuestion
+    }
+  }else{
+  
+    toServer = {
+      question : userQuestion
+    }
+
+  }
+
+  const response = 
+  await axios.post('/api/submitQuestion', {toServer})
 
    console.log(response, 'response')
 
@@ -22,6 +42,18 @@ const fetchResponse = async(userQuestion) => {
     sendAndDisplayMessage(text,'systemMsg', lang)
   }
 }
+
+
+// app loaded fist
+
+function appFirstLoad(){
+  const navigated = performance.getEntriesByType('navigation')[0].type === 'navigate'
+  const sessionActive = sessionStorage.getItem('tab_init')
+  const emptyReferrer = window.history.length <= 2 && document.referrer === ''
+
+  return navigated && emptyReferrer && !sessionActive
+}
+
 
 function createMessageLoading(){
   const El = document.createElement('p')
