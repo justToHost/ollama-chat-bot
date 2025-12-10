@@ -1,13 +1,27 @@
 
+import axios from "axios"
 
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', ()=>{
     console.log('new chat buuton clicked')
     document.querySelector('.chats-area').innerHTML = ''
     openNewConversationPage()
+    createNewConversation('new Chat')
 })
 }
 
+async function createNewConversation(title){
+  const convRes = await axios.post('/api/newConversation', {title})
+  
+  console.log(convRes, 'response of the new one')
+
+  if(!convRes.data.success) return console.log('failure in response ', convRes)
+
+   console.log('conversation created !')
+   const conversationId =  convRes.data.conversationId
+   localStorage.setItem('conversationId', conversationId)
+   return conversationId
+}
 
  function openNewConversationPage(){
 

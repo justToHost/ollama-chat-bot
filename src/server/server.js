@@ -7,11 +7,12 @@ import fs from "fs/promises"
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const {PDFParse} = require('pdf-parse');
-import path, { parse } from "path"
+import path from "path"
 import { fileURLToPath } from "url"
 import Tesseract from "tesseract.js"
 import paymentSystemTrainingData from "./trainedData.js"
 import db from "./DB/seed.js"
+import { info } from "console"
 // import { unkownErrors } from "./trainedData.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -26,12 +27,46 @@ const client = new OpenAI({
     baseURL: "https://api.groq.com/openai/v1",
 });
 
+// we add converstion id to have track of first message and converstions
+
 app.post('/api/submitQuestion', async(req,res)=>{
 
-    const {question} = req.body.toServer
+    const {question} = req.body.questionData
+    let {conversation_id} = req.query
+    let isNewConversation = false;
 
-   console.log(req.body, 'coming from client')
-    if(!question) return res.json({message : 'no message provided !'})
+      if (!conversation_id) {
+        console.log('very first conversation')
+
+        const info = createNewConversation(question)
+
+        conversation_id = info.lastInsertRowid
+        isNewConversation = true
+         console.log('info ', info)
+      
+      }else{
+        
+        const existingConversation = 
+        db.prepare('SELECT * FROM conversations WHERE id = ?').
+        get(conversation_id)
+
+          if(!existingConversation){
+           console.log('conversation does not exist new should be made')
+
+            const newConversation = createNewConversation(question)
+            conversation_id = newConversation.lastInsertRowid
+            isNewConversation = true
+
+
+        }else{
+         console.log('conversation exists go on : title : ', 
+          existingConversation)
+        }
+      }
+
+     const message = createMessage(conversation_id, 'user', question)
+
+     console.log('new message ', message)
 
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
@@ -42,55 +77,73 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
      const knowledgeBase = await getDetailedDataForQuestion()
 
+      const aiResponse = await generateAiResponse(question,askedLang,relevantInfo, knowledgeBase)
+
+
+    const cleanAnswer = aiResponse
+      createMessage(conversation_id, 'AI', cleanAnswer)
+
+       console.log('ai answer = ', cleanAnswer)
+
+    res.json({
+        success : true,
+        answer :  cleanAnswer,
+        lang : askedLang,
+        conversationId : conversation_id
+    })
+  
+})
+
+async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBase){
   try {
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
    input : `You are a payroll system expert for Afghanistan Ministry of Finance.
 
-USER QUESTION: "${question}"
+    USER QUESTION: "${question}"
 
-Generate:
-1. 5 different ways a user might ask this same question (in ${askedLang})
-by generate i mean find out but do not render in the output
-2. Key technical terms and their synonyms
-3. Common misspellings or alternative phrasings
+    Generate:
+    1. 5 different ways a user might ask this same question (in ${askedLang})
+    by generate i mean find out but do not render in the output
+    2. Key technical terms and their synonyms
+    3. Common misspellings or alternative phrasings
 
-AVAILABLE KNOWLEDGE BASE (JSON array):
-${JSON.stringify(relevantInfo, null, 2)}
+    AVAILABLE KNOWLEDGE BASE (JSON array):
+    ${JSON.stringify(relevantInfo, null, 2)}
 
-INSTRUCTIONS:
-1. FIRST, filter the knowledge base to find entries MOST RELEVANT to the user's question
-2. RELEVANCE CRITERIA:
-   - Entry's "question_dari" field should contain keywords from user's question
-   - Entry's "tags" array should contain words from user's question  
-   - Entry's "user_friendly_title" should be similar to user's question
+    INSTRUCTIONS:
+    1. FIRST, filter the knowledge base to find entries MOST RELEVANT to the user's question
+    2. RELEVANCE CRITERIA:
+      - Entry's "question_dari" field should contain keywords from user's question
+      - Entry's "tags" array should contain words from user's question  
+      - Entry's "user_friendly_title" should be similar to user's question
 
-3. If NO entries match the criteria, look on this knowledge base : 
-${knowledgeBase} and if still not match found then
+    3. If NO entries match the criteria, look on this knowledge base : 
+    ${knowledgeBase} and if still not match found then
 
-respond: "I don't have specific information about this issue. Please contact the relevant department."
-4. If MULTIPLE entries match, choose the ONE with highest relevance score
-5. ANSWER ONLY in Dari, using simple, non-technical language
-6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
-7. Structure response: Problem → Solution → Who to contact
+    respond: "I don't have specific information about this issue. Please contact the relevant department."
+    4. If MULTIPLE entries match, choose the ONE with highest relevance score
+    5. ANSWER ONLY in Dari, using simple, non-technical language
+    6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
+    7. Structure response: Problem → Solution → Who to contact
 
-EXAMPLE:
+    EXAMPLE:
     "question_dari": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
     "answer": "الف: حذف ام 41 و ام 16 باید حذف باشند بعدا کوشش شود."
   "user_friendly_title": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
     "simple_explanation": "الف: حذف ام 41 و ام 16 باید حذف باشند بعدا کوشش شود
 
-NOW, answer the user's question based on the knowledge base above: 
+    NOW, answer the user's question based on the knowledge base above: 
 
-RESPONSE REQUIREMENTS:
+    RESPONSE REQUIREMENTS:
 
-- Answer strictly based ONLY on the provided context and previous conversation flow.
-- If the question is irrelevant to payroll, accounting, or ministry financial matters and unrelated to previous discussions, respond: "I'm sorry, I don't have information about that." in the same language as the question.
+    - Answer strictly based ONLY on the provided context and previous conversation flow.
+    - If the question is irrelevant to payroll, accounting, or ministry financial matters and unrelated to previous discussions, respond: "I'm sorry, I don't have information about that." in the same language as the question.
 
 
-Exception:
-- Respond appropriately to greetings or gratitude.
-- Answer follow-up questions related to previous discussions based on your knowledge.
+    Exception:
+    - Respond appropriately to greetings or gratitude.
+    - Answer follow-up questions related to previous discussions based on your knowledge.
 
 `});
 
@@ -98,6 +151,7 @@ Exception:
 
      const  targetLanguageAnswer = await 
      translateText(simplifiedAnswer, askedLang)
+
        console.log(targetLanguageAnswer, ' the answer')
 
      const cleanAnswer = targetLanguageAnswer
@@ -107,17 +161,31 @@ Exception:
         .trim();
 
         console.log(cleanAnswer, 'the clean answer ')
+        return cleanAnswer
 
-    res.json({
-        success : true,
-        answer :  cleanAnswer,
-        lang : askedLang
-    })
-  } catch (e) {
-    console.log(`❌ model failed with an error`);
-  }
+    }catch(err){
+      console.log(err)
+      throw err
+    }
 
-})
+}
+
+function createMessage(conversationId, role, content){
+
+ try{
+   const message = db.prepare(`INSERT INTO messages 
+    (conversation_id,role,content)
+     VALUES(?, ? , ?)
+    `).run(conversationId,role,content)
+
+    return message
+
+ }catch(err){
+  console.log(err)
+  throw err
+ }
+
+}
 
 function searchKnowledgeBase(q){
   const words = q.split(' ').filter(w => w.length > 1);
@@ -186,8 +254,39 @@ const text = await parser.getText()
 }
 
 
+function createNewConversation(title){
+ try{
+   db.prepare('BEGIN').run()
+
+  // new conversation
+  const newConversation = db.prepare(`INSERT INTO conversations (title)
+    VALUES(?)`)
+
+    const info = newConversation.run(title)
+    console.log(newConversation.columns.length, 'new one')
+
+     db.prepare('COMMIT').run()
+     return info
+ }catch(err){
+  console.log(err)
+      db.prepare('ROLLBACK')
+      throw err
+ }
+}
 
 
+// new conversation
+
+app.post('/api/newConversation', (req, res)=>{
+  const {title} = req.body
+
+  const newConversation = createNewConversation(title)
+
+  res.json({
+    success : true,
+    conversationId  : newConversation.lastInsertRowid
+  })
+})
 
 // scanning file upload
 

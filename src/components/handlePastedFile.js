@@ -21,7 +21,7 @@ const handlePastedFile = () => {
                     preview.innerHTML = 'parsing...'
 
                     const compressedImage = await compressImage(file)
-
+                    
                    // now extract it 
                   const base64 = await readAndBufferFile(compressedImage)
             
