@@ -3,11 +3,19 @@ import axios from "axios"
 
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', async()=>{
-    console.log('new chat buuton clicked')
+   //  await createNewConversationAndClearUI()
+   console.log('new chat buuton clicked')
     document.querySelector('.chats-area').innerHTML = ''
     openNewConversationPage()
-    await createNewConversation('new Chat')
+    await createNewConversation('New Conversation')
 })
+}
+
+async function createNewConversationAndClearUI(){
+   // console.log('new chat buuton clicked')
+   //  document.querySelector('.chats-area').innerHTML = ''
+   //  openNewConversationPage()
+   // //  await createNewConversation('New Conversation')
 }
 
 async function createNewConversation(title){
@@ -24,11 +32,6 @@ async function createNewConversation(title){
    return conversationId
 }
 
-
-function createTempConversation(title){
-   localStorage.setItem('temp_conversation_title', title)
-   console.log( ' temp title savved on local storage')
-}
 
  function openNewConversationPage(){
 
@@ -62,4 +65,4 @@ function createTempConversation(title){
 }
 
 export default handleNewConversation
-export {openNewConversationPage, createTempConversation, createNewConversation}
+export {openNewConversationPage, createNewConversation}

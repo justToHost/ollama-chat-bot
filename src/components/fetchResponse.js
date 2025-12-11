@@ -1,28 +1,13 @@
 
 import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
+
 import { createNewConversation } from "./handleNewConversation"
 
 const fetchResponse = async(userQuestion) => {
 
-   createMessageLoading()
-const tempTitle = localStorage.getItem('temp_conversation_title')
+  const questionData = {question : userQuestion}
 
-const questionData = {question : tempTitle ? tempTitle: userQuestion}
-
-let conversationId = localStorage.getItem('conversationId')
-Object.values(localStorage).forEach((item,i) =>{
-  console.log(item, 'item ', i)
-})
-
- if(appFirstLoad){
-      conversationId = await createNewConversation(tempTitle)
-
-
-      localStorage.setItem('conversationId', conversationId)
-      // if message sent we remove from temp and save it to db on server
-      localStorage.removeItem('temp_conversation_title')
-    }
   const response = 
   await axios.post(`/api/submitQuestion?conversation_id=${conversationId}`, {questionData})
 
