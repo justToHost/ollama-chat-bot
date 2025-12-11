@@ -2,11 +2,11 @@
 import axios from "axios"
 
 const handleNewConversation = (newChatBtn) => {
-  newChatBtn.addEventListener('click', ()=>{
+  newChatBtn.addEventListener('click', async()=>{
     console.log('new chat buuton clicked')
     document.querySelector('.chats-area').innerHTML = ''
     openNewConversationPage()
-    createNewConversation('new Chat')
+    await createNewConversation('new Chat')
 })
 }
 
@@ -17,10 +17,17 @@ async function createNewConversation(title){
 
   if(!convRes.data.success) return console.log('failure in response ', convRes)
 
-   console.log('conversation created !')
+   console.log('conversation created !',convRes.data.conversationId )
    const conversationId =  convRes.data.conversationId
+
    localStorage.setItem('conversationId', conversationId)
    return conversationId
+}
+
+
+function createTempConversation(title){
+   localStorage.setItem('temp_conversation_title', title)
+   console.log( ' temp title savved on local storage')
 }
 
  function openNewConversationPage(){
@@ -55,4 +62,4 @@ async function createNewConversation(title){
 }
 
 export default handleNewConversation
-export {openNewConversationPage}
+export {openNewConversationPage, createTempConversation, createNewConversation}

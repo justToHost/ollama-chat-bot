@@ -9,8 +9,20 @@ import handleNewConversation from './handleNewConversation.js'
 import { loadBot } from './handleBotClick.js'
 import newChatBtn from './newChatBtn.js'
 import handleSendIconToggle from './handleSendIconToggle.js'
+import { createTempConversation } from './handleNewConversation.js'
+
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
+
+
+window.addEventListener('DOMContentLoaded', (e)=>{
+const firstLoad = performance.getEntriesByType('navigation')[0].type === "navigate"
+
+if(firstLoad){
+  createTempConversation('New Chat')
+}
+})
+
 
 
 function homeFirstLoad(){

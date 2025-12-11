@@ -33,8 +33,9 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     const {question} = req.body.questionData
     let {conversation_id} = req.query
+     console.log(conversation_id, 'id')
     let isNewConversation = false;
-
+      console.log(conversation_id, 'top id of conversation ')
       if (!conversation_id) {
         console.log('very first conversation')
 
@@ -266,6 +267,10 @@ function createNewConversation(title){
     console.log(newConversation.columns.length, 'new one')
 
      db.prepare('COMMIT').run()
+
+     const convs = db.prepare('SELECT * FROM conversations').all()
+
+     console.log('all conversations ', convs)
      return info
  }catch(err){
   console.log(err)
