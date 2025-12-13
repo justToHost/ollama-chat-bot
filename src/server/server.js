@@ -1,6 +1,6 @@
 
 import express from "express"
-import axios from "axios"
+import axios, { all } from "axios"
 import dotenv from "dotenv"
 import OpenAI from "openai"
 import fs from "fs/promises"
@@ -8,17 +8,13 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const {PDFParse} = require('pdf-parse');
 import path from "path"
-import { fileURLToPath } from "url"
 import Tesseract from "tesseract.js"
 import paymentSystemTrainingData from "./trainedData.js"
 import db from "./DB/seed.js"
-import { info } from "console"
-// import { unkownErrors } from "./trainedData.js"
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+import { __dirname } from "./relativePath.js"
+import tasnifJson, { locationJson } from "./utils/readExcel.js"
 
 dotenv.config()
-
 const app = express()
 app.use(express.json())
 
@@ -35,10 +31,6 @@ app.post('/api/submitQuestion', async(req,res)=>{
     let {conversation_id} = req.query
 
      console.log(conversation_id, 'id')
-
-     const message = createMessage(conversation_id, 'user', question)
-
-     console.log('new message ', message)
 
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
@@ -67,7 +59,23 @@ app.post('/api/submitQuestion', async(req,res)=>{
   
 })
 
+
+
+   // Simple filter example (expand this)
+// function filterRows(question, allRows) {
+//   const questionWords = question.toLowerCase().split(' ');
+//   return allRows.filter(row => 
+//     questionWords.some(word => 
+//       row.District.includes(word) || 
+//       row['Description in English'].toLowerCase().includes(word)
+//     )
+//   ).slice(0, 5); // Take only first 5 matches
+// }
+
+
 async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBase, conversationId){
+     const concatenated = [...tasnifJson, ...locationJson]
+
   try {
 
      const currentConversationMessages = 
@@ -84,7 +92,7 @@ async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBa
 
     USER QUESTION: "${question}"
 
-    think of :
+    think BUT do not include in the output :
     1. 5 different ways a user might ask this same question (in ${askedLang})
     2. Key technical terms and their synonyms
     3. Common misspellings or alternative phrasings
@@ -111,6 +119,16 @@ async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBa
     5. ANSWER ONLY in Dari, using simple, non-technical language
     6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
     7. Structure response: Problem → Solution → Who to contact
+    8: if the question was about tasneef and location codes 
+    USE the ${concatenated} data. for example "what is the code for Dushi district of Baghlan province " its 0903
+    or in persian it might be "کود ولسوالی دوشی ولایت بغلان چی است" or "تمام کودهای مربوط ولایت بغلان را بده " 
+
+    or "what is the tasneef code for civilian permanent employees ? " "its 21100". 
+    "which codes can belong to employees enrolled in ministry of education ? " and u provide all the mentioned ones
+    according to the given structured data. 
+
+    
+    AND for information 
 
     EXAMPLE:
     "question_dari": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
