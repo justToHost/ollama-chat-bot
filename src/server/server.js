@@ -1,6 +1,5 @@
 
 import express from "express"
-import axios, { all } from "axios"
 import dotenv from "dotenv"
 import OpenAI from "openai"
 import fs from "fs/promises"
@@ -13,6 +12,7 @@ import paymentSystemTrainingData from "./trainedData.js"
 import db from "./DB/seed.js"
 import { __dirname } from "./relativePath.js"
 import tasnifJson, { locationJson } from "./utils/readExcel.js"
+import { systemInfo } from "./systemInfo.js";
 
 dotenv.config()
 const app = express()
@@ -41,8 +41,16 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
      const knowledgeBase = await getDetailedDataForQuestion()
 
+      const systemInfoAnswers = closestAnswersForSystemInfo(question)
+      console.log(systemInfoAnswers, 'closest answers')
+
       const aiResponse = 
-      await generateAiResponse(question,askedLang,relevantInfo, knowledgeBase, conversation_id)
+      await generateAiResponse(question,
+        askedLang,
+        relevantInfo, 
+        knowledgeBase, 
+        conversation_id,
+      systemInfoAnswers)
 
 
     const cleanAnswer = aiResponse
@@ -60,22 +68,54 @@ app.post('/api/submitQuestion', async(req,res)=>{
 })
 
 
-
    // Simple filter example (expand this)
-// function filterRows(question, allRows) {
-//   const questionWords = question.toLowerCase().split(' ');
-//   return allRows.filter(row => 
-//     questionWords.some(word => 
-//       row.District.includes(word) || 
-//       row['Description in English'].toLowerCase().includes(word)
-//     )
-//   ).slice(0, 5); // Take only first 5 matches
-// }
+function filterRows(question, allRows) {
+  const questionWords = question.toLowerCase().split(' ');
+  return allRows.filter(row => {
+    // 1. SAFETY CHECK: Ensure row has required properties
+    if (!row || !row.District || !row['Description in English']) {
+      return false; // Skip invalid rows
+    }
+    
+    // 2. SAFE SEARCH
+    return questionWords.some(word => {
+      // Check District (convert to string for safety)
+      const districtMatch = String(row.District || '').includes(word);
+      const provinceMatch = String(row.District || '').includes(word);
+      
+      // Check English Description
+      const descMatch = String(row['Description in English'] || '')
+        .toLowerCase()
+        .includes(word);
+      
+      return districtMatch || provinceMatch || descMatch;
+    })
+  }).slice(0, 5); // Take only first 5 matches
+}
 
+function closestAnswersForSystemInfo(question){
+  const questionWords =  question.toLowerCase().split(' ')
 
-async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBase, conversationId){
+ return systemInfo.filter(info => {
+  const searchTerms = question.toLowerCase().split(' ');
+  
+  return info.key_points.some(point => {
+    const pointLower = point.toLowerCase();
+    return searchTerms.some(term => 
+      pointLower.includes(term) ||
+      info.title_dari.toLowerCase().includes(term) ||
+      info.title_english.toLowerCase().includes(term)
+    );
+  });
+}).slice(0,3)
+}
+
+async function generateAiResponse(question, askedLang, relevantInfo, 
+  knowledgeBase, conversationId, systemInfoAnswers){
      const concatenated = [...tasnifJson, ...locationJson]
+     const possibleCodeAnswer = filterRows(question, concatenated)
 
+    
   try {
 
      const currentConversationMessages = 
@@ -120,15 +160,15 @@ async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBa
     6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
     7. Structure response: Problem → Solution → Who to contact
     8: if the question was about tasneef and location codes 
-    USE the ${concatenated} data. for example "what is the code for Dushi district of Baghlan province " its 0903
+    USE the ${possibleCodeAnswer} data. for example "what is the code for Dushi district of Baghlan province " its 0903
     or in persian it might be "کود ولسوالی دوشی ولایت بغلان چی است" or "تمام کودهای مربوط ولایت بغلان را بده " 
 
     or "what is the tasneef code for civilian permanent employees ? " "its 21100". 
     "which codes can belong to employees enrolled in ministry of education ? " and u provide all the mentioned ones
     according to the given structured data. 
 
-    
-    AND for information 
+    9: if the question is about system information  where and how or system menus info or their locations 
+    refer to this file :  ${JSON.stringify(systemInfoAnswers, null, 2)}
 
     EXAMPLE:
     "question_dari": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
