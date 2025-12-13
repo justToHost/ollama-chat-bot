@@ -2,11 +2,12 @@
 import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
 
-import { createNewConversation } from "./handleNewConversation"
 
 const fetchResponse = async(userQuestion) => {
 
-  const questionData = {question : userQuestion}
+   createMessageLoading()
+const questionData = {question : userQuestion}
+const conversationId = localStorage.getItem('conversationId')
 
   const response = 
   await axios.post(`/api/submitQuestion?conversation_id=${conversationId}`, {questionData})

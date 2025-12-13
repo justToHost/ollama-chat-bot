@@ -21,7 +21,7 @@ export function sendQuestion(element){
     const inputMessage = parsedText ? parsedText + userMessage : userMessage
 
     const base64Img = inputPanel.querySelector('img') ? inputPanel.querySelector('img').src : null  
-
+ 
     const chatData = {
       image : base64Img,
       message : userMessage

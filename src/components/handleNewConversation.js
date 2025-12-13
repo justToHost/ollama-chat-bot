@@ -3,19 +3,18 @@ import axios from "axios"
 
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', async()=>{
-   //  await createNewConversationAndClearUI()
-   console.log('new chat buuton clicked')
-    document.querySelector('.chats-area').innerHTML = ''
     openNewConversationPage()
-    await createNewConversation('New Conversation')
+
+    localStorage.setItem('isFirstLoad', 'false')
+    await createNewConversation('new Chat')
 })
 }
 
-async function createNewConversationAndClearUI(){
-   // console.log('new chat buuton clicked')
-   //  document.querySelector('.chats-area').innerHTML = ''
-   //  openNewConversationPage()
-   // //  await createNewConversation('New Conversation')
+function openNewConversationPage(){
+    document.querySelector('.chats-area').innerHTML = ''
+    const conversationID = localStorage.getItem('conversationId')
+     //  reset the local storage
+    conversationID && localStorage.removeItem('conversationId')
 }
 
 async function createNewConversation(title){
@@ -32,13 +31,15 @@ async function createNewConversation(title){
    return conversationId
 }
 
+ function firstChatPageLoad(){
 
- function openNewConversationPage(){
-
+    const isFirstLoad = localStorage.getItem('isFirstLoad')
+   
     return `
      <div class="container">
         <div class="chats-area">
-          <p class="systemMsg message" >How can i help you ?</p>
+          ${isFirstLoad && 
+            `<p class="systemMsg message" >How can i help you ?</p>`}
         </div>
 
         <div class="chat-input-panel">
@@ -65,4 +66,6 @@ async function createNewConversation(title){
 }
 
 export default handleNewConversation
-export {openNewConversationPage, createNewConversation}
+export {firstChatPageLoad, 
+       createNewConversation,
+      openNewConversationPage}

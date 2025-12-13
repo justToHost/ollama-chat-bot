@@ -33,37 +33,8 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     const {question} = req.body.questionData
     let {conversation_id} = req.query
+
      console.log(conversation_id, 'id')
-    let isNewConversation = false;
-      console.log(conversation_id, 'top id of conversation ')
-      if (!conversation_id) {
-        console.log('very first conversation')
-
-        const info = createNewConversation(question)
-
-        conversation_id = info.lastInsertRowid
-        isNewConversation = true
-         console.log('info ', info)
-      
-      }else{
-        
-        const existingConversation = 
-        db.prepare('SELECT * FROM conversations WHERE id = ?').
-        get(conversation_id)
-
-          if(!existingConversation){
-           console.log('conversation does not exist new should be made')
-
-            const newConversation = createNewConversation(question)
-            conversation_id = newConversation.lastInsertRowid
-            isNewConversation = true
-
-
-        }else{
-         console.log('conversation exists go on : title : ', 
-          existingConversation)
-        }
-      }
 
      const message = createMessage(conversation_id, 'user', question)
 
@@ -78,7 +49,8 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
      const knowledgeBase = await getDetailedDataForQuestion()
 
-      const aiResponse = await generateAiResponse(question,askedLang,relevantInfo, knowledgeBase)
+      const aiResponse = 
+      await generateAiResponse(question,askedLang,relevantInfo, knowledgeBase, conversation_id)
 
 
     const cleanAnswer = aiResponse
@@ -95,20 +67,29 @@ app.post('/api/submitQuestion', async(req,res)=>{
   
 })
 
-async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBase){
+async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBase, conversationId){
   try {
+
+     const currentConversationMessages = 
+     db.prepare(`
+      SELECT content from messages WHERE conversation_id = ?`)
+      .all(conversationId)
+
+       console.log('all current conversation messages ', 
+        currentConversationMessages)
+
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
    input : `You are a payroll system expert for Afghanistan Ministry of Finance.
 
     USER QUESTION: "${question}"
 
-    Generate:
+    think of :
     1. 5 different ways a user might ask this same question (in ${askedLang})
-    by generate i mean find out but do not render in the output
     2. Key technical terms and their synonyms
     3. Common misspellings or alternative phrasings
 
+    
     AVAILABLE KNOWLEDGE BASE (JSON array):
     ${JSON.stringify(relevantInfo, null, 2)}
 
@@ -122,6 +103,9 @@ async function generateAiResponse(question, askedLang, relevantInfo, knowledgeBa
     3. If NO entries match the criteria, look on this knowledge base : 
     ${knowledgeBase} and if still not match found then
 
+    answer the question considering the prevous chats as follow if any  : 
+    ${JSON.stringify(currentConversationMessages, null, 2)} (JSON ARRAY)
+    
     respond: "I don't have specific information about this issue. Please contact the relevant department."
     4. If MULTIPLE entries match, choose the ONE with highest relevance score
     5. ANSWER ONLY in Dari, using simple, non-technical language
