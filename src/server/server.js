@@ -13,6 +13,7 @@ import db from "./DB/seed.js"
 import { __dirname } from "./relativePath.js"
 import tasnifJson, { locationJson } from "./utils/readExcel.js"
 import { systemInfo } from "./systemInfo.js";
+import findBestMatch from "./utils/bestAnswer.js";
 
 dotenv.config()
 const app = express()
@@ -23,36 +24,51 @@ const client = new OpenAI({
     baseURL: "https://api.groq.com/openai/v1",
 });
 
-// we add converstion id to have track of first message and converstions
 
+function currentChatHistory(){
+  const currentConversationMessages = 
+     db.prepare(`
+      SELECT content from messages WHERE conversation_id = ?`)
+      .all(conversationId)
+
+      return currentConversationMessages
+}
+        
+     
 app.post('/api/submitQuestion', async(req,res)=>{
 
     const {question} = req.body.questionData
     let {conversation_id} = req.query
 
-     console.log(conversation_id, 'id')
+    //  console.log(conversation_id, 'id')
+
+     const bestMatchTasnifCode = findBestMatch(tasnifJson, question)
+
+     return console.log('best match for tasnieef ', bestMatchTasnifCode)
 
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
       
-     const relevantInfo = searchKnowledgeBase(question)
+    // console.log('typfe of taneef ', typeof tasnifJson, tasnifJson)
+   console.log('typfe of location ', typeof locationJson, tasnifJson)
+  const sources = {
+    relevantInfo: searchKnowledgeBase(question),  // Array of error objects
+    systemInfoAnswers: closestAnswersForSystemInfo(question),  // Array of system process objects  
+    possibleCodeAnswer : [...tasnifJson, ...locationJson],
+    conversation : currentChatHistory, 
+    knowledgeBase : await getDetailedDataForQuestion()
+  };
 
-     console.log(relevantInfo, 'releveant info')
 
-     const knowledgeBase = await getDetailedDataForQuestion()
-
-      const systemInfoAnswers = closestAnswersForSystemInfo(question)
-      console.log(systemInfoAnswers, 'closest answers')
+      
 
       const aiResponse = 
-      await generateAiResponse(question,
-        askedLang,
-        relevantInfo, 
-        knowledgeBase, 
-        conversation_id,
-      systemInfoAnswers)
+      await generateAiResponse(question,askedLang,
+        sources.relevantInfo, 
+        sources.possibleCodeAnswer,
+      sources.conversation)
 
-
+// 
     const cleanAnswer = aiResponse
       createMessage(conversation_id, 'AI', cleanAnswer)
 
@@ -66,6 +82,42 @@ app.post('/api/submitQuestion', async(req,res)=>{
     })
   
 })
+
+// // Example usage with different question formats:
+// function handleTasnifQuestion(question, tasnifCodes) {
+//   const results = searchInTasnifCodes(question, tasnifCodes);
+  
+//   // Format the response
+//   if (results.exactMatches.length > 0) {
+//     const bestMatch = results.exactMatches[0];
+//     return {
+//       type: 'exact_match',
+//       answer: `کود ${bestMatch.code}: ${bestMatch.dariDescription}`,
+//       allMatches: results.exactMatches.slice(0, 5).map(m => ({
+//         code: m.code,
+//         description: m.dariDescription
+//       }))
+//     };
+//   } else if (results.partialMatches.length > 0) {
+//     return {
+//       type: 'partial_match',
+//       answer: `من چند کد مرتبط پیدا کردم:`,
+//       matches: results.partialMatches.slice(0, 3).map(m => ({
+//         code: m.code,
+//         description: m.dariDescription,
+//         confidence: m.score
+//       })),
+//       suggestions: results.suggestions.length > 0 ? 
+//         `شاید منظور شما کدهای خانواده ${results.suggestions[0]?.code?.toString().substring(0, 2)} باشد` : ''
+//     };
+//   } else {
+//     return {
+//       type: 'no_match',
+//       answer: 'کد تصنیفی با این مشخصات پیدا نشد.',
+//       suggestions: 'لطفاً نام دقیق‌تر یا کد عددی را وارد کنید.'
+//     };
+//   }
+// }
 
 
    // Simple filter example (expand this)
@@ -110,85 +162,73 @@ function closestAnswersForSystemInfo(question){
 }).slice(0,3)
 }
 
-async function generateAiResponse(question, askedLang, relevantInfo, 
-  knowledgeBase, conversationId, systemInfoAnswers){
-     const concatenated = [...tasnifJson, ...locationJson]
-     const possibleCodeAnswer = filterRows(question, concatenated)
-
-    
+async function generateAiResponse(question, askedLang, 
+  relevantInfo, 
+  systemInfoAnswers, 
+  possibleCodeAnswer,
+  conversation){
+     
   try {
-
-     const currentConversationMessages = 
-     db.prepare(`
-      SELECT content from messages WHERE conversation_id = ?`)
-      .all(conversationId)
-
-       console.log('all current conversation messages ', 
-        currentConversationMessages)
 
     const response = await client.responses.create({
     model: process.env.CURRENT_MODEL,
    input : `You are a payroll system expert for Afghanistan Ministry of Finance.
 
-    USER QUESTION: "${question}"
+USER QUESTION: "${question}"
 
-    think BUT do not include in the output :
-    1. 5 different ways a user might ask this same question (in ${askedLang})
-    2. Key technical terms and their synonyms
-    3. Common misspellings or alternative phrasings
+ANSWER STRICTLY BASED ON AVAILABLE  AND PREVOUS CHAT HISTORY:
 
-    
-    AVAILABLE KNOWLEDGE BASE (JSON array):
-    ${JSON.stringify(relevantInfo, null, 2)}
+1. ERROR/ISSUE DATABASE (for problems, errors, troubleshooting):
+${JSON.stringify(relevantInfo, null, 2)}
 
-    INSTRUCTIONS:
-    1. FIRST, filter the knowledge base to find entries MOST RELEVANT to the user's question
-    2. RELEVANCE CRITERIA:
-      - Entry's "question_dari" field should contain keywords from user's question
-      - Entry's "tags" array should contain words from user's question  
-      - Entry's "user_friendly_title" should be similar to user's question
+2. SYSTEM/MENU DATABASE (for "where is...", "how to access...", "location of..."):
+${JSON.stringify(systemInfoAnswers, null, 2)}
 
-    3. If NO entries match the criteria, look on this knowledge base : 
-    ${knowledgeBase} and if still not match found then
+3. CODE/LOCATION DATABASE (for codes, tasneef, districts, provinces):
+${JSON.stringify(possibleCodeAnswer, null, 2)}
 
-    answer the question considering the prevous chats as follow if any  : 
-    ${JSON.stringify(currentConversationMessages, null, 2)} (JSON ARRAY)
-    
-    respond: "I don't have specific information about this issue. Please contact the relevant department."
-    4. If MULTIPLE entries match, choose the ONE with highest relevance score
-    5. ANSWER ONLY in Dari, using simple, non-technical language
-    6. Base your answer STRICTLY on the "answer" or "simple_explanation" fields from selected entry
-    7. Structure response: Problem → Solution → Who to contact
-    8: if the question was about tasneef and location codes 
-    USE the ${possibleCodeAnswer} data. for example "what is the code for Dushi district of Baghlan province " its 0903
-    or in persian it might be "کود ولسوالی دوشی ولایت بغلان چی است" or "تمام کودهای مربوط ولایت بغلان را بده " 
-
-    or "what is the tasneef code for civilian permanent employees ? " "its 21100". 
-    "which codes can belong to employees enrolled in ministry of education ? " and u provide all the mentioned ones
-    according to the given structured data. 
-
-    9: if the question is about system information  where and how or system menus info or their locations 
-    refer to this file :  ${JSON.stringify(systemInfoAnswers, null, 2)}
-
-    EXAMPLE:
-    "question_dari": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
-    "answer": "الف: حذف ام 41 و ام 16 باید حذف باشند بعدا کوشش شود."
-  "user_friendly_title": "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟"
-    "simple_explanation": "الف: حذف ام 41 و ام 16 باید حذف باشند بعدا کوشش شود
-
-    NOW, answer the user's question based on the knowledge base above: 
-
-    RESPONSE REQUIREMENTS:
-
-    - Answer strictly based ONLY on the provided context and previous conversation flow.
-    - If the question is irrelevant to payroll, accounting, or ministry financial matters and unrelated to previous discussions, respond: "I'm sorry, I don't have information about that." in the same language as the question.
+4. PREVIOUS CONVERSATION:
+${JSON.stringify(conversation, null, 2)}
 
 
-    Exception:
-    - Respond appropriately to greetings or gratitude.
-    - Answer follow-up questions related to previous discussions based on your knowledge.
+INSTRUCTIONS:
 
-`});
+1. CLASSIFY the question type:
+   - Type A: Error/Problem (e.g., "چرا معاش دانلود نمیشه؟", "error during save")
+   - Type B: System Navigation (e.g., "کجا امتیازات کارکن است؟", "where to create department")
+   - Type C: Codes/Locations (e.g., "کود دوشی چیست؟", "tasneef code for civilian")
+   - Type D: General/Other
+
+2. USE THE CORRECT SOURCE:
+   - Type A → Search ERROR DATABASE
+   - Type B → Search SYSTEM/MENU DATABASE  
+   - Type C → Search CODE/LOCATION DATABASE
+   - Type D → Search GENERAL KNOWLEDGE
+
+3. SEARCH CRITERIA:
+   For Type A: Match with "question_dari", "tags", "error_signature"
+   For Type B: Match with "title_dari", "key_points", "workflow"  
+   For Type C: Match exact code names/numbers
+   For Type D: Broad search in all sources
+
+4. IF NO MATCH in primary source, check OTHER sources.
+
+5. RESPONSE FORMAT (in Dari):
+   - If Type A: Problem → Solution → Who to contact
+   - If Type B: Location → Steps → Notes
+   - If Type C: Code → Description → Related codes
+   - If Type D: Simple explanation
+
+EXAMPLE CLASSIFICATIONS:
+- "معاش ایجاد شده از حالت اپروف به ایجاد نمی آید؟" → Type A (Error)
+- "امتیازات کارکن کجاست؟" → Type B (System Navigation)  
+- "کود ولسوالی دوشی چیست؟" → Type C (Codes)
+- "مراحل ثبت کارمند چیست؟" → Type B (System Navigation)
+
+EXCEPTION : if any completely irrelevant question asked response repectly that u do not have infomation
+
+
+NOW ANSWER:`});
 
     const simplifiedAnswer = response.output_text
 
