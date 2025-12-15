@@ -1,48 +1,168 @@
 
-
-export default function findBestMatch(data, searchQuery) {
-  // Step 1: Clean and split the search query into keywords
-  const searchWords = searchQuery
-    .toLowerCase()
-    .replace(/[^\w\s]/g, '') // Remove punctuation
-    .split(' ')
-    .filter(word => word.length > 2); // Remove short words like "the", "for", "is"
+export default function findBestMatch(tasnifData, locationData, question) {
+  const q = question.toLowerCase()
   
-  // Filter out common stop words (optional)
-  const stopWords = ['what', 'the', 'for', 'is', 'are', 'and', 'or'];
-  const keywords = searchWords.filter(word => !stopWords.includes(word));
+  // 1. Find any code
+  const codeInQuestion = q.match(/\b\d{3,}\b/);
+  if (codeInQuestion) {
+    const code = codeInQuestion[0];
+    
+    // Check tasnif first
+    const tasnifItem = tasnifData.find(d => d.tasnif_code == code);
+    if (tasnifItem) return `Tasnif Code ${code}: ${tasnifItem.english_description}`;
+    
+    // Then check district
+    const districtItem = locationData.find(d => d.district_code == code);
+    if (districtItem) return `District ${code}: ${districtItem.english_description}, ${districtItem.province}`;
+    
+    return `Code ${code} not found`;
+  }
   
-  // Step 2: Calculate match scores for each object
-  const scores = data.map(obj => {
+  // 2. Search in both datasets
+  const words = q.split(' ').filter(w => w.length > 3);
+  
+  const allData = [
+    ...tasnifData.map(d => ({...d, type: 'TASNIF'})),
+    ...locationData.map(d => ({...d, type: 'LOCATION', code: d.district_code}))
+  ];
+  
+  const found = allData.find(d => {
+    const text = [
+      d.english_description || '',
+      d.dari_description || '',
+      d.province || '',
+      d.country || ''
+    ].join(' ').toLowerCase();
     
-    const descWords = obj.english_description ? obj.english_description
-      .toLowerCase()
-      .replace(/[^\w\s]/g, '')
-      .split(' ') : null
-    
-    // Count how many keywords appear in the description
-    const matchCount = keywords.filter(keyword => 
-      descWords.some(descWord => descWord.includes(keyword) || descWord === keyword)
-    ).length;
-    
-    return {
-      code: obj.tasnif_code,
-      english_desc: obj.english_description,
-      score: matchCount,
-      matchedKeywords: keywords.filter(keyword => 
-        descWords.some(descWord => descWord.includes(keyword) || descWord === keyword)
-      )
-    };
+    return words.some(word => text.includes(word));
   });
   
-  // Step 3: Find the object with highest score
-  const bestMatch = scores.reduce((best, current) => 
-    current.score > best.score ? current : best
-  );
+  if (found) {
+    if (found.type === 'TASNIF') {
+      return `Tasnif Code ${found.tasnif_code}: ${found.english_description}`;
+    } else {
+      return `District ${found.district_code}: ${found.english_description}, ${found.province}, ${found.country}`;
+    }
+  }
   
-  return bestMatch;
+  return 'No matches found';
 }
 
+// export default function findBestMatch(data, question) {
+//   const q = question.toLowerCase().trim();
+  
+//   // Outcome 1: Look for a specific tasnif code in the question
+//   const codeMatch = q.match(/\b(\d{3,})\b/);
+//   if (codeMatch) {
+//     const code = codeMatch[1];
+//     const found = data.find(item => item.tasnif_code.toString() === code);
+    
+//     if (found) {
+//       return {
+//         status: 'FOUND_CODE',
+//         answer: `Code ${code} is: ${found.english_description || found.dari_description}`,
+//         details: {
+//           tasnif_code: found.tasnif_code,
+//           ministry_code: found.ministry_code,
+//           english_desc: found.english_description,
+//           dari_desc: found.dari_description
+//         }
+//       };
+//     } else {
+//       return {
+//         status: 'CODE_NOT_FOUND',
+//         answer: `No item found with tasnif code ${code}`,
+//         suggestion: 'Check if the code is correct'
+//       };
+//     }
+//   }
+  
+//   // Outcome 2: Look for a description to find its code
+//   if (q.includes('code of') || q.includes('tasnif code')) {
+//     // Extract what they're asking about (remove question words)
+//     const searchPhrase = q
+//       .replace(/.*?(?:code of|tasnif code of|what is the code of|tell me code of)\s*/i, '')
+//       .replace(/\?$/, '')
+//       .trim();
+    
+//     if (searchPhrase) {
+//       const matches = data.filter(item => {
+//         const desc = (item.english_description || '').toLowerCase() + ' ' + 
+//                      (item.dari_description || '').toLowerCase();
+//         return desc.includes(searchPhrase);
+//       });
+      
+//       if (matches.length > 0) {
+//         return {
+//           status: 'FOUND_DESCRIPTION',
+//           answer: `Found ${matches.length} match(es) for "${searchPhrase}":`,
+//           matches: matches.map(m => ({
+//             tasnif_code: m.tasnif_code,
+//             ministry_code: m.ministry_code,
+//             english_desc: m.english_description,
+//             dari_desc : m.dari_description
+//           }))
+//         };
+//       } else {
+//         return {
+//           status: 'DESCRIPTION_NOT_FOUND',
+//           answer: `No items found for "${searchPhrase}"`,
+//           suggestion: 'Try different keywords'
+//         };
+//       }
+//     }
+//   }
+  
+//   // Outcome 3: General search for anything mentioned
+//   const keywords = q.split(' ')
+//     .filter(word => word.length > 3)
+//     .filter(word => !['what', 'tell', 'code', 'tasnif', 'ministry'].includes(word));
+  
+//   if (keywords.length > 0) {
+//     const results = [];
+    
+//     data.forEach(item => {
+//       const allText = (item.english_description || '') + ' ' + 
+//                      (item.dari_description || '') + ' ' +
+//                      (item.pashto_description || '');
+//       const textLower = allText.toLowerCase();
+      
+//       const matchedKeywords = keywords.filter(kw => textLower.includes(kw));
+      
+//       if (matchedKeywords.length > 0) {
+//         results.push({
+//           tasnif_code: item.tasnif_code,
+//           ministry_code: item.ministry_code,
+//           english_desc: item.english_description,
+//           dari_desc : item.dari_description,
+//           match_score: matchedKeywords.length,
+//           matched_keywords: matchedKeywords
+//         });
+//       }
+//     });
+    
+//     if (results.length > 0) {
+//       results.sort((a, b) => b.match_score - a.match_score);
+      
+//       return {
+//         status: 'PARTIAL_MATCHES',
+//         answer: `Found ${results.length} possibly related items`,
+//         best_matches: results.slice(0, 3) // Top 3 matches
+//       };
+//     }
+//   }
+  
+//   // Nothing found
+//   return {
+//     status: 'NO_MATCH',
+//     answer: 'Could not find any matching items. Try asking differently.',
+//     example_questions: [
+//       "What is code 21111?",
+//       "What is the tasnif code for permanent employees?",
+//       "Find projects about coronavirus"
+//     ]
+//   };
+// }
 
 
 

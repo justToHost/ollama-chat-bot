@@ -42,25 +42,24 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     //  console.log(conversation_id, 'id')
 
-     const bestMatchTasnifCode = findBestMatch(tasnifJson, question)
+    const codes = [...tasnifJson, ...locationJson]
 
-     return console.log('best match for tasnieef ', bestMatchTasnifCode)
+    
+
 
         // step 1 detect language of question
     const askedLang = await detectLanguage(question)
       
-    // console.log('typfe of taneef ', typeof tasnifJson, tasnifJson)
-   console.log('typfe of location ', typeof locationJson, tasnifJson)
+     const bestMatchTasnifCode = 
+     findBestMatch(tasnifJson, locationJson, question)
+
   const sources = {
     relevantInfo: searchKnowledgeBase(question),  // Array of error objects
     systemInfoAnswers: closestAnswersForSystemInfo(question),  // Array of system process objects  
-    possibleCodeAnswer : [...tasnifJson, ...locationJson],
+    possibleCodeAnswer : bestMatchTasnifCode,
     conversation : currentChatHistory, 
     knowledgeBase : await getDetailedDataForQuestion()
   };
-
-
-      
 
       const aiResponse = 
       await generateAiResponse(question,askedLang,
@@ -82,68 +81,6 @@ app.post('/api/submitQuestion', async(req,res)=>{
     })
   
 })
-
-// // Example usage with different question formats:
-// function handleTasnifQuestion(question, tasnifCodes) {
-//   const results = searchInTasnifCodes(question, tasnifCodes);
-  
-//   // Format the response
-//   if (results.exactMatches.length > 0) {
-//     const bestMatch = results.exactMatches[0];
-//     return {
-//       type: 'exact_match',
-//       answer: `کود ${bestMatch.code}: ${bestMatch.dariDescription}`,
-//       allMatches: results.exactMatches.slice(0, 5).map(m => ({
-//         code: m.code,
-//         description: m.dariDescription
-//       }))
-//     };
-//   } else if (results.partialMatches.length > 0) {
-//     return {
-//       type: 'partial_match',
-//       answer: `من چند کد مرتبط پیدا کردم:`,
-//       matches: results.partialMatches.slice(0, 3).map(m => ({
-//         code: m.code,
-//         description: m.dariDescription,
-//         confidence: m.score
-//       })),
-//       suggestions: results.suggestions.length > 0 ? 
-//         `شاید منظور شما کدهای خانواده ${results.suggestions[0]?.code?.toString().substring(0, 2)} باشد` : ''
-//     };
-//   } else {
-//     return {
-//       type: 'no_match',
-//       answer: 'کد تصنیفی با این مشخصات پیدا نشد.',
-//       suggestions: 'لطفاً نام دقیق‌تر یا کد عددی را وارد کنید.'
-//     };
-//   }
-// }
-
-
-   // Simple filter example (expand this)
-function filterRows(question, allRows) {
-  const questionWords = question.toLowerCase().split(' ');
-  return allRows.filter(row => {
-    // 1. SAFETY CHECK: Ensure row has required properties
-    if (!row || !row.District || !row['Description in English']) {
-      return false; // Skip invalid rows
-    }
-    
-    // 2. SAFE SEARCH
-    return questionWords.some(word => {
-      // Check District (convert to string for safety)
-      const districtMatch = String(row.District || '').includes(word);
-      const provinceMatch = String(row.District || '').includes(word);
-      
-      // Check English Description
-      const descMatch = String(row['Description in English'] || '')
-        .toLowerCase()
-        .includes(word);
-      
-      return districtMatch || provinceMatch || descMatch;
-    })
-  }).slice(0, 5); // Take only first 5 matches
-}
 
 function closestAnswersForSystemInfo(question){
   const questionWords =  question.toLowerCase().split(' ')
@@ -184,7 +121,8 @@ ${JSON.stringify(relevantInfo, null, 2)}
 2. SYSTEM/MENU DATABASE (for "where is...", "how to access...", "location of..."):
 ${JSON.stringify(systemInfoAnswers, null, 2)}
 
-3. CODE/LOCATION DATABASE (for codes, tasneef, districts, provinces):
+3. CODE/LOCATION DATABASE (for codes, tasneef, districts, provinces): if three options check the question and the choose the best possible one otherwise say not found 
+   
 ${JSON.stringify(possibleCodeAnswer, null, 2)}
 
 4. PREVIOUS CONVERSATION:
