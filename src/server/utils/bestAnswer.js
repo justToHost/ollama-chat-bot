@@ -1,51 +1,164 @@
 
 export default function findBestMatch(tasnifData, locationData, question) {
-  const q = question.toLowerCase()
+  // Keep the original Persian question for searching
+  const qPersian = question;
+  const qLower = question.toLowerCase();
   
-  // 1. Find any code
-  const codeInQuestion = q.match(/\b\d{3,}\b/);
+  // 1. Find any code (numbers work in any language)
+  const codeInQuestion = question.match(/\b(\d{3,})\b/);
   if (codeInQuestion) {
-    const code = codeInQuestion[0];
+    const code = codeInQuestion[1]; // Use group 1, not index 0
     
     // Check tasnif first
-    const tasnifItem = tasnifData.find(d => d.tasnif_code == code);
-    if (tasnifItem) return `Tasnif Code ${code}: ${tasnifItem.english_description}`;
+    const tasnifItem = tasnifData.find(d => 
+      d.tasnif_code && d.tasnif_code.toString() === code
+    );
+    if (tasnifItem) {
+      return {
+        success: true,
+        type: 'TASNIF_CODE',
+        code: code,
+        english_description: tasnifItem.english_description,
+        dari_description: tasnifItem.dari_description,
+        ministry_code: tasnifItem.ministry_code
+      };
+    }
     
     // Then check district
-    const districtItem = locationData.find(d => d.district_code == code);
-    if (districtItem) return `District ${code}: ${districtItem.english_description}, ${districtItem.province}`;
+    const districtItem = locationData.find(d => 
+      d.district_code && d.district_code.toString() === code
+    );
+    if (districtItem) {
+      return {
+        success: true,
+        type: 'DISTRICT_CODE',
+        code: code,
+        english_description: districtItem.english_description,
+        dari_description: districtItem.dari_description,
+        province: districtItem.province,
+        country: districtItem.country
+      };
+    }
     
-    return `Code ${code} not found`;
+    return {
+      success: false,
+      message: `Code ${code} not found in any database`
+    };
   }
   
-  // 2. Search in both datasets
-  const words = q.split(' ').filter(w => w.length > 3);
+  // 2. Search for Persian keywords (like کارمندان, بالمقطع, تصنیف)
+  const persianKeywords = extractPersianKeywords(question);
   
-  const allData = [
-    ...tasnifData.map(d => ({...d, type: 'TASNIF'})),
-    ...locationData.map(d => ({...d, type: 'LOCATION', code: d.district_code}))
-  ];
-  
-  const found = allData.find(d => {
-    const text = [
-      d.english_description || '',
-      d.dari_description || '',
-      d.province || '',
-      d.country || ''
-    ].join(' ').toLowerCase();
-    
-    return words.some(word => text.includes(word));
+  // Search in tasnif data for Persian matches
+  const tasnifMatches = tasnifData.filter(item => {
+    const searchText = (item.dari_description || '') + ' ' + 
+                       (item.english_description || '');
+    return persianKeywords.some(keyword => 
+      searchText.includes(keyword)
+    );
   });
   
-  if (found) {
-    if (found.type === 'TASNIF') {
-      return `Tasnif Code ${found.tasnif_code}: ${found.english_description}`;
-    } else {
-      return `District ${found.district_code}: ${found.english_description}, ${found.province}, ${found.country}`;
+  // Search in location data
+  const locationMatches = locationData.filter(item => {
+    const searchText = (item.dari_description || '') + ' ' + 
+                       (item.english_description || '');
+    return persianKeywords.some(keyword => 
+      searchText.includes(keyword)
+    );
+  });
+  
+  // If we found tasnif matches, return the best one
+  if (tasnifMatches.length > 0) {
+    // Find the best match (most keywords matched)
+    const bestMatch = tasnifMatches.reduce((best, current) => {
+      const bestScore = scoreMatch(best, persianKeywords);
+      const currentScore = scoreMatch(current, persianKeywords);
+      return currentScore > bestScore ? current : best;
+    }, tasnifMatches[0]);
+    
+    return {
+      success: true,
+      type: 'TASNIF_MATCH',
+      exact_match: scoreMatch(bestMatch, persianKeywords) > 2, // Good match
+      code: bestMatch.tasnif_code,
+      english_description: bestMatch.english_description,
+      dari_description: bestMatch.dari_description,
+      ministry_code: bestMatch.ministry_code,
+      // Show available alternatives
+      alternatives_count: tasnifMatches.length - 1,
+      message: tasnifMatches.length > 1 ? 
+        `Found ${tasnifMatches.length} related codes. This is the closest match:` :
+        `Found exact match for your query.`
+    };
+  }
+  
+  // 3. If no Persian matches, try English keywords
+  const englishKeywords = extractEnglishKeywords(question);
+  if (englishKeywords.length > 0) {
+    const englishMatches = tasnifData.filter(item => {
+      const searchText = (item.english_description || '').toLowerCase();
+      return englishKeywords.some(keyword => 
+        searchText.includes(keyword)
+      );
+    });
+    
+    if (englishMatches.length > 0) {
+      const bestMatch = englishMatches[0]; // Simple - take first
+      return {
+        success: true,
+        type: 'ENGLISH_MATCH',
+        code: bestMatch.tasnif_code,
+        english_description: bestMatch.english_description,
+        dari_description: bestMatch.dari_description,
+        alternatives_available: englishMatches.length > 1,
+        message: `Found ${englishMatches.length} possible matches based on English translation.`
+      };
     }
   }
   
-  return 'No matches found';
+  // 4. Nothing found
+  return {
+    success: false,
+    message: 'No exact match found for your query.',
+    suggestions: [
+      'Try using different keywords',
+      'Ask in English for better results',
+      'Contact administrative department for complete code list'
+    ]
+  };
+}
+
+// Helper function to extract Persian keywords
+function extractPersianKeywords(text) {
+  // Persian/Dari words are usually 3+ characters
+  const persianWords = text.match(/[\u0600-\u06FF]{3,}/g) || [];
+  return persianWords;
+}
+
+// Helper function to extract English keywords
+function extractEnglishKeywords(text) {
+  // Try to find any English words
+  const englishWords = text.match(/[a-z]{3,}/gi) || [];
+  return englishWords.map(w => w.toLowerCase());
+}
+
+// Helper function to score how well an item matches keywords
+function scoreMatch(item, keywords) {
+  const searchText = (item.dari_description || '') + ' ' + 
+                     (item.english_description || '');
+  let score = 0;
+  
+  keywords.forEach(keyword => {
+    if (searchText.includes(keyword)) {
+      score += 2; // Base score for keyword
+      // Bonus for exact phrase match
+      if (searchText.includes(keyword + ' ')) {
+        score += 1;
+      }
+    }
+  });
+  
+  return score;
 }
 
 // export default function findBestMatch(data, question) {

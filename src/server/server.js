@@ -14,18 +14,21 @@ import { __dirname } from "./relativePath.js"
 import tasnifJson, { locationJson } from "./utils/readExcel.js"
 import { systemInfo } from "./systemInfo.js";
 import findBestMatch from "./utils/bestAnswer.js";
+import {franc} from "franc"
+
+let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o'
 
 dotenv.config()
 const app = express()
 app.use(express.json())
 
 const client = new OpenAI({
-    apiKey: process.env.GROQ_API_KEY,
-    baseURL: "https://api.groq.com/openai/v1",
+    apiKey: process.env.OPEN_ROUTER_API,
+    baseURL: 'https://openrouter.ai/api/v1' || "https://api.groq.com/openai/v1"
 });
 
 
-function currentChatHistory(){
+function currentChatHistory(conversationId){
   const currentConversationMessages = 
      db.prepare(`
       SELECT content from messages WHERE conversation_id = ?`)
@@ -39,16 +42,13 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     const {question} = req.body.questionData
     let {conversation_id} = req.query
-
-    //  console.log(conversation_id, 'id')
-
     const codes = [...tasnifJson, ...locationJson]
 
-    
-
+      // Use franc for accurate detection
+       const freeLang = franc(question, {minLength: 1})
 
         // step 1 detect language of question
-    const askedLang = await detectLanguage(question)
+    const askedLang = freeLang ? freeLang : await translateText(question)
       
      const bestMatchTasnifCode = 
      findBestMatch(tasnifJson, locationJson, question)
@@ -56,19 +56,21 @@ app.post('/api/submitQuestion', async(req,res)=>{
   const sources = {
     relevantInfo: searchKnowledgeBase(question),  // Array of error objects
     systemInfoAnswers: closestAnswersForSystemInfo(question),  // Array of system process objects  
-    possibleCodeAnswer : bestMatchTasnifCode,
-    conversation : currentChatHistory, 
+    possibleCodeAnswer : codes ? codes : bestMatchTasnifCode,
+    conversation : currentChatHistory(conversation_id), 
     knowledgeBase : await getDetailedDataForQuestion()
   };
 
       const aiResponse = 
       await generateAiResponse(question,askedLang,
-        sources.relevantInfo, 
+        sources.relevantInfo,
+        sources.systemInfoAnswers, 
         sources.possibleCodeAnswer,
       sources.conversation)
 
 // 
     const cleanAnswer = aiResponse
+    // return console.log(cleanAnswer, ' the')
       createMessage(conversation_id, 'AI', cleanAnswer)
 
        console.log('ai answer = ', cleanAnswer)
@@ -81,6 +83,21 @@ app.post('/api/submitQuestion', async(req,res)=>{
     })
   
 })
+
+
+async function useAiWith(model,role, content) {
+  const completion = await client.chat.completions.create({
+    model: model,
+    messages: [
+      {
+        role: role,
+        content: content,
+      },
+    ],
+  });
+  console.log('the message ',  completion.choices[0].message.content);
+  return completion.choices[0].message.content
+}
 
 function closestAnswersForSystemInfo(question){
   const questionWords =  question.toLowerCase().split(' ')
@@ -99,21 +116,15 @@ function closestAnswersForSystemInfo(question){
 }).slice(0,3)
 }
 
-async function generateAiResponse(question, askedLang, 
-  relevantInfo, 
-  systemInfoAnswers, 
-  possibleCodeAnswer,
-  conversation){
-     
-  try {
 
-    const response = await client.responses.create({
-    model: process.env.CURRENT_MODEL,
-   input : `You are a payroll system expert for Afghanistan Ministry of Finance.
+const generateResponseContent = 
+(question,relevantInfo,systemInfoAnswers,
+  possibleCodeAnswer,conversation, askedLang)=>{
+return `You are a payroll system expert for Ministry of Finance.
 
 USER QUESTION: "${question}"
 
-ANSWER STRICTLY BASED ON AVAILABLE  AND PREVOUS CHAT HISTORY:
+ANSWER STRICTLY BASED ON THESE INFORMATIONS WITH NO SELF INFO: in this ${askedLang} language.
 
 1. ERROR/ISSUE DATABASE (for problems, errors, troubleshooting):
 ${JSON.stringify(relevantInfo, null, 2)}
@@ -125,9 +136,11 @@ ${JSON.stringify(systemInfoAnswers, null, 2)}
    
 ${JSON.stringify(possibleCodeAnswer, null, 2)}
 
-4. PREVIOUS CONVERSATION:
-${JSON.stringify(conversation, null, 2)}
 
+4: PREVOUS CHAT HISTORY: ${JSON.stringify(conversation, null, 2)}
+
+5: also just quickly check if the language of the asked question
+ and the context is the same
 
 INSTRUCTIONS:
 
@@ -166,33 +179,41 @@ EXAMPLE CLASSIFICATIONS:
 EXCEPTION : if any completely irrelevant question asked response repectly that u do not have infomation
 
 
-NOW ANSWER:`});
+NOW ANSWER:`
+}
 
-    const simplifiedAnswer = response.output_text
 
-     const  targetLanguageAnswer = await 
-     translateText(simplifiedAnswer, askedLang)
 
-       console.log(targetLanguageAnswer, ' the answer')
+async function generateAiResponse(question, askedLang, 
+  relevantInfo, 
+  systemInfoAnswers, 
+  possibleCodeAnswer,
+  conversation){
 
-     const cleanAnswer = targetLanguageAnswer
-        .replace(/\*\*/g, '')  // Remove bold markers
-        .replace(/\*/g, '')    // Remove italic markers  
-        .replace(/\n\s*\n/g, '\n\n') // Clean multiple newlines
-        .trim();
+    const content = 
+    generateResponseContent(
+      question, 
+      relevantInfo,
+      systemInfoAnswers,
+      possibleCodeAnswer,
+      conversation,
+      askedLang )
+    
+    try{
+      const result = await useAiWith(currentModel, 'user', content)
 
-        console.log(cleanAnswer, 'the clean answer ')
-        return cleanAnswer
+      console.log(result, 'result of the anaswer generation')
 
+      return result;
     }catch(err){
       console.log(err)
       throw err
     }
-
 }
 
 function createMessage(conversationId, role, content){
 
+   console.log(conversationId, role, content, 'new conversation')
  try{
    const message = db.prepare(`INSERT INTO messages 
     (conversation_id,role,content)
@@ -236,33 +257,20 @@ function searchKnowledgeBase(q){
   return scoredResults;
 }
 
-async function detectLanguage(question) {
-  
-    console.log(question, 'question ')
-  const response = await client.responses.create({
-    model: process.env.CURRENT_MODEL,
+ async function translateText(askedText) {  
 
-    input: ` you are a master class translator and at the same time you are extremely good at slang and ususal language in persian and pashto languages,  
-    give me the exact language of this ${question}
+   const content = ` you are a master class translator and at the same time you are extremely good at slang and ususal language in persian and pashto languages,  
+    give me the exact language of this ${askedText}
      return just the name of the language. 
      Ex : "pasho" or "dari" or "persian" `
-});
 
-return response.output_text
+      const textLang = await useAiWith(currentModel, 'user', content)
+
+    
+      return textLang 
 }
 
- async function translateText(askedText, targetLang) {  
-  const response = await client.responses.create({
-    model: process.env.CURRENT_MODEL,
-    input: `Translate this "${askedText}" to "${targetLang} 
-    only if text is in other than english , 
-    otherwise give it as is without revealing it is in english`
-});
 
- console.log('translated text ',response.output_text)
-
-        return response.output_text
-}
 
 async function getDetailedDataForQuestion() {
   const fileBuffered = await fs.readFile(path.join(__dirname, '/pdfFiles/tpms.pdf'))
