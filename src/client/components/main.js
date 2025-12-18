@@ -9,8 +9,8 @@ import handleNewConversation from './handleNewConversation.js'
 import { loadBot } from './handleBotClick.js'
 import newChatBtn from './newChatBtn.js'
 import handleSendIconToggle from './handleSendIconToggle.js'
-
-
+import loadPrevMessages from './loadPrevMessages.js'
+import { scrollToBottom } from './handle-submit-message.js'
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
 
@@ -20,18 +20,25 @@ if(performance.getEntriesByType('navigation')[0].type === 'navigate'){
       conversationId && localStorage.removeItem('conversationId')
 }
 
-window.addEventListener('DOMContentLoaded', (e)=>{
-   const conversationId = localStorage.getItem('conversationId')
+
+
+
+
+window.addEventListener('DOMContentLoaded', async(e)=>{
    localStorage.setItem('isFirstLoad', 'true')
- 
-   console.log(conversationId,'conversation id')
+      const conversationId = localStorage.getItem('conversationId')
+   let chatArea = document.querySelector('.chats-area')
+
+   console.log(chatArea, 'chat area')
+   scrollToBottom()
 
    if(!conversationId){
-    console.log('new conversation page loaded and the local sotrage is goaan be empty')
-     firstChatPageLoad()
-    
+    chatArea.innerHTML = 
+      `<p class="systemMsg message" >How can i help youuuus ?</p>`
+
    }else{
-    // load exising convesation with messages
+      scrollToBottom()
+      await loadPrevMessages(conversationId,chatArea)
    }
 })
 

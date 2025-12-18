@@ -6,7 +6,7 @@ const handleNewConversation = (newChatBtn) => {
     openNewConversationPage()
 
     localStorage.setItem('isFirstLoad', 'false')
-    await createNewConversation('new Chat')
+       await createNewConversation('new Chat')
 })
 }
 
@@ -24,7 +24,7 @@ async function createNewConversation(title){
 
   if(!convRes.data.success) return console.log('failure in response ', convRes)
 
-   console.log('conversation created !',convRes.data.conversationId )
+   console.log('conversation created !',convRes.data.conversationId)
    const conversationId =  convRes.data.conversationId
 
    localStorage.setItem('conversationId', conversationId)
@@ -33,13 +33,10 @@ async function createNewConversation(title){
 
  function firstChatPageLoad(){
 
-    const isFirstLoad = localStorage.getItem('isFirstLoad')
-   
     return `
      <div class="container">
         <div class="chats-area">
-          ${isFirstLoad && 
-            `<p class="systemMsg message" >How can i help you ?</p>`}
+         
         </div>
 
         <div class="chat-input-panel">

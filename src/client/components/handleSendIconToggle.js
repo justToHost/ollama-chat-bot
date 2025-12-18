@@ -4,11 +4,7 @@ const handleSendIconToggle = (inputMsg,sendBtn) => {
  inputMsg.addEventListener('input', async()=>{
     console.log('input message input triggered ')
     toggleSendIcon(inputMsg,sendBtn)
-    const conversationId = localStorage.getItem('conversationId')
-
-    if(!conversationId) {
-        await createNewConversation('New Conversation')
-    }
+    
  })
 }
 

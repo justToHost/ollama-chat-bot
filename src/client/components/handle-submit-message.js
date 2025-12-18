@@ -2,7 +2,7 @@
 import fetchResponse from "./fetchResponse.js"
 
 import { toggleSendIcon } from "./handleSendIconToggle.js"
-
+import { createNewConversation } from "./handleNewConversation.js"
 
 export function sendQuestion(element){
 
@@ -29,6 +29,10 @@ export function sendQuestion(element){
 
 
     sendAndDisplayMessage(chatData, 'user-message')
+    const conversationId = localStorage.getItem('conversationId')
+    if(!conversationId) {
+        await createNewConversation('New Conversation')
+    }
 
     await fetchResponse(inputMessage)
 
@@ -92,7 +96,7 @@ function createMessage(chat,classes, lang = null){
 
 
 // Format the message with proper HTML
-function formatMessage(text) {
+export default function formatMessage(text) {
 
  console.log('formatting message text ', text)
     return text
@@ -109,4 +113,4 @@ function formatMessage(text) {
         .trim()
 }
 
-export {sendAndDisplayMessage}
+export {sendAndDisplayMessage, scrollToBottom}

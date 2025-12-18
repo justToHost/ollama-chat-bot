@@ -1,7 +1,7 @@
 
 import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
-
+import { createNewConversation } from "./handleNewConversation"
 
 const fetchResponse = async(userQuestion) => {
 

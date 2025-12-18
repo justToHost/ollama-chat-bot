@@ -41,9 +41,11 @@ function currentChatHistory(conversationId){
 app.post('/api/submitQuestion', async(req,res)=>{
 
     const {question} = req.body.questionData
-    let {conversation_id} = req.query
+    let conversation_id = parseInt(req.query.conversation_id)
     const codes = [...tasnifJson, ...locationJson]
 
+
+    createMessage(conversation_id, 'user', question)
       // Use franc for accurate detection
        const freeLang = franc(question, {minLength: 1})
 
@@ -327,7 +329,7 @@ app.post('/api/upload/doc', async(req,res)=>{
 
   const {file} = req.body
 
-
+console.log('comming file')
   if(!file) return res.json({message : 'invalid or unknown file'})
 
   const result = await Tesseract.recognize(
@@ -351,6 +353,29 @@ app.post('/api/upload/doc', async(req,res)=>{
     message : 'success parse'
   })
 
+})
+
+// all messages of a conversation
+
+app.get('/api/conversation/:id/messages', async(req,res)=>{
+   const conversationId = parseInt(req.params.id)
+ console.log('the issue is : ',conversationId)
+
+   const existingConversation =db.prepare('SELECT * FROM conversations WHERE id = ?').get(conversationId)
+
+   console.log(existingConversation, 'existing conversation')
+
+   if(!existingConversation) return console.log('existing conversation not found')
+
+    const messages = 
+    db.prepare('SELECT * FROM messages WHERE conversation_id = ?').all(conversationId)
+
+    if(!messages) console.log('no message found')
+
+    return res.json({
+      success : true,
+      messages : messages
+    })
 })
 
 app.listen(3001, ()=>{

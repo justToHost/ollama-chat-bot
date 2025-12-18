@@ -1,6 +1,5 @@
 
 import axios from "axios"
-import fetchResponse from "./fetchResponse"
 
 
 const handleUploadFile = (element) => {
@@ -55,6 +54,7 @@ async function readAndBufferFile(compressedFile){
 
 async function parseFile(file,filePreview){
 
+  console.log(file, 'the sending file')
   const response = await axios.post('/api/upload/doc',{file})
 
   console.log(response, 'response')

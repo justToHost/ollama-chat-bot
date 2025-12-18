@@ -4,15 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "server": "node src/server/server.js",
-    "app": "nodemon src/server/server.js",
-    "dev:full": "concurrently \"npm run dev\" \"node src/server/server.js\""
+    "dev:client": "vite --config src/client/vite.config.js",
+    "dev:server": "node src/server/server.js",
+      "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "build": "vite build --config src/client/vite.config.js",
+    "preview": "vite preview --config src/client/vite.config.js"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
     "vite": "^7.2.2"
   },
   "dependencies": {
@@ -21,9 +23,7 @@
     "axios": "^1.13.2",
     "better-sqlite3": "^12.5.0",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
     "franc": "^6.2.0",
-    "nodemon": "^3.1.11",
     "ollama": "^0.6.3",
     "openai": "^6.9.1",
     "pdf-parse": "^2.4.5",
