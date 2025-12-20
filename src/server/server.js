@@ -58,7 +58,7 @@ app.post('/api/submitQuestion', async(req,res)=>{
   const sources = {
     relevantInfo: searchKnowledgeBase(question),  // Array of error objects
     systemInfoAnswers: closestAnswersForSystemInfo(question),  // Array of system process objects  
-    possibleCodeAnswer : codes ? codes : bestMatchTasnifCode,
+    possibleCodeAnswer :  bestMatchTasnifCode,
     conversation : currentChatHistory(conversation_id), 
     knowledgeBase : await getDetailedDataForQuestion()
   };
@@ -97,8 +97,14 @@ async function useAiWith(model,role, content) {
       },
     ],
   });
-  console.log('the message ',  completion.choices[0].message.content);
-  return completion.choices[0].message.content
+   const answer = completion?.choices?.[0]?.message?.content;
+    
+    if (!answer) {
+      console.log('ai threw error ! ',  answer);
+      throw new Error('AI returned empty response');
+    }
+  console.log('the message ',  answer);
+  return answer
 }
 
 function closestAnswersForSystemInfo(question){
@@ -145,6 +151,7 @@ ${JSON.stringify(possibleCodeAnswer, null, 2)}
  and the context is the same
 
 INSTRUCTIONS:
+
 
 1. CLASSIFY the question type:
    - Type A: Error/Problem (e.g., "چرا معاش دانلود نمیشه؟", "error during save")
