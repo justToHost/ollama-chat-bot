@@ -16,7 +16,7 @@ import { systemInfo } from "./systemInfo.js";
 import findBestMatch from "./utils/bestAnswer.js";
 import {franc} from "franc"
 
-let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o'
+let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
 
 dotenv.config()
 const app = express()

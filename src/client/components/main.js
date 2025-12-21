@@ -11,6 +11,8 @@ import newChatBtn from './newChatBtn.js'
 import handleSendIconToggle from './handleSendIconToggle.js'
 import loadPrevMessages from './loadPrevMessages.js'
 import { scrollToBottom } from './handle-submit-message.js'
+import navbar from './navbar.js'
+
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
 
@@ -19,9 +21,6 @@ if(performance.getEntriesByType('navigation')[0].type === 'navigate'){
   const conversationId = localStorage.getItem('conversationId')
       conversationId && localStorage.removeItem('conversationId')
 }
-
-
-
 
 
 window.addEventListener('DOMContentLoaded', async(e)=>{
@@ -48,12 +47,14 @@ window.addEventListener('DOMContentLoaded', async(e)=>{
 function homeFirstLoad(){
   return  `
     
-     ${newChatBtn()}
+  <main>
+    ${navbar()}
+    ${newChatBtn()}
       ${firstChatPageLoad()}
       ${loadBot()}
+  </main>
 `
 }
-
 
 sendQuestion(document.querySelector('.submit-question-btn'))
 handleBotClick(document.querySelector('.bot'))
