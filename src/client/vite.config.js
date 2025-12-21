@@ -19,12 +19,12 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3001',  // Your Express server
         changeOrigin: true,
-      },   
+      },
+    }   
   },
   resolve: {
     alias: {
       '../server': false  // Block server imports
     }
   }
-}
 })
