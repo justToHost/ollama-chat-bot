@@ -1,4 +1,4 @@
-import '../styles/style.css'
+import '/styles/style.css'
 import { sendQuestion } from './handle-submit-message.js'
 import handleBotClick from './handleBotClick.js'
 import handleUploadFile from './handleUploadFile.js'
