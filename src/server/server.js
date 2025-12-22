@@ -25,7 +25,10 @@ let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
 
 
 const app = express()
-app.use(cors())
+
+app.use(cors({
+  origin: ['ollama-chat-bot.vercel.app', 'http://localhost:5173']
+}))
 
 
 app.use(express.json())
