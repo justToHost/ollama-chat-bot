@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   root: __dirname,  // Absolute path to src/client
   build: {
-    outDir: path.resolve(__dirname, '../../dist'),
+    outDir: path.resolve(__dirname, 'client'),
     emptyOutDir: true
   },
   server: {
