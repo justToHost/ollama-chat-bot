@@ -15,11 +15,19 @@ import tasnifJson, { locationJson } from "./utils/readExcel.js"
 import { systemInfo } from "./systemInfo.js";
 import findBestMatch from "./utils/bestAnswer.js";
 import {franc} from "franc"
+import cors from "cors"
+
+
+dotenv.config()
 
 let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
 
-dotenv.config()
+
+
 const app = express()
+app.use(cors())
+
+
 app.use(express.json())
 
 const client = new OpenAI({
@@ -385,6 +393,7 @@ app.get('/api/conversation/:id/messages', async(req,res)=>{
     })
 })
 
-app.listen(3001, ()=>{
+const PORT = process.env.PORT || 3001
+app.listen(PORT, ()=>{
     console.log('now running on port 3001')
 })

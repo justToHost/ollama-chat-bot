@@ -1,6 +1,5 @@
 import '/styles/style.css'
 import { sendQuestion } from './handle-submit-message.js'
-import handleBotClick from './handleBotClick.js'
 import handleUploadFile from './handleUploadFile.js'
 import handlePastedFile from './handlePastedFile.js'
 import handleVoiceRecord from './handleVoiceRecord.js'
@@ -11,7 +10,6 @@ import handleSendIconToggle from './handleSendIconToggle.js'
 import loadPrevMessages from './loadPrevMessages.js'
 import { scrollToBottom } from './handle-submit-message.js'
 import navbar from './navbar.js'
-
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
 

@@ -1,4 +1,3 @@
-import { createNewConversation } from "./handleNewConversation"
 
 const handleSendIconToggle = (inputMsg,sendBtn) => {
  inputMsg.addEventListener('input', async()=>{

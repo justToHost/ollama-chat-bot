@@ -1,5 +1,6 @@
 
 import axios from "axios"
+import baseUrl from "./baseUrl"
 
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', async()=>{
@@ -18,7 +19,7 @@ function openNewConversationPage(){
 }
 
 async function createNewConversation(title){
-  const convRes = await axios.post('/api/newConversation', {title})
+  const convRes = await axios.post(`${baseUrl}/api/newConversation`, {title})
   
   console.log(convRes, 'response of the new one')
 

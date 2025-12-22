@@ -1,8 +1,9 @@
 import axios from 'axios'
 import formatMessage from './handle-submit-message.js'
+import baseUrl from './baseUrl.js'
 
 export default async function loadPrevMessages(conversationId,chatArea){
-  const response = await axios.get(`/api/conversation/${conversationId}/messages`)
+  const response = await axios.get(`${baseUrl}/api/conversation/${conversationId}/messages`)
 
     if(response.status === 200){
        console.log('response code ',response)

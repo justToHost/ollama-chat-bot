@@ -1,7 +1,9 @@
 
 import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
-import { createNewConversation } from "./handleNewConversation"
+import baseUrl from "./baseUrl.js"
+
+console.log(baseUrl, 'base url')
 
 const fetchResponse = async(userQuestion) => {
 
@@ -10,7 +12,7 @@ const questionData = {question : userQuestion}
 const conversationId = localStorage.getItem('conversationId')
 
   const response = 
-  await axios.post(`/api/submitQuestion?conversation_id=${conversationId}`, {questionData})
+  await axios.post(`${baseUrl}/api/submitQuestion?conversation_id=${conversationId}`, {questionData})
 
    console.log(response, 'response')
 
