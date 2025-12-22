@@ -1,6 +1,8 @@
 
 import axios from "axios"
-import baseUrl from "./baseUrl"
+import { getBaseUrl } from "./baseUrl"
+
+const baseUrl = getBaseUrl()
 
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', async()=>{
