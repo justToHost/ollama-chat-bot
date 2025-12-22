@@ -1,6 +1,8 @@
 
 import axios from "axios"
-import baseUrl from "./baseUrl"
+import getBaseUrl from "./baseUrl.js"
+
+const baseUrl = getBaseUrl()
 
 
 const handleUploadFile = (element) => {

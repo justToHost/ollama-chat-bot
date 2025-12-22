@@ -1,9 +1,10 @@
 
 import axios from "axios"
-import { getBaseUrl } from "./baseUrl"
+import getBaseUrl from "./baseUrl"
 
 const baseUrl = getBaseUrl()
 
+console.log(baseUrl, 'base url in new conversation ')
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', async()=>{
     openNewConversationPage()

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import formatMessage from './handle-submit-message.js'
-import baseUrl from './baseUrl.js'
+import getBaseUrl from './baseUrl.js'
+
+const baseUrl = getBaseUrl()
 
 export default async function loadPrevMessages(conversationId,chatArea){
   const response = await axios.get(`${baseUrl}/api/conversation/${conversationId}/messages`)

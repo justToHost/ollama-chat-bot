@@ -1,7 +1,10 @@
 
 import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
-import baseUrl from "./baseUrl.js"
+import getBaseUrl from "./baseUrl"
+
+const baseUrl = getBaseUrl()
+
 
 console.log(baseUrl, 'base url')
 
