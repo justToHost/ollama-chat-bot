@@ -19,19 +19,19 @@ import cors from "cors"
 
 
 dotenv.config()
-
-let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
-
-
-
 const app = express()
 
 app.use(cors({
-  origin: ['ollama-chat-bot.vercel.app', 'http://localhost:5173']
+  origin: ['https://ollama-chat-bot.vercel.app', 'http://localhost:5173'],
+  credentials: true,
+  methods  : 'GET, POST, PUT, PATCH, DELETE'
 }))
 
 
 app.use(express.json())
+
+let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
+
 
 const client = new OpenAI({
     apiKey: process.env.OPEN_ROUTER_API,
