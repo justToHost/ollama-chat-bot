@@ -9,6 +9,8 @@ import newChatBtn from './newChatBtn.js'
 import handleSendIconToggle from './handleSendIconToggle.js'
 import loadPrevMessages from './loadPrevMessages.js'
 import { scrollToBottom } from './handle-submit-message.js'
+import handleChatLanguage from './handleChatLanguage.js'
+
 import navbar from './navbar.js'
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
@@ -56,8 +58,10 @@ handleUploadFile(document.querySelector('.upload-file'))
 handlePastedFile()
 handleVoiceRecord()
 handleNewConversation(
-document.querySelector('.newChatBtn')
+document.querySelector('.new')
 )
+ console.log(handleChatLanguage())
+
 
 handleSendIconToggle(
 document.querySelector('.inputMsg'), 

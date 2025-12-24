@@ -2,6 +2,8 @@
 import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
 import getBaseUrl from "./baseUrl"
+import handleChatLanguage from "./handleChatLanguage.js"
+
 
 const baseUrl = getBaseUrl()
 
@@ -9,9 +11,10 @@ const baseUrl = getBaseUrl()
 console.log(baseUrl, 'base url')
 
 const fetchResponse = async(userQuestion) => {
-
+   const cl = handleChatLanguage()
+   console.log(handleChatLanguage, cl, 'chat lang')
    createMessageLoading()
-const questionData = {question : userQuestion}
+const questionData = {question : userQuestion, selectedLang : cl}
 const conversationId = localStorage.getItem('conversationId')
 
   const response = 

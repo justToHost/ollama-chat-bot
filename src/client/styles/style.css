@@ -45,8 +45,9 @@ nav{
 }
 
 .innerNav .left {
-        display: flex;
+    display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .innerNav .left .logo{
@@ -55,6 +56,15 @@ nav{
 
 .innerNav .left button{
     align-self: center;
+}
+
+.languageSelect{
+  
+}
+
+.languageSelect select{
+    border: 2px solid #000;
+    border-radius: 3px;
 }
 
 .innerNav button{

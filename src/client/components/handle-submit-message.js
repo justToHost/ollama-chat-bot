@@ -64,7 +64,8 @@ function createMessage(chat,classes, lang = null){
   
   const userMsgEl = document.createElement('p')
     userMsgEl.classList.add(classes, 'message')
-    userMsgEl.style.direction = lang === 'persian' || lang === 'pashto' ? 'rtl' : 'ltr'
+    userMsgEl.style.direction = lang === null || (lang.includes('dari') || 
+    lang.includes('pashto')) ? 'rtl' : 'ltr'
      userMsgEl.innerHTML = 
     classes === 'user-message' ?
 
