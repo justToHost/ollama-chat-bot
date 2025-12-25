@@ -40,8 +40,8 @@ nav{
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
-    background: #fff;
-    padding: 0 3px;
+    background: #72729f;
+    /* padding: 0 3px; */
 }
 
 .innerNav .left {
@@ -52,6 +52,11 @@ nav{
 
 .innerNav .left .logo{
     font-size: 30px;
+    max-width: 50px;
+}
+
+.innerNav .left .logo img{
+    width: 100%;
 }
 
 .innerNav .left button{
@@ -111,6 +116,16 @@ nav{
 .newChatBtn{
     margin: 18px 50px 0 50px;
     padding: 5px 9px;
+}
+
+.message small button{
+    padding: 0;
+    border: 2px solid #333;
+    border-radius: 4px;
+    align-self: center;
+    text-align: center;
+    background: #444;
+    font-size: 13px;
 }
 
 

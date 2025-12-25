@@ -30,7 +30,7 @@ const faqs = db.prepare(
     'SELECT COUNT(*) as faqsCount FROM faq_questions').get();
 
 const hisMessagesLenth = 
-db.prepare('SELECT * FROM messages').all();
+db.prepare('SELECT COUNT(*) as mess FROM messages').all();
 
 //   db.prepare(
 //     'DELETE FROM conversations').run();
@@ -39,7 +39,7 @@ db.prepare('SELECT * FROM messages').all();
 //     'DELETE FROM messages').run();
 
 const conversationsCount = db.prepare(
-    'SELECT * FROM conversations').all();
+    'SELECT COUNT(*) as conv FROM conversations').all();
 
   
 

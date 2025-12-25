@@ -2,6 +2,11 @@ export default function findBestMatch(question, codes) {
   const q = question.toLowerCase();
   const normalizedData = normalizeLocationData(codes);
   
+
+  const izafakari = normalizedData.find(row => row.dari_description.includes('اضافه کاری'))
+  // console.log('normalized data : ', izafakari || "not found")
+
+
   // STEP 1: Find ALL matches
   const matches = normalizedData.filter(code => {
     const searchTerms = [
@@ -13,10 +18,13 @@ export default function findBestMatch(question, codes) {
     ].filter(term => term && term);
     
     return searchTerms.some(term => 
-      q.includes(term.toString().toLowerCase())
+     (term.dari_description || term.tasnif_code || term.english_description) && term.dari_description.split('').some(word => q.includes(word))
     );
   });
   
+
+console.log('matches ', matches)
+
   if (matches.length === 0) return null;
   
   // STEP 2: Determine user intent MORE PRECISELY
@@ -98,6 +106,8 @@ export default function findBestMatch(question, codes) {
     }
   }
   
+
+
   return matches.find(m => m.district_code) || matches[0];
 }
 
@@ -117,7 +127,8 @@ function normalizeLocationData(rawData) {
       province: row.province || lastProvince,
       district_code: row.district_code || "",
       english_description: row.english_description || "",
-      dari_description: row.dari_description || ""
+      dari_description: row.dari_description || "",
+      tasnif_code : row.tasnif_code || ""
     };
     
     normalized.push(normalizedRow);

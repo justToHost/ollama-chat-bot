@@ -1,9 +1,13 @@
 
+import tpmsLogo from '../assets/tpms_logo.webp'
+
 const navbar = () => {
   return `<nav>
       <div class="innerNav">
       <div class="left">
-        <div class="logo">TPMS</div>
+        <div class="logo">
+           <img src="${tpmsLogo}">
+        </div>
         <button class="new">new chat</button>
 
         <div class="languageSelect">
