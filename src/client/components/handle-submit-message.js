@@ -49,7 +49,7 @@ export function sendQuestion(element){
 
 
 function sendAndDisplayMessage(chatData,classes, lang = null){
-    const userMsgEl = createMessage(chatData,classes, lang)
+    const userMsgEl = createMessage(chatData,classes, lang = null)
     
     document.querySelector('.chats-area').append(userMsgEl)     
     scrollToBottom()
@@ -62,7 +62,7 @@ chatsArea.scrollTop = chatsArea.scrollHeight;
 
 function createMessage(chat,classes, lang = null){
   
-  const userMsgEl = document.createElement('p')
+  const userMsgEl = document.createElement('div')
     userMsgEl.classList.add(classes, 'message')
     userMsgEl.style.direction = lang === null || (lang.includes('dari') || 
     lang.includes('pashto')) ? 'rtl' : 'ltr'
@@ -83,18 +83,21 @@ function createMessage(chat,classes, lang = null){
     `
     :
       `${!chat.includes('thinking') ? 
-  `${formatMessage(chat)}
-    <small style="display:block; margin-top:5px; color: #555;">was it useful ? 
-      <button class="feedback-btn" data-feedback="helpful">👍</button>
-      <button class="feedback-btn" data-feedback="not-helpful">👎</button>
-    </small>
-  ` 
+
+  ` <p>${formatMessage(chat)}</p> ${feedBackUI()}` 
   : 
   formatMessage(chat)}`;
 
   return userMsgEl
 }
 
+
+function feedBackUI(){
+  return `<small style="display:block; margin-top:5px; color: #555;">was it useful ? 
+      <button class="feedback-btn" data-feedback="helpful">👍</button>
+      <button class="feedback-btn" data-feedback="not-helpful">👎</button>
+    </small>`
+}
 
 // Format the message with proper HTML
 export default function formatMessage(text) {
@@ -114,4 +117,4 @@ export default function formatMessage(text) {
         .trim()
 }
 
-export {sendAndDisplayMessage, scrollToBottom}
+export {sendAndDisplayMessage, scrollToBottom, createMessage, feedBackUI}
