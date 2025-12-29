@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', async(e)=>{
 
    if(!conversationId){
     chatArea.innerHTML = 
-      `<p class="systemMsg message"> How can i help youuuus ?</p>`
+      `<p class="systemMsg static_msg message"> How can i help you ?</p>`
 
    }else{
       scrollToBottom()

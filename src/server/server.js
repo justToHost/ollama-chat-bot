@@ -58,19 +58,22 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     console.log('selected lang', selectedLang)
 
-    let conversation_id = parseInt(req.query.conversation_id)
     const codes = [...tasnifJson, ...locationJson]
+
+    let conversation_id = parseInt(req.query.conversation_id)
+
+    
 
 
     createMessage(conversation_id, 'user', question)    
       
-     const bestMatchedCode = 
-     findBestMatch(question, codes)
+    //  const tasnifCodes = findBestMatch(question, tasnifJson)
+     const paymentCodes = findBestMatch(question, codes)
 
   const sources = {
     relevantInfo: searchKnowledgeBase(question),  // Array of error objects
     systemInfoAnswers: closestAnswersForSystemInfo(question),  // Array of system process objects  
-    possibleCodeAnswer :  bestMatchedCode,
+    possibleCodeAnswer :  paymentCodes,
     conversation : currentChatHistory(conversation_id), 
     knowledgeBase : await getDetailedDataForQuestion()
   };
@@ -86,8 +89,7 @@ app.post('/api/submitQuestion', async(req,res)=>{
     const cleanAnswer = aiResponse
     // return console.log(cleanAnswer, ' the')
       createMessage(conversation_id, 'AI', cleanAnswer)
-
-       console.log('ai answer = ', cleanAnswer)
+     console.log('ai answer = ', cleanAnswer)
 
     res.json({
         success : true,

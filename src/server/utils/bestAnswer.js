@@ -1,5 +1,6 @@
 export default function findBestMatch(question, codes) {
   const q = question.toLowerCase();
+  const questionWords = q.split(/\s+/).filter(Boolean);
   const normalizedData = normalizeLocationData(codes);
   
 
@@ -12,21 +13,25 @@ export default function findBestMatch(question, codes) {
     const searchTerms = [
       code.english_description?.toLowerCase(),
       code.dari_description,
-      code.district_code,
-      code.tasnif_code,
-      code.province
-    ].filter(term => term && term);
+      code.district_code ? code.district_code.toString() : null,
+      code.tasnif_code ? code.tasnif_code.toString() : null,
+      code.province ? code.province.toString() : null
+    ].filter(term => term && (
+      term.english_description && term.english_description?.toLowerCase().includes(questionWords[0]) ||
+      term.dari_description && term.dari_description.includes(questionWords[0]) ||
+      term === questionWords[0]
+    ));
     
-    return searchTerms.some(term => 
-     (term.dari_description || term.tasnif_code || term.english_description) && term.dari_description.split('').some(word => q.includes(word))
-    );
-  });
-  
 
-console.log('matches ', matches)
+    return searchTerms
+    
+  }).slice(0, 3);
+
+ console.log('matches ', matches, matches.length)
 
   if (matches.length === 0) return null;
-  
+  return matches
+
   // STEP 2: Determine user intent MORE PRECISELY
   const wantsDistrictsOfProvince = 
     q.includes('districts of') || 
@@ -111,6 +116,12 @@ console.log('matches ', matches)
   return matches.find(m => m.district_code) || matches[0];
 }
 
+
+function decideBestMatch(question, matches, allData) {
+  // Prioritize matches that align with more specific user intent
+  // For simplicity, return the first match for now
+  return matches[0];
+} 
 
 function normalizeLocationData(rawData) {
   const normalized = [];

@@ -1,0 +1,379 @@
+﻿ministry_code,tasnif_code,english_description,dari_description,pashto_description
+Operating Budget Project Code,000000,Project code for Operating Budget,کود پروزه براي بودجه عادي,د عادي بودجي د پروژي کوډ
+,011111,Operation and Maintenance (OP Budget),پروژه بودجه عادی حفظ و مراقبت (بودجه دولت),د عادي بودجي د ساتنی او څارني پروژه (دولتي بودجه)
+,022222,Revised O&M-WB,پروژه بودجه عادی حفظ و مراقبت (بانک جهانی),د عادي بودجي د ساتنی او څارني پروژه (نړیوال بانک)
+,033333,Operating Budget COVID-19,پروژه بودجه عادی مختص به کرونا ,د عادي بودجي د کرونا اړوند مصارفو ځانګړي پروژه
+,044444,Operating Budget Salary Project,پروژه بودجه عادی معاشات,د عادي بودجي د معاشاتو پروژه
+,021100,Civilian employees (permanent),کارمندان ملکی (دائمی ),دایمي کارکوونکي
+,021110,Contractors,کارمندان بالمقطع,باالمقطع کارکوونکی
+,021122,Interim additional allow (PRR),معاشات امتیازی  ,امتیازي معاشات
+,021124,Overtime,اضافه کاری ( تمام کارمندان از بست خارج رتبه الی بست هشتم),اضافه کاری
+,021130,Special Operative and hidden Expense,مصارف اوپراتیفی خاص و مستور,ځانګړي اوپراتیفی پټ مصارف
+,022100,Travel,سفریه,سفریه
+,022400,Repairs and maintenance of vehicles,ترمیمات حفظ ومراقبت وسایط نقلیه,
+,022408,Maintenance and repair of office equipment,ترمیمات حفظ ومراقبت تجهیزات دفتر,
+,022416,Repairs And Maintenance of Buildings,ترمیمات حفظ ومراقبت ساختمان ها,
+,022601,Fuel Vehicles,روغنیات اراده جات,
+,022603,Fuel - domestic,روغنیات داخلی,
+,022428,Operating And Maintenance Of High Tonnage Scales,حفظ ومراقبت ترازو های بلند تناژ,
+,022500,"Electricity
+                 ",برق,بريښنا
+OP Budget Contingency Project Code,,,,
+,090001,Policy Contingency code,کود احتیاطی  پالیسی,د پالیسۍ احتیاطي کوډونه
+,090002,Contingincy code for emergency situation,کود احتیاطی برای حالت اضطراری,د بیړني حالت لپاره احتیاطي کوډ
+,090020,Refunding the Revenue, برای بازپرداخت عواید, د عوایدو بیا ورکړه
+,090024,Contingency Funds for land purchase, وجوه برای خریداری زمین,د ځمکې د اخیستلو لپاره احتیاطي وجوه
+,090036,Funds for the safety of strategic projects, وجوه برای محافظت پروژه های استراتیژیک,د استراتیژيکو پروژو د ساتنې لپاره وجوه
+,090050,Funds for preserving and caring , وجوه  برای حفظ و مراقبت,د حفظ او مراقبت لپاره وجوه
+,090081,Funds for Emergency and Unpredictable Expenses, وجوه برای مصارف عاجل و پیشبینی نشده,د بېړنیو او نه وړاندوینه شویو لګښتونو لپاره وجوه
+,090008,Membership of ministries in international organizations, عضویت وزارت ها در سازمان های بین المللی , په نړیوالو سازمانونو کې د وزارتونو غړیتوب
+,090084,Paying  previous years' debts, پرداخت مقروضیت ها سال های گذشته, د تیرو کلونو د پورونو ورکړه
+,090085,"Funds for the  non-recruited employees  of the General Directorate of Intelligence, Ministry of National Defense, Ministry of Interior Affairs and Ministry of Education for the fiscal year 1402",وجوه برای  تشکیل استخدام نه شده  سال مالی 1402  ریاست عمومی استخبارات و وزارتهای دفاع ملی، امور داخله و معارف , په 1402 مالي کال کې د استخباراتو لوی ریاست د ملي دفاع، کورنیو چارو او پوهنې وزارتونو د نه استخدام شوي تشکیل لپاره وجوه
+Development Budget Projects,,,,
+113,‍130188,Dar ul-Aman administrative complex program,برنامه کمپلکس اداری دارالامان,د دارالامان اداري کمپلکس پروګرام
+,"130,208",Construction of Qosh Tepah Canal,کانال قوش تپه,اعمار کانال قوش تیپه
+,"130,215",Qosh Tepa Canal Project,پروژه کانال قوش تپه,د قوشتپې کانال پروژه
+,"130,217",Restoration of the islamic culture centre building in Ghazni province.,ترمیم ساختمان های مرکز فرهنگ اسلامی ولایت غزنی,د غزنی ولایت د اسلامی ثقافت مرکز د ودانیو ترمیم
+,"130,208",Reconstruction and restoration of historical monuments,باز سازی و مرمت آبدات تاریخی (مربوط اداره امور),د تاریخي اثارو بیارغونه او بحالي
+,"130,217",Restoration of the islamic culture centre building in Ghazni province.,ترمیم ساختمان های مرکز ثقافت اسلامی در ولایت غزنی,د غزنی ولایت د اسلامی ثقافت مرکز د ودانیو ترمیم
+114,"140,006",Rehabilitation and Construction of Primary and Appeal courts in Provinces,اعمار وترمیم اساسی محاکم ابتدائيه ومرافعه در ولایات,
+115,"150,004",Purchase of military equipment and vehicles,خریداری تجهیزات نظامی و وسایط,د نظامي تجهیزاتو او وسایطو پېرل
+,"150,008",Protection of Security places,تحکیم کاری محلات امنیتی,د امنیتي ځایونو محکمول
+,"150,017",Construction of Building,اعمار ساختمانها,د ساختمانونو جوړول
+120,"200,122",Modernization of customs (second part) and construction of customs facilities and construction of domestic customs stations,عصری ساختن گمرکات (بخش دوم) و اعمار تاسیسات گمرکی و احداث ستیشنهای گمرکی داخلی,د ګمرکونو عصري کول ( دویمه برخه ) او دګمرکونو د تاسیساتو جوړول، او د ګمرکي سټیشنونو منځته راوړل
+,"200,187","Development, improvement and maintenance of the national budget planning and implementation system",انکشاف ، بهبود و مراقبت سیستم پلانگذاری و اجرای بودجه ملی (SBPS),د ملي بودیجې د اجراء او پلان  د سیستم پرمختګ،ښه والی او پاملرنه
+,"200,232",Repairs and Construction of Buildings of Directorate General Properties in Center and Provinces,ترمیمات اسای واعمار تعمیرات ریاست عمومی املاک در مرکز وولایات,
+,"200,237","Budgeting, planning and coordination of foreign aid in all government entities",بودجه سازی، پلانگذاری و انسجام کمک های خارجی در تمام ادارات دولتی  (MBAW),په ټولو دولتي اداراتو کې بودیجه جوړونه، پلان جوړونه او د بهرنیو مرستو انسجام 
+,"200,265",Tax Academy,اکارمی مالیاتی,
+,"200,264",Non Tax Revenue,پروژه عواید غیر مالیاتی (NTR),
+,"200,273",System development of Sektas and capacity building of Revenue Department,پروژه انکشاف سیستم سکتاس وارتقای ظرفیت کارمندان ریاست عواید,
+,"200,282","Construction, Expansion and Acquisition of Fixed Asset for MoF",ساختمان توسعه وکسب دارایی های ثابت برای وزارت مالیه,
+,"200,291",Air Corridor for Balancing Trade of Afghanistan,دهلیز هوایی برای توازن تجارت ,
+,"200,292",Pension Reform safety net Project,پروژه ریفورم تقاعد ومصونیت اجتماعی,
+,"200,299","Connection of Fiber Optic in five Mustofiats
+",نصب قایبر نوری درپنچ مستوفیت,
+,"200,303"," 
+Printing Passports and Securities",چاپ پاسپورت واوراق بهادار,
+,"200,307",The project of purchasing technological devices and office equipment of the General Directorate of Revenue,پروژه خریداری  وسایل تکنالوژی و تجهیزات دفتری ریاست عمومی عواید ,د عوایدو د عمومي ریاست د تکنالوژی وسایلو او دفتري تجهیزاتو د اخیستلو پروژه
+,"200,308",The project of repairing of the tax areas of the smal and large Taxpayer's Office in center,پروژه ترمیم حوزه های مالیاتی ریاست مالیه دهنده گان کوجک و بزرگ مرکز ,د مرکز د کوچنیو او لویو مالیه ورکوونکو د ریاست د مالیاتو د بیارغولو پروژه
+,"200,309",The project of  awareness and capacity building and improving the systems of the General Directorate of Revenue,پروژه اگاهی دهی و ارتقا ظرفیت و بهبود سیستم های ریاست عمومی عواید ,د پوهاوي، ظرفیت لوړول او د عوایدو عمومي ریاست سیسټمونو وده ورکولو پروژه 
+,"200,310",The project of equipping Mustofiats with solar power system,پروژه تجهیز مستوفیت ها به سیتم برق افتابی ,د مستوفیتونو  لمریزې برېښنا سیستم سمبالولو پروژه
+,"200,311",The project for purchase of technological devices and office equipment in Mustofiats on provincial bases,پروژه خریداری  وسایل تکنالوژی و تجهیزات دفتری  مستوفیت های در سطح ولایات , په ولایتی سطح کی د مستوفیتونود تکنالوژی وسایلو او تجهیزاتو د پېرلو پروژه
+122,"220,182",The construction of air defenses and the construction of border shells,اعمار مفرزه های هوائی,د سرحدي پوستو او  هوایي تاسیساتو جوړول 
+,"220,183",Creating infrastructure and systematization for the Finance Department of the Ministry of Defense,ایجاد زیربنا و سیستم سازی برای ریاست مالی وزارت دفاع,د دفاع وزارت مالي ریاست لپاره د زیربنا او سیستم جوړونې رامنځ ته کول
+,"220,184",Construction of Mosques in the Center and Provinces,اعمار مساجد درمرکز وولایات,
+123,"230,118",The project to strengthen the distribution of passports and Tazkira of Afghan nationals living abroad,پروژه تقویت توزیع پاسپورت و تذکره های اتباع افغانستان مقیم خارج,بهر مېشتو افغانانو لپاره د پاسپورټ او تذکرو د ویش د پیاوړتیا پروژه 
+,"230,112",Afghan students incentive studying abroad,مدد معاش محصلین در خارج از کشور,
+,"230,033",Construction of Administrative Buildings and Archieve for Ministry of Foreign Affairs,پروژه اعمار تعمیرات اداری وارشیف ,
+124,"240,023",Engineering and supervision unit of construction projects,واحد انجنیری ونظارت از پروژه های ساختمانی,د پرمختیایي پروژو د څارنې او انجینرۍ څانګه
+,"240,008",Construction of Mosques,اعمار مساجد,د جوماتونو جوړول
+125,"250,157",Supporting from industrial parks,حمایت از پارکهای صنعتی,د صنعتی پارکونو څخه ملاتړ
+,"250,158",Initiative Industries,صنایع خلاق,
+,"250,163",Support for carpet exporters (payment of 6% subsidy),,
+,"250,164",Construction of the electricity distribution system of the fourth phase of the industrial park,اعمار سیستم توزیع برق فاز چهارم پارک صنعتی,د صنعتی پارکونو د برښنا د سیستم توزیع د څلورم فاز جوړول
+,"250,165","Creating a commercial area with a width of 100 meters and a length of 3000 meters in  Industrial Park,Dorahi Haritaan, Balkh province",ایجاد ساحه تجارتی در عرض 100 متر و طول 3000 متر در پارک صنعتی دوراهی حیرتان ولایت بلخ,د بلخ ولایت د حیراتانو په دوه لارې صنعتي پارکونو کې د سوداګریزی ساحې جوړول چې سور ېې ۱۰۰ متره او اوږدوالی ېې ۳۰۰۰ متره کی
+,"250,167",Creating a commercial area in the industrial park of Khost province,ایجاد ساحه تجارتی در پارک صنعتی ولایت خوست,د خوست ولایت په صنعتي پارکونو کې د سوداګریزې ساحې جوړول 
+,"250,155",Intenational Trede Support,تجرات بین المللی,
+,"250,080",Business Environment Support,حمایت از محیط تجارت کار بار,
+,"250,084",Provincial Commercial Development,پیشرفت ولایتی,
+126,"260,299",Strengthening the distribution system of computerized passports and purchasing equipment,تقویت سیستم توزیع پاسپورت های کمپیوتری وخریداری تجهیزات,د کمپیوټري پاسپورتونو د ویش سیستم پیاوړي کول او د تجهیزاتو پيرودل
+,"260,342",Creating and strengthening financial systems in the Ministry of Interior,ایجاد و تقویت سیستم های مالی در وزارت امور داخله,د کورنیو چارو په وزارت کې د مالي سیسټمونو رامینځته کول او پیاوړتیا
+,"260,349",The project of increasing the revenue of the passport department,پروژه طرح افزایش عواید ریاست پاسپورت,د پاسپورت ریاست د عوایدو د زیاتوالي طرحې پروژه 
+,"260,350",Dayak General Management Revenue Increase Project,پروژه طرح افزایش عواید مدیریت عمومی دایاک,د د ایاک مدیریت د عوایدو د زیاتوالي طرحې پروژه 
+,"260,354",technical project for detection of crime, پروژه تخنیکی در کشف جرم,د جرمونو کشفولو تخنیکی پروژه 
+,"260,355",construction of the administrative complex of the provincial security commands (Khost&Helmand),اعمار تعمیر  کمپلکس اداری قوماندانی های امنیه ولایات (خوست و هلمند),د امنیه قوماندانی د اداری کمپلکس جوولو پروژه ( خوست و هلمند)
+,"260,356",construction of &nbsp;complex of the for border police in airports.,اعمار تعمیرهای پولیس سرحدی میدان هوایی,په میدان هوای کی سرحدی پولیسو لپاره د تعمیرونو جولول
+,"260,357","construction of mosques at the security commands in provinces (Panjshishir ,Logar and Helmand)",اعمار تعمیر مساجد در سطح قوماندانی ها امنیه در ولایات  ( پنجشیر، لوگر، هلمند),د ولایتونو د امنیه قومندانی په کچه د جوماتونو جولول ( پنشیر ، اوگر او هلمند)
+,"260,358",construction of fire fighting station in provinces Nimrouz and Baghlan.,اعمار تعمیر های مراکز اطفایئه وی ولایات  (نیمروز و بغلان),په ولایتونو کی د اور وژنی د مرکزونو جولوول 
+,"260,359",Preparation and procurement of electronic tools and equipment needed to General Directorate of Traffic Police,تهیه و تدارک وسایل و تجهیزات الکترونیکی مورد نیاز ریاست عمومی پولیس ترافیک,د ترافیکو پولیسو د عمومي ریاست د اړتیا وړ الکترونیکي وسایطو او تجهیزاتو تدارکات چمتوکول
+,"260,360",Construction Of The Administrative Building And masjid -E -Sharif in Zabul Province,اعمار مسجد شریف وتعمیر اداری مقام ولایت زابل,
+127,"270,332",Construction and equipment of public education schools,اعمار و تجهيز مکاتب تعليمات عمومی,د عمومي تعلیماتو د ښوونځیو رغونه او تجهيز
+,"270,335",Construction of Schools and Dormitories for Kochies.,اعمار مکاتب ولیلیه برای کوچیان,
+,"270,383",Education Infrastructure Development,انکشاف زیر بنای تعلیم وتربیه,
+,"270,387",General Education (Including EQUIP),تعلیمات عمومی (بشمول EQIP),
+,"270,389",Islamic Education,تعلیمات اسلامی,
+,"270,638",reconstruction of dormitory for teacher traning centers,اعمار لیلیه برای دارالمعلمین ها,
+,"270,773",Rehabilitation of sayed jamaludin Teacher Traninin in kabul,باز سازی وترمیم مرکز تربیه معلم سید جماالدین در کابل,
+,"270,894",unconditional Fund for Provinces,وجوه غیرمشروط ولایات,
+,"270,796",Development projects for 11 North and West border provinces,پروزه های انکشافی 11 ولایت سرحدی شمال وغرب,
+,"270,897",Construction of Schools in Seven Big Cities,اعمار مکاتببرای تیز هوشان در هفت شهر بزرک,
+,"270,910",Salaries of employees studying abroad,معاشات کارمندان مصروف تحصیل در خارج از کشور, د هېواد څخه بهر په زده کړو بوخت کارکوونکو معاشات
+,"270,911",Repair construction for the headship of testimonials,اعمار تعمیر برای ریاست شهادتنامه ها ,د شهادت نامو ریاست لپاره د تعمیر جورول
+,"270,912",Preparation and purchase of equipment for presiding over certificates,تهیه و خریداری تجهیزات برای ریاست شهادتنامه ها ,د شهادت نامو ریاست لپاره د تجهیزاتو چمتو کول او پیرود
+,"270,828",Construction of schools in central of Zabul province,اعمار مکاتب معارف در مرکز ولایت زابل,
+,"270,895",hiring of female teachers,استخدام معلمین اناث در روستای ها ,
+,"270,892",Development and strengthening literacy programs,انکشاف وتقویت برنامهای سواد آموزی وارتقای سویه تحصیلی معلمین دوازده پاس وچهارده پاس,
+,"270,896",Completion of Incomplete remaining Equip Schools,تکمیل پروژه های باقیمانده مکاتب ناتکمیل اکویب,
+128,"280,308","Construction and repair of the cancer treatment center  at Aali Abad Hospital, Kabul Medical University",اعمار تعمیر مرکز تداوی سرطان  واقع شفاخانه عالی آباد پوهنتون طبی کابل,د کابل طبي پوهنتون د علي آباد روغتون ته څیرمه د سرطان د درملنې مرکز  تعمیر جوړول 
+,"280,326",Salaries of professors and employees studying abroad,معاشات اساتید وکارمندان مصروف  تحصیل در خارج از کشور, د هېواد څخه بهر په زده کړو بوخت استادانو او کارکوونکو معاشات
+,"280,327",  Doctoral program, برنامه دکتورا ,د دکتورا  برنامه  
+,"280,328",Master's program,برنامه ماستری,د ماسټرۍ برنامه 
+,"280,329",Publishing books on Islamic culture for educational institutions and universities,چاپ کتب ثقافت اسلامی برای موسسات تحصیلی و  پوهنتون ها,د پوهنتونونو او تحصیلي موسساتو لپاره د اسلامي ثقافت کتابونو چاپ
+,"280,330",Activation of 10 cafeterias and 30 canteens in different universities,فعال سازی 10 کافتریا و 30 کانتین در پوهنتون های مختلف,په مختلفو پوهنتونونو کې د ۱۰ کافتریاوو او ۳۰ کانتینونو فعالول 
+,"280,331",Development of electronic learning management system (LMS) and digital library (DL),انکشاف سیستم مدیریت آموزش الکترونیکی یا (LMS) و کتابخانه دیجیتلي (DL),د بریښنایي زده کړو د مدیریت (LMS) او ډیجیټلي کتابتون (DL) وده
+,"280,332",Capacity building of technical and professional departments,ظرفیت سازی بخش های تخنیکی و مسلکی ,د تخنیکي او مسلکي برخو ظرفیت جوړونه
+129,"290,241",For the operation of the consortium to select the beneficiaries according to Decree 305,جهت فعالیت کانسرسیوم برای انتخاب مستحقین بر اساس فرمان 305,د ۳۰۵ فرمان له مخې د دکانسرسیوم فعالیتونو په موخه د متسحقینو انتخاب
+,"290,128",Ensuring of technical and basic social services for established towns for returnees,تامین خدمات تخنیکی اساسی واجتماعی شهرک های افتتاح شده عودت کننده گان,
+,"290,234",Reintegration of Internal Displaced People,استقرار پایدار بیچاشده گان داخلی,
+132,"320,090",Construction of Building and its Equipping in Kabul and provinces,اعمار تعمیرات و تجهیزات آن در مرکز و ولایات ,په مرکز او ولایتونو کې د ودانیو او د هغوې د تجهیزاتو برابرول 
+,"320,112",Program Support Unit PSU,واحد حمایوی برنامه ها PSU,د PSU پروگرامونو د ملاتړ واحد
+,"320,124",Mes Ainak Project,معدن مس عینک ,د عینک د مسو پروژه
+,"320,125",Feasibilty Study for TAPI project, مطالعات تخنیکی تاپی,له ترکمنستان څخه افغانستان، پاکستان او هندوستان ته د غازو د نل لیکي د تخنیکي څیړنو پروژه (TAPI)
+,"320,159",Drilling of two extraction wells in Yatim Taq gas field and purchase of sulfur extraction machine in gas mining field.,حفاری دو حلقه چاه استخراجی در ساحه گازی یتیم تاق و خریداری دستگاه تجرید سلفر در ساحه معدن گازی ,د یتیم تاق د ګازو په سیمه کې د دوو استخراجې څاه ګانو کیندل او د سلفرو دستګاه پېرل
+,"320,160",Geological studies and mapping survey investigations and biological environmental geology studies,مطالعات جیولوجی و تفحصات سروی نقشه برداری و مطالعات جیولوجی محیطی زیستی,د چاپېریال جیولوجي مطالعات او د نقشې جولولو عمومي سروې 
+,"320,161",Construction project of 94.5 kilometers gas pipeline from Sheberghan to Mazar Sharif,پروژه احداث 94.5 کیلو متر پایپ لاین گاز شبرغان الی مزار شریف,د مزار شریف څخه تر شبرغان پورې د ګاز پایپلاین جوړول د ۹۴.۵ کیلو مترو په اوږدوالي 
+133,"330,001",Social protection reform,ریفورم مصؤنیت اجتماعی,د ټولنیز خوندیتوب ریفورم
+,"330,006",System development,انکشاف سیستم ,د سیستم پراختیا
+134,"340,015",Development Of ICT Afghanistan (E-Governance) (Bankable),توسعه تکنالوژی معلوماتی افغانستان (حکومتداری الکترونیکی),
+,"340,086",Devolepment Of Hot Spot Stand By For Data Center And Devolepment Of Center For Internet Exchange Point,ایجاد بک آپ برای دیتا سنتر وتامین تجهیزات مایکرویف برای مرکز تبادله انترنت,
+,"340,091",Government Electronic Information Source Center,مرکز منابع معلومات حکومتداری الکترونیکی ,
+,"340,105",Change of Afghanistan information system in to iCloud,تبدیل نمودن مرکز ملی معلومات افغانستان به زیر بنا,
+,"340,110",Asan Khidmat Project,پروژه اسان خدمت,
+,"340,116",Project Implementation Unit-Ministry Reforms,واحد تطبیق پروژه  ریفورم های وزارت,
+,"340,103",Creation of  Internet Exchange Center (NIXA),ایجاد مرکز تبادله انترنت,د انترنت د تبادلې مرکز جوړونه (NIXA)
+,"340,124",Creating cloud infrastructure and developing systems,ایجاد زیر بنای کلود,د کلود د جوړولو زیربنا پروژه 
+,"340,125",Infrastructure development and protection of Afghanistan's National Information Center,انکشاف زیر بناه مصون ساختن مرکز ملی معلومات افغانستان,د افغانستان د ملي معلوماتو د مرکز خوندیتوب او د زیربناء وده
+,"340,126",Improving the capacity of digital governance and paying the salaries of internal technical support employees,ارتقای ظرفیت حکومتداری دیجیتلی وپرداخت معاشات کارمندان (NTA),د ډیجیټلي حکومتولۍ ظرفیت لوړونه او د داخلي مرستندویه تخنیکي کارکوونکي معاشاتو ورکړه
+,"340,127","The Facilitation, Innovation and Initiative Center Project",مرکز تسهیل، نوآوری و ابتکار,د آسانتیا، نوښت او ابتکار مرکز
+135,"350,077","Fundamental strengthening of the basic duties of the Ministry of Economy (planning and evaluation, economic analysis, sustainable development goals and transparency and accountability of non-governmental organizations)",تقویت بنیادی وظایف اساسی وزارت اقتصاد(پلان گزاری وارزیابی،تحلیل های اقتصادی ؛اهداف انکشاف پایدار وشفافیت وحسابدهی موسسات غیر دولتی,د اقتصاد وزارت د اساسي دندو بنسټیزه پياوړتیا (پلان جوړونه او ارزونه، اقتصادي تحلیلونه، د ثابتې پراختیا موخې او د غیردولتي مؤسساتو شفافیت او حساب ورکونه)
+136,"360,294","Modernization of broadcasting, equipments and technical devices of radio and television",مدرن سازی نشرات، تجهیزات و وسایل تخنیکی رادیو تلویزیون,د رادیو تلویزیون د نشراتو، تجهیزاتو او تخنیکی وسایلو ماډرن کول
+,"360,295","Basic restoration of three water reservoirs in Ahmed Shahi, Kandahar",ترمیم اساسی سه حوض های آب در احمد شاهی قندهار,د کندهار احمد شاهي کې  د دریو حوضونو اساسي ترمیم
+,"360,296",Basic repair of the house of the great emperor Ahmad Shah Baba,ترمیم اساسی منزل امپراتور بزرګ احمد شاه بابا, د لوی امپراتور احمد شاه بابا کور ترمیمول 
+,"360,297",Creation of Beyhaqi bookstall,ایجاد غرفه کتب بیهقی,د بېهقې کتابونو د غرفې جوړول
+,"360,298",Construction of  Hotel and Guest House in Zazai Ariob National Amusement Park,اعمار هوتل و مهمانخانه در پارک ملي تفریحی ځاځی آریوب,د ځاځي اریوب په ملي تفریحي پارک کې د هوټل او میلمستون جوړول
+,"360,299",Constrution of  Hotel and Guest House in ancient area of Jam minaret ,اعمار هوتل و مهمانخانه در ساحه منار باستانی جام,د جام منار په لرغونې سیمه کې د هوټل او میلمستون جوړول
+,"360,300",Construction of  Hotel and guest house for tourists in Nuristan province,اعمار هوتل و مهمانخانه برای سیاحین در ولایت نورستان,په نورستان ولایت کې د سیلانیانو لپاره د هوټل او میلمستون جوړول 
+,"360,301","Construction of  Hotel in Sayad Amusement Park, Kapisa province",اعمار هوتل در پارک تفریحی  صیاد ولایت کاپیسا,د کاپسا ولایت په صیاد تفریحي پارک کې د هوټل جوړول
+,"360,302",Purchase of equipment for the national radio and television station,خریداری تجهیزات ستدیو ترنم رادیو تلویزیون ملی,د ملي راډیو او تلویزیون سټیشن لپاره د تجهیزاتو پیرود
+,"360,303",Development of the tourism industry for tourists in the center and provinces,توسعه صنعت توریزم برای سیاحین در مرکز و ولایات,په مرکز او ولایتونو کې د ګرځندویانو لپاره د ګرځندوی صنعت پراختیا
+,"360,304","Construction of solar system for (15) national radio and television provinces (Balk, Kandahar, Nangarhar, Herat, Zabul, Helmand, Khost, Paktia, Paktika, Ghazni, Logar, Baghlan, Kunar, Nuristan Lag",خریداری تجهیزات مختلف رادیو تلویزیون ملی ورادیو تلویزیون تعلیمی وتربیتی (تجهیزات تلویزیون ، رادیو ، برق ، فرستنده وانترنت ) برای مر کز و33 ولایت ,د ملي راډیو او ټلویزیون د بیلابیلو وسایلو او د تعلیمي او تحصیلي راډیو او ټلویزیوني وسایلو (د مرکز او ۳۳ ولایتونو لپاره د ټلویزیون، راډیو، بریښنا، ټرانسمیټر او انترنیټ وسایلو) اخیستل
+,"360,305",Construction of radio and television studios in Sarpol and Faryab provinces with equipment.,اعمار استدیو رادیو تلویزیون ملی در ولایات سرپل و فاریاب با تجهیز ات ,په سرپل او فاریاب ولایتونو کې د تجهیزاتو سره د راډیو او تلویزیون سټوډیوګانو جوړول
+,"360,308","Construction of solar system for (15) national radio and television provinces ((Balk, Kandahar, Nangarhar, Herat, Zabul, Helmand, Khost &nbsp;Paktia Paktika, Ghazni, Logar, Baghlan, Kunar, Nuristan Lag",ساخت وساز سیستم سولری برای (15) ولایت رادیو تلویزیون ملی(بلخ،کندهار،ننگرهار،هرات، زابل، هلمند، خوست، پکتیا،پکتیکا، غزنی،لوگر،بغلان،کنر،نورستان ولغمان ),د (۱۵) ملي راډیوګانو او تلویزیونونو لپاره د سولر سیسټم جوړول.(بلخ، کندهار، ننګرهار، هرات، زابل، هلمند، خوست، پکتیا، پکتیکا، غزني، لوګر، بغلان، کنړ، نورستان او لغمان)
+137,"370,188", Afghanistan medical forensic strengthening,تقویت طب عدلی افغانستان,د افغانستان د عدلي طب تقویه کول 
+,"370,442",Creating mobile eye care camps,ايجاد کمپ های سيار مراقبت چشم, د سترګو د پاملرنې لپاره د سیارو کمپونو جوړول
+,"370,546",Disability and rehabilitation,معلولیت و بازتوانائی,معلولیت او بیا پیاوړتیا
+,"370,646",Intencive Care Unit (I C U ),بخش مراقبت عاجل   I C U,د عاجل مراقبت څانګه I C U
+,"370,727",Medical equipment purchase project,‍‍‍پروژه خریداری تجهیزات طبی,د طبي توکو د پېرلو پروژه
+,"370,762",Development of measures to strengthen the health system and its interventions to improve the field of health services,توسعه اقدامات تقویت سیستم صحی ومداخلات آن دربهبودعرصه خدمات صحی,د روغتیايي خدمتونو د تر سره کولو د ښیګڼې په موخه د صحي سیستم پیاوړتیا او د اقداماتو پراختیا 
+,"370,769",Equipping and activating parenteral fluids factory,تجهیز وفعال سازی فابریکه محلولات زرقی,د زرقی محلولاتو د فابریکی جوړول او تجهیزول
+,"370,839",National Cancer Control Program,برنامه ملی کنترول سرطان,د سرطان د تشخیص ملي پروګرام
+,"370,867",Equipping and activating the National Superspeciality Hospital,تجهیز وفعال سازی شفاخانه ملی فوق تخصصی,د فوق تخصصي روغتون فعالول او تجهیز
+,"370,881",Strengthening the National Health Care Accreditation Authority,تقویت اداره  ملی اعتباردهی مراقبت های صحی,د روغتیایي پاملرنې اعتبار ورکولو ملي ادارې پياوړتیا 
+,"370,883",Strengthening the Council of  Nurses and Midwives od Afghanistan,تقویت شورای نرس ها وقابله های افغانستان,د افغانستان د نرسانو او قابلو د شورا پیاوړتیا
+,"370,893",The project of providing health services for nomads and returnees,پروژه عرضه خدمات صحی برای کوچیها  و عودت کننده گان,د کوچیانو او بیرته راستنیدونکو لپاره د روغتیا خدماتو پروژه
+,"370,895","Hemodialysis project, kidney diseases and urinary system",پروژه هیمودیالیز، امراض کلیه و سیستم اطراحی (Urinary system),هیموډالیسز، د پښتورګو او ادرار سیسټم د درملنې پروژه
+,"370,897",Providing health services for the nomads of the southern zone,عرضه خدمات صحی برای کوچیهای زون جنوب,د سویلي زون کوچیانو لپاره د روغتیایي خدماتو وړاندې کول
+,"370,898",Creating cafeterias in hospitals,ایجاد کفتریا در شفاخانه ها,په روغتونونو کې د کافتریا جوړول
+,"370,899",Jamhoryt hospital reform,ریفورم شفاخانه جمهوریت,د جمهوریت روغتون ریفورم
+,"370,900",Construction of 350 bed Hospital Merwiase kandahar,اعمار شفاخانه ۳۵۰ بستر شفاخانه حوزوی میرویس ولایت کندهار,په کندهار ولایت کې د میرویس ۳۵۰ بستریز روغتون  جوړونه
+,"370,904",Construction of serounding wall &nbsp;Hospitals and Mosque,اعماردیوارهای احاطه شفاخانه صحت طفل واعماریک باب مسجد ،واحاطه سه قطعه زمین سفید د ساحات مختلف شهر کابل,اعمار دیوار احاطه شفاخانه ها ومسجد شریف 
+,"370,905",Construction of Ambulance building,اعمار تعمیر مرکز امبولانس,اعمار تعمیر مرکز امبولانس 
+,"370,906",Construction of CHC at Qoosh Tepa District at jawzjan province,اعمار مرکز (سی اچ سي+) صحی قریه گردن ولسوالی قوش تپه ولایت جوزجان,اعمار مرکز CHC قریه گردان ولسوالی قوش تیپه ولایت جوزجان 
+,"370,907",Supply of &nbsp;Medical equipment for Health Service Delivery in Indraghandi Hospital,اکمال تجهیزات طبی جراحی قلبی جهت  توسعه عرضه خدمات صحت طفل اندراگاندی ,اکمال تجهیزات طبی جراحی قلبی جهت توسعه عرضه خدمات صحت طفل اندراگاندی 
+,"370,908","Activation of the quality control laboratory of food, spices and medicinal products in the provinces (Nangarhar, Balkh, Kandahar and Herat)",فعال سازی لابراتوار کنترول کیفیت غذا، ادویه و محصولات دوایی در ولایات ( ننگرهار، بلخ، کندهار و هرات),فعال سازی لابراتوار کنترول کیفیت غذا ادویه و محصولات دوایی درولایات (ننگرهار، بلخ، کندهار و هرات) 
+,"370,909",Afghanistan medical councel,تقویت شورای طبی افغانستان,د افغانستان طبي شورا پياوړتیا 
+,"370,910",Strenghening &nbsp;National medicine and healthcare product regulatory Authority,تقویت اداره ملی تنظیم ادویه وغذا افغانستان,دخورو او درملو ملی اداره پياوړتیا 
+139,"390,323",National Livestock and Animal Health Development Program,برنامه ملی انکشاف مالداری و صحت حیوانی,د مالدارۍ د پراختیا او د څارویو د روغتیا ملي پروګرام
+,"390,356",National Horticulture and Livestock Program,برنامه ملی باغداری و مالداری ,د باغدارۍ  او مالدارۍ ملي پروژه 
+,"390,781",Creation and repair of cold storages,ایجاد و ترمیم سردخانه ها,د سړو خونو ترمیم او جورول
+,"390,782","Poultry, fish and economic insect industry growth and development project",پروژه رشد و انکشاف صنعت طیور، ماهی و  حشرات اقتصادی,د مرغانو، کبانو او اقتصادی حشراتو د ودی او پراختیا پروژی
+,"390,783",Construction and reconstruction of irrigation buildings,اعمار و بازسازی ساختمان های آبیاری,د ابولگولو ساختمانونو رغول او جورونه
+,"390,784",Repair and purchase of agricultural machinery equipment,ترمیم و خریداری تجهیزات ماشین آلات زراعتی,د کرنیزو ماشین آلاتو ترمیم او تجهیزاتو اخیستل
+,"390,395",Agriculture Development in border district,انکشاف زراعت در ولسوالی های سرحدی,
+,"390,240","construction and equipping agricultures’ offices in center, provinces &district",ساختمان وجهیز دفتر ترویج در ولایات وولسوالی ها,
+,"390,244","construction and equipping agricultures’ offices in center, provinces &district",ستختمان وتجهیز دفتر ترویج در ولایات وولسوالی ها,
+,"390,742",Kabul Green Belt,کمر بند سبز کابل,
+,"390,654",Natural Resource Management National Program,برنامه ملی تنظیم منابع زبیعی به اشتراک جامعه,
+,"390,766","Construction of Household Qoria's in Paktia, Paktika and Khost Provinces",احداث قوریه جات خانگی در ولایت پکتیکا وخوست,
+,"390,770",Sustainable range Land managment plan on cumulative approach,طرح تنظیم علفچرها به اشتراک جوامع محلی,
+,"390,787",Community Based Rangeland Management, تنظیم  همه جنابه علفچرها به مشارکت جامعه,
+,"390,786",Natural Forests Conservation and  Restoration of pistachio and walnuts,احیا وحفاظت جنگلات طبعیی پسته وچهار مغز,
+,"390,785",Community Based Wild Medicinal Plants Management,تنظیم نباتات  طبی وحشی به اشتراک جامعه,
+,"390,676",Irrigation and water reservoir project,پروژه ابیاری وذخایر اب,
+,"390,763",Feasibility Study Of Strategic Project,مطالعات امکان سنجی پروژه های استراتیژیک,
+,"390,780",Farm water efficiency program,برنامه موثریت اب در مزرعه,
+,"390,789",Construction of Drainage Networks and Agricultural Lands and Improvement,اعمارشبکه های زهکشی واصلاح زمین های زراعتی,
+,"390,604",Developing of Zafaran and cotton cultivation,توسعه کشت پخته وزعفران,
+,"390,790",provision and purchase of seeds and chemical fertilizers,تهیه وخریداری تخم های بذری وکودهای کمیاوی,
+,"390,767",Nomad's Development project( Agriculture),پروژه انکشافی امورکوچی هامربوط وزارت زراعت,
+,"390,792",Establishment and equiping of lequid Nitrogen plant in Balkh province ,اعمارساختمان وتجهیزدستگاه تولید نایتروجن مایع ولایت بلخ,
+,"390,793",Feasibility study and establishment of standard Dairy cattle farms at the 7 zones,مطالعه امکان سنجی وایجاد۷باب فارمهای معیاری گاوهای شیری درهفت زون,
+,"390,331","Construction, Development & Surveillance of Research, Extension & Productions' farms",احیاه توسعه و مراقبت فارمهای تحقیقاتی ترویجی وتولیدی,
+,"390,788",Soil Information System of Afghanistan (SISAF),مطالعه سیستم معلوماتی خاک های افغانستان,
+,"390,791","Alternative Livelihood Packages for Poppy Cultivation, Extension of Ferula /Hing, and vegetables Production under Greenhouse technology",بسته های جاگزین کشت کوکنار ترویج نبات هنگ واحداث سبز خانه ها,
+,"390,774",Afghanistan Agricultural Products Management,مدیریت محصولات زراعتی افغانستان,
+,"390,749",Construction of Cooperative Cold storages,اعمار کمپلکس سردخانه های عصری,
+,"390,741",Kitchen Garden,ایجاد باغچه های خانگی ومصونیت غذایی,
+,"390,357",Integrated plant Pest and animal Disease Management,مبارزه علیه آفات وامراض نباتی,
+,"390,624",Construction of Strategic wheat Reserve,احیاه واعمار زخایر استراتیژیک گندم,
+,"390,244",provision and distribution of Improved Seeds and fertilizer,ساختمان وتجهیز دفتر ترویج در ولایات وولسوالی ها,
+,"390,505","Establishing Management Information System, Information Technology & Agricultural Statistics",پیشبینی وضیعت زراعت هواشناسی زراعتی تقویت سیستم تکنالوژی های معلوماتی واحصائیه زراعتی,
+,"390,755",Prov Development Projects,پروژه های انکشافی ولایتی,
+140,"400,004",Mechanical and professional education,تعليمات ميخانيکی و مسلکی,میخانیکی او مسلکی زده کری 
+,"400,014",Salaries of professors and employees studying abroad,معاشات اساتید وکارمندان مصروف  تحصیل در خارج از کشور, د هېواد څخه بهر په زده کړو بوخت استادانو او کارکوونکو معاشات
+,"400,002",Technical & Vocational Learning,آموزش فنی وحرفه ای,
+,"400,005",Construction of national technical institute,ساخت انستیتوت فنی ملی,
+141,"410,066",Kamal Khan Irrigation Project and Lashkari Flood Control,پروژه آبياري کمال خان وکنترول سيلاب لشکري,د کمال خان اوبو لګونې او د لښکري سیلاب د کنټرول پروژه
+,"410,133","Design , Construction , Power Generation and Irrigation Of Bakhshabab Farha Province",تونل ابګردان بحش اباد ولایت فراه,تونل ابګردان بحش اباد ولایت فراه
+,"410,285",Supervision and construction of Shah and Arous irrigation and power dam in Shekardara district (irrigation capacity of 1500 hectares and electricity production of 1.2 megawatts),نظارت و ساختمان بند برق و آبیاری شاه و عروس ولسوالی شکردره (ظرفیت آبیاری 1500 هکتار و تولید برق 1.2 میگاوات),د شکر درې ولسوالۍ د شاه او عروس د بریښنا او اوبو لګولو بند څارنه او رغونه (د ابو لګونې ظرفیت ۱۵۰۰ هکتار او د برق تولیت ۱.۲ میګاواټ)
+,"410,400","Design and construction of Pashdan irrigation and power generation dam, Herat province",دیزاین و ساختمان بند آبیاری و تولید برق پاشدان ولایت هرات,د هرات ولایت دپاشدان د اوبو لګونې بند ډیزاین او ساختمان
+,"410,412","Regulation, implementation and maintenance of irrigation dams and electricity generation, transmission and distribution projects",تنظیم، تطبیق و مراقبت بندهای آبیاری وپروژه های تولید انتقال و توزیع برق,د اوبو لګولو د بندونو او برېښنا د وېش او لېږد د پروژو تنظیم، پلي کول او څارنه
+,"410,782",Check Dams Project in 34 provinces,,دچیکدیمونه جورولو پروژه په ولایاتو کی
+,"410,794",The project to regulate the maintenance and care of dams in the center and provinces,پروژه تنظیم حفظ و مراقبت بند ها در مرکز و ولایات ,په مرکز او ولایاتو کې د بندونو د ساتنې او پاملرنې د تنظیم پروژه
+,"410,795",Fortifications of the shores of the Amu Sea,تحکیمات سواحل دریا آمو,د آمو سیند د سواحلو تحکیمات
+,"410,796",Extension of the power grid of Nuristan province,تمدید شبکه برق ولایت نورستان,د نورستان ولایت د برق تمدید شبکه
+,"410,797",Provision Of Electricity To Dand Ghori And Kharotai Mosque Villages Of Baghlan Province,,د بغلان ولایت دنډه غوری او خروتی مسجد کلیو دبریښنا تامینولو پروژه
+,"410,798",Provision of Electronic Equipments For the Developments of Electricity Network in paktia Province,,دپکتیا ولایت بریښنا شبکی د پراختیا په موخه دبریښنایی وسایلو چمتو کول او تدارک
+,"410,799",Construction Of Shahe Canal In laghman Province,بازسازی کانال شاهی ولایت لغمان,د لغمان ولایت شاهي کانال جوړونه 
+,"410,800",Construction Of Paktia River Basin Building.,اعمار ساختمان در حوضه ای دریایی ولایت پکتیا,د پکتیا ولایت سیندیزې حوزې د ودانۍ رغونه 
+,"410,801",Construction Of Sultan Ibrahim Dam from the revenue of Qashkeri mines,ساخت بند سلطان ابراهیم از معدن نفت قشقری,د سلطان ابراهیم بند جوړونه د قشقري کان له عوایدو څخه 
+,"410,802",Power supply to Qosh Tepa and Darzad Districts of Jawzjan province from the imported power of Turkmanistan (TAP),تامین برق ولسوالی های قوش تپی و درزاب ولایت جوزجان از برق وارداتی ترکمنستان,د ترکمنستان هیواد وارداتي برېښنا څخه د جوزجان ولایت قوش تیپی او درزاب ولسوالیو ته برېښنا رسونې پروژه 
+,"410,803",Construction of Haghan Jan Dam in Chenar to District of Uruzgan,اعمار بند آغا جان در ولسوالی چینارتو ولایت ارزگان,د اروزګان وزارت د چینارتو ولسوالۍ د اغا جان بند جوړونه 
+142,"420,106","National Rural Roads Program - NRAP (road construction from Farkhar district to Warsaj from 0+000 km to 15+000 km with asphalt carpet in Takhar Province, Northeast Zone)",برنامه ملي سرک های روستايی - NRAP  (اعمار و ساختمان سرک از ولسوالی فرخار الی ورسج از کیلومتر 0+000 ال 15+000 کیلومتر با فرش اسفالت ولایت تخار، زون شمال شرق),د کلیو د سړکونو د پراختیا ملي برنامه - NRAP  د شمال زون د تخار ولایت د فرخار څخه تر ورسج ولسوالی له  0+000 تر 15+000 کیلومتر پورې سفالټ سړک جوړونه
+,"420,335","Kabul-Logar Second Line Road Building (from Mohammad Agha District to Alam Bridge, Logar Province) second layer",ساختمان سرک لین دوم کابل – لوگر (از ولسوالی محمدآغه الی پل علم ولایت لوگر) لات دوم,د کابل ـ لوګر دویم لین سړک ( د مرکز پل علم څخه تر د محمد آغې ولسوالۍ پورې) دوهم لاټ
+,"420,320",POPWs Workforce Development Unit,واحد انکشاف برنامه قوه کار وزارت فواید عامه,
+,"420,568",Maintenance and care of roads,حفظ و مراقبت سرک ها,د سرکونو ساتنه او پاملرنه
+,"420,569",Preservation and care of Salangs ,حفظ و مراقبت سالنگها,د سالنګونو ساتنه او پاملرنه
+,"420,573",Construction of Kunar to Nuristan Road (20KM),اعمار سرک نورستان کنر به طول (115) کیلومتر,
+,"420,620",Asphalting of the road in Goshtepeh and Darzab districts of Jawzjan province with a length of (47) kilometers,اسفالت سرک ولسوالی قوشتپه ودرزاب ولایت جوزجان به طول 47 کیلومتر,د جوزجان ولایت د قوشتپې او درزاب ولسوالیو  د (۴۷) کیلومتره په اوږدوالي سړک قیر کول
+,"420,621","Reconstruction of the Gardiz-Zermatt road (from Khatavah area to the repair of the bazaar, 22 kilometers long)",پروزه ترمیم سرک گردیز زرمت از ساحه ختاوه الا تعمیر بازار  بطول 22 کیلومتر,د ګردیز- زرمت سړک بیارغونه ( له خټاوې څخه تر تعمیر بازار پورې ۲۲ کیلو متره سړک)
+,"420,622",Salangs Reconstruction And Renovation Project By Toll Plaza,پروژه ترمیم وبازسازی سالنگ ها توسط تولپلازا,
+,"420,623","The High Tonnage Scales’ construction, solar installation, repairs, operating and maintenance project",پیشبرد امور ساختمانی، نصب سولر و ترازو، دیجیتل سازی، ترمیمات، حفظ و مراقبت ترازوهای بلند تناژ ,د ساختماني کارونو پرمخ وړل، د سولر او ترازوگانو نصبول، ډیجیټل سازۍ، ترمیم او د لوړ تناژ تلو ساتنه او پانلرنه
+,"420,624",Kabul - Jalalabad 2nd lane Road (Latah Band) construction by Toll Plaza,اعمار سرک لین دوم کابل-جلال آباد (لته بند) توسط تولپلازا,د ټولپلازې په واسطه د کابل - جلال آباد دویم لین (لته بند) سړک جوړول
+,"420,625",Dasht Archi-Kundz 20 km remaining public road asphalt project,اسفالت کار باقیمانده سرک عمومی دشت ارچی - کندز به طول 20 کیلومتر,د دشت ارچي - کندز د شل 20 کیلومټرو په اوږدوالي عامه سړک د اسفالټ پاتې کار
+,"420,626",Countrywide mosques’ construction project along the public highways by MoPW,اعمار مساجد در مسیر شاهراه های عمومی کشور مربوط وزارت فواید عامه,د ټولګټو وزارت اړوند د هېواد د لویو لارو په اوږدو کې د جوماتونو جوړول
+,"420,627","Installing Traffic Signs, Signals, Guardrails and street lines painting project by MoPW",نصب علایم و اشارات ترافیکی، خط اندازی و نصب گاردریل ها مربوط وزارت فواید عامه ,د ټولګټو وزارت اړوند د ترافیکي نښو او اشارو نصبول، د سړکونو خط اچول او د ګارد ریلونو نصبول
+,"420,628",The construction of a half-finished bridge in Geezab district’s Uruzgan province,پیشبرد امور باقیمانده پروژه نیمه کاره گیزاب ولایت ارزگان,د ارزګان د ګیزاب ولسوالۍ د نیمه بشپړې شوې پروژې د پاتې چارو پرمخ بیول
+,"420,629",Asphalt and Reconstruction of Daikundi – Kandahar road,اعمار و بازسازی سرک دایکندی - کندهار ,د دايکندي – کندهار سړک جوړول او بيارغول
+,"420,630",Organization’s Technical support and NTA employees’ salary payment,حمایت تخنیکی اداره و پرداخت معاشات کارمندان حمایوی تخنیکی,د ادارې تخنیکي ملاتړ او د داخلي مرستندویه تخنیکي کارکوونکو معاشاتو ورکړه
+,"420,631",Technical Studies and Consultancy Services,مطالعات تخنیکی و خدمات مشورتی ,تخنیکي مطالعات او مشورتي خدمتونه
+,"420,632",Khawaaf - Herat railway 4th lot constriction,ساختمان خط آهن قطعه چهارم خواف - هرات,د خواف – هرات د څلورمې برخې د اوسپنې پټلۍجوړښت
+,"420,633","Railways Administration, Utilization Equipment and Machinary Purchase Project",پیشبرد امور، خریداری تجهیزات و ماشین آلات بهره برداری خطوط آهن,د اوسپنې پټلیو د ګټې اخیستنې لپاره د تجهیزاتو او ماشین آلاتو پيرل، او دچارو پرمخ بیول
+,"420,634","Railways&#39; Operation and Maintenance, Repair, O&M Equipment and Machinary Purchase Project",خریداری تجهیزات و ماشین آلات، ترمیمات و حفظ و مراقبت خطوط آهن,د اوسپنې پټلیو ترمیمات، ساتنه او پاملرنه او د تجهیزاتو او ماشين آلاتو پیرل
+,"420,635",Hayrataan - Mazaar-e-Sharif Railway&#39;s Utilization and O&M,بهره برداری و حفظ و مراقبت خط آهن حیرتان - مزارشریف,د حيرتان - مزارشریف داوسپنې پټلۍ څخه ګټه اخیستنه، ساتنه او پاملرنه
+,"420,636",Railway&#39;s Technical Institute and Technical Skill building Project,تدویر برنامه های آموزشی و ایجاد انستیتوت مسلکی خط آهن , د اوسپنې پټلۍ لپاره زده کړيزو برنامو دایرول او مسلکي انسټيټیوټ رامنځ ته کول
+,"420,637",Kandahar - Speen Boldak 96km Railway detailed design and construction Project, دیزاین تفصیلی و ساختمان 96 کیلومتر خط آهن کندهار – سپین بولدک , د کندهار - سپین بولډک د 96 کیلومټرو په اوږدوالي د اوسپنې پټلۍ تفصیلي ډیزاین او جوړول
+,"420,638",Andkhoy - Shabarghan 67km railway’s detailed design and construction project,دیزاین تفصیلی و ساختمان خط آهن اندخوی - شبرغان (67) به طول کیلومتر , د 67 کیلومترو په اوږدوالي د اندخوی – شبرغان د اوسپنې پټلۍ تفصیلي ډیزاین او جوړول
+,"420,639",Khawaf - Herat railway 4th lot constriction (2nd phase &nbsp;47km),ساختمان خط آهن قطعه چهارم خواف - هرات (فاز دوم - به طول 47 کیلومتر),د اوسپنې پټلۍ جوړول، د خواف – هرات څلورمه برخه (دویم فاز – 47 کیلومتره اوږدوالی)
+,"420,640",Shahr-e-Safa to Maanje's main road repair project - Kabul -Kandahar highway -5th lot (against Logar Province's 2nd District Chromite mine's revenues,پروژه ترمیم اساسی سرک از شهر صفا الا مانجه در مسیر شاهراه کابل کندهار لات پنجم در مقابل عواید معدن کروم ولایت لوگر واقع حصه دوم,
+,"420,641",Asmar-Ghazi Abad-Naari road constrution project in kunar province,پروژه اعمار سرک ولسوالی اسمار غازی آباد ناری ولایت کنر,
+,"420,642",Kabul - Ghazni Road (2an Lane) Construction Project By Toll ,پروژه اعمار سرک لین دوم کابل غزنی توسط تولپلازا,
+143,"430,447",Regional integration program,برنامه انسجام ساحوی,د ساحوي پراختیا ملي پروګرام (NABDP)
+,"430,485",The large water supply network of Qala e Naw city and the water dam of Badghis province,شبکه بزرگ آبرسانی شهر قلعه نو و بند آب ولایت بادغیس,د بادغیس ولایت د شهر  قلعه نو بند او اوبو رسونې شبکه جوړول
+,"430,494","Completion of the remaining work of silk road Wakhan District , Badakhshan province.",تکمیل کار باقیمانده سرک راه ابریشم در ولسوالی واخان ولایت بدحشان,د وریښمو د لاری د باقیمانده سړک د کارونو تکمیلیدل د بدخشان ولایت په واخان ولسوالی کی
+,"430,495",Construction of Check dams,ساخت چکدمها ,د چکدم جوړول
+,"430,496",Spin Buldak-Retaining wall construction in Kandahar Province, اعمار دیوار استنادی در ولسوالی  سپین بولدک ولایت کندهار,ّپه سپین بولدک ولسوالی کی د استنادی دیوال جوړول 
+,"430,497",Construction of Kaj Samad (Kaj Star) Dam in Farah province.,اعمار بند کج صمد ( کج استار)  ولایت فراه ,دفراه ولایت د بند کج صمد (کج ستار) ودانی جوړول
+144,"440,034","Rehabilitation of Regional Airports (Faizabad, Cheghcheran, Maimana and Qala-e-Now",احیای میدان هوایی منطقوی فیض اباد چغچران میمنه وقلعه نو,
+,"440,226","Construction of terminal, fire services, road 980 meters from the ramp to parking lot, runway and pools on both sides of the Nimroz airport ACAA.",اعمار ترمینل تعمیر اطفایه سرک از رمپ الی پارکینگ 980 متر حوض های جانب در دو طرف رنوی میدان هوایی ولایت نیمروز وفراه,
+,"440,225",Construction of the new runway for Uruzgan Airport,احداث خط جدید رنوی ولایت ارزگان,
+,"440,008",extention and maintenance of kabul air port,توسعه حفظ ومراقبت میدان هوایی,
+,"440,164",Rehablitation and Extension Terminal of Kandahar Airports,باز سازی توسعه ونوسازی ترمینل میدان هوایی کندهار,
+,"440,215","Wall, design and construction of new Airport behind Ghazi Amanullah Khan Mina Nangarhar province",دیزاین واعمار میدان هوایی جدید ولایت ننگرهار دردشت دربگی ولسوالی رودات,
+,"440,224",Surrounded Wall of Mazar-e-Sharif Airport,احاطه میدان هوایی مزار شریف,
+,"440,212",Operation and Maintainance of Salttelites(VSAT) for Airspace Control,حفظ مراقبت ستلایت VSAT جهت کنترول فضا,
+,"440,174","Airports Security (Kabul, Herat, Mazar Sharif, and Kandahar)",تامین امنیت وحفظ ومراقبت میادین هوایی کابل هرات کندهار ومزارشریف,
+,"440,209","Operating and maintenance of 35 MLAT stations, equipment to control airspace, flight check, aircraft guidance devices, and purchase of technical equipment",حفظ ومراقبت 35 استیشن دستگاه های MLAT جهت کنترول فضای افغانستان وفلایت چک دشتگاه های رهنمایی طیارات خریداری تجهیزات تخنیکی,
+,"440,162","Construction of runway, terminal, parking, fire stations and other equipment of Khost Airport",اعمار رنوی ترمینل پارکینگ استیشن اطفایه وملحقات میدان هوایی ولایات خوست پکتیا وتخار,
+,"440,222","Study, design and construction of the International Airport in Logar province",مطالعه دیزاین تخنیکی واعمار میدان هوایی بین المللیدر ولایت لوگر,
+145,"450,190",computerization of Entrance doors in  provinces,کمپیوترایز ساختن دروازه های عبوری,
+,"450,222","Ensuring the security and maintenance of airfields (Kabul, Herat, Kandahar and Mazar-e-Sharif)","تامین امنیت و حفظ ومراقبت میدان هوایی( کابل ,هرات,کندهار,ومزارشریف",د کابل، هرات، کندهار او مزارشریف د هوایی ډګر د ساتنې او څارنې او د امنیت نیولو پروژه
+,"450,223",Construction of administrative  Building  project of Road Transport Regulation Directorate of Logar province,پروزه اعمار تعمیر اداری ریاست تنظیم ترانسپورت جاده ای ولایت کابل,د لوګر ولایت - د ځمکني ټرانسپورټ ریاست لپاره اداري ودانۍ جوړول
+,"450,224",Balkh province Administrative Building Construction For Road Transport Directorate,پروژه اعمار تعمیر اداری ریاست تنظیم ترانسپورت جاده ای ولایت بلخ ,د بلخ ولایت - د ځمکني ټرانسپورټ ریاست لپاره اداري ودانۍ جوړول 
+,"450,225",Construction of administrative  Building  project of Road Transport Regulation Directorate of Paktia province,پروژه اعمار تعمیر اداری ریاست تنظیم ترانسپورت جاده ای ولایت پکتیا ,د پکتیا ولایت - د ځمکني ټرانسپورټ ریاست لپاره اداري ودانۍ جوړول
+,"450,226",Construction of administrative  Building  project of Road Transport Regulation Directorate of Nimroz province,پروژه اعمار تعمیر اداری ریاست تنظیم ترانسپورت جاده ای ولایت نیمروز,
+,"450,227",Construction of administrative  Building  project of Road Transport Regulation Directorate of Nangarhar province,پروژه اعمار تعمیر اداری ریاست تنظیم ترانسپورت جاده ای ولایت ننگرهار ,"د ننگرهار ولایت - د ځمکني ټرانسپورټ ریاست لپاره اداري ودانۍ جوړول
+"
+,"450,228",24-hour solar power supply system project for road transportation (23) ports of the country,پروژه  سیستم برق رسانی 24 ساعته سولری برای کانکس ها  ترانسپورت جاده ای  (23) بنادر کشور,"د هېواد په (۲۳) بندرونو کې د ځمکني ټرانسپورټ کانکسونو لپاره د ۲۴ ساعته لمریز برېښنا رسولو سیستم پروژه
+"
+,"450,230",50 shop stall constiction project at freight terminal of Gozrah district in Herat province ,پروژه اعمار (50) باب دوکاکین برای ترمینل باربری ولسوالی گذره ولایت هرات,د هرات ولایت د ګذره ولسوالی د باربری هډی د (50) دوکانونو  جوړولو  پروژه 
+,"450,231",MoTA&#39;s National Technical Assistance Employees&#39; Salary Payments,پرداخت معاشات کارمندان حمایوی تخنیکی ملی وزارت ترانسپورت و هوانوردی,د ټرانسپورټ او هوايي چلند وزارت ته د ملي مرستندویه او تخنیکي خدمتونه وړاندې کول
+,"450,232",Kabul International Airport Terminal’s repair & expansion project, اعمار توسعه تعمیر ترمینل میدان هوایی بین المللی کابل ,د کندهار د هوايي ډګر د ځغاستې او پارکینګ ترمیم
+,"450,233",Haritaan’s cargo terminal 6200m surrounding wall construction project – Balkh province, اعمار دیوار احاطه به طول (6200 متر) ترمینل باربری واقع حیرتان ولایت بلخ ,د بامیانو د اوسني هوايي ډګر د ځغاستې لیکې اساسي ترمیم 
+,"450,234",Torkham port terminal’s retaining walls construction project - Nangarhar province,اعمار دیوار احاطه و دیوار استنادی برای ترمینل بندر تورخم ولایت ننگرهار, د بلخ ولایت په حیراتانوکې د ۶۲۰۰ مترو په اوږدوالي د باروړونکو موټرو ترمینل د احاطې جوړول
+,"450,235",The 2248m surrounding wall construction project of Truck stops at Pushtah – Parwan province, اعمار دیوار احاطه به طول (2247 متر) تیرپارک پشته ولایت پروان ,د پروان ولایت د تیر پارک پشتې د (۲۲۴۷) مترو په اوږدوالي د احاطې دیوال جوړول
+,"450,236",Waradak Province’s Truck stops 868m surrounding wall construction project, اعمار دیوار احاطه به طول ( 868 متر) تیرپارک ولایت میدان وردک ,د میدان وردګو ولایت د تیر پارک د ۸۶۸ متره په اوږدوالي د احاطې دیوال جوړول
+,"450,237",Kandahar Airport’s runway and parking renovation project,ترمیم خط رنوی و پارکینگ میدان هوایی ولایت کندهار,د ننګرهار ولایت د تورخم بندر ټرمینل لپاره د احاطې او استنادي دیوالونو جوړول
+,"450,238",Ahmad Shah Baba International Airport Juliet Ramp’s Construction project – Kandahar province, اعمار (رمپ جولیت) میدان هوایی بین المللی احمد شاه بابا ولایت کندهار ,د هلمند ولایت د بست هوایي ډګر د احاطې دیوال (فنس) او د ریمپ او ځغاستې لیکې ترمیم 
+,"450,239",Bamyan Airport’s existing runway renovation project,ترمیم اساسی خط رنوی میدان هوایی موجوده بامیان,د کابل نړیوال هوايي ډګر د ټرمینل ودانۍ اعمار او پراختیا 
+,"450,240","Bust Airport’s fence wall construction, runway and ramp repair project – Helmand province",دیوار احاطه (فنس) و ترمیم رمپ و خط رنوی میدان هوایی بُست ولایت هلمند ,د کندهار ولایت کې د احمدشاه بابا نړیوال هوايي ډګر د رغولو
+,"450,241",Countrywide Construction of Transportation Terminals,اعمار ترمینل های ترانسپورت زمینی به سطح کشور,په ټول هیواد کې د ځمکني ټرانسپورټ ترمینلونو جوړول
+,"450,189",4 Terminals Construction for Cargo and passenger Transporation at the Cities Entry and Exit Points,احداث 4 ترمینال تراتسپورت باربری مسافربری  در نقاط دخولی وخروجی شهر ها وتطبیق طرح ترانسپورت عامه,
+146,"460,048",Construction of Khushal Khan Baba High School Educational Complex,اعمار کمپلیکس تعلیمی لیسه خوشحال خان, د خوشحال خان بابا د لیسې د تعلیمې کمپلیکس  جوړول
+,"460,052",Borders & Tribal Management Information,سیستیم مدیریت اطلاعات سرحدات وقبایل,
+,"460,053",MoBTA Reform project,ریفورم وزارت امور سرحدات,
+147,"470,041",Skills development program,برنامه انکشاف مهارتها,د مهارتونو د پراختیا پروګرام 
+149,"490,485", Public and government buildings program,برنامه ساختمان های عامه و دولتی,د دولتي او عامه ودانیو د جوړولو پروګرام
+,"490,525",Maidan Shahr city terminal,ترمینل شهری میدان شهر,د میدان ښار ښاري ترمینل
+,"490,526",Finallinzing constructions of the &nbsp;three additional blocks of Directorate of Supervision and Follow-up of Orders and Decrees in DarulAman,کار باقیمانده سه بلاک الحاقیه اداره لوی ریاست نظارت و تعقیب احکام و فرامین واقع دارالامان,په دارالامان کې د حکمونو او فرمانونو د څارنې او تعقیب ریاست د دریو اضافي بلاکونو پاتې کارکونکي
+150,"500,155",Draft rules project,پروژه طرح قوانین,دقانون طرحې پروژه
+,"500,159",Construction of a decentralized sewage treatment system,ساخت سیستم غیر متمرکز تصفیه فاضلاب ,ساخت سیستم غیر متمرکز تصفیه فاضلاب
+,"500,158",Revenue increase plan and management  project,پروژه طرح مدیرت وافزایش عواید,دعوایدود زیاتوالی طرحی اومدیریت پروژه
+151,"510,026",Strengthening the financial and procurement system,تقویت سیستم مالی و تدارکاتی,د مالي او تدارکاتي سیسټم پیاوړتیا
+158,"580,050",Accreditation of the central laboratory,اعتباردهی لابراتوار مرکزی,د مرکزي لابراتوار اعتباري کوول
+,"580,060",Mobile Laboratry of petroleum materials in three sites in the center and north and west zones,لابراتوار سیار مواد نفتی در سه سیت مرکز وزون های شمال غرب,
+,"580,061",Provision of temperature laboratories and verfication of long tonnage scale (metrology),تدارک لابراتوار های درجه حرارت وعیار سازی وتصدیق ترازو ها بلند تناژمترولوژی,
+160,"600,006",Construction of  administrative building in center and provinces of the Department of Environment with its surroundings,اعمار تعمیر اداری مرکز و ولایات ریاست محیط زیست با احاطه آن,د چاپیریال ساتني ادارې ولایتي او مرکزی ریاستونو ودانۍ جوړول
+161,"610,020",Tools and writing of encyclopedia,ابزار و نگارش دایرت المعارف,
+163,"630,049",Hiring of technical and professional employees,استخدام کارمندان تخنیکی و مسلکی,د مسلکی او تخنیکی کارکونکو استخدام 
+164,"640,003",Construction and reconstruction of national security repairs in Kabul and provinces,اعمار و باز سازی تعمیرات امنیت ملی در کابل و ولایات,د ملي امنیت د تعمیرونو جوړول په کابل او ولایاتو کې 
+173,"730,020",Implementation of statistical surveys,اجرای سروی های احصائیوی,اجرای سروی های احصائیوی
+,"730,021",Distribution of electronic identification cards,توزیع تذکره الکترونیکی,د برېښنايي پېژندپاڼو د وېش پروژه
+,"730,008",Construction of Central Static Offices in Center and Provinces,اعمار تعمیر اداره مرکزی احصایه در مرکز وولایات,
+,"730,023",The project of creating and equipping easy service centers,پروژه ایجاد و تجهیز مراکز آسان خدمت,د آسان خدمت د مرکزونو د تجهیز او رامنځته کولو پروژه
+,"730,024",  Activation of electronic Tazkira  distribution zones abroad, فعال سازی زون های توزیع تذکره الکترونیکی در خارج از کشور,له هېواده بهر د برښنایې پیژند پاڼو د ویش زونونو د فعالولو پروژه
+176,"760,004",Construction of Administrative Building in Provinces,اعمار تعمیر اداری در ولایات,
+,"760,015",Policy and Capacity Development Program,برنامه ارتقاع ظرفیت وپالیسی سازی,
+,"760,016",Construction of Main Office Building for Directorate General Kuchies,اعمار تعمیر مرکزی ریاست عمومی کوچی ها,
+177,"770,001",The development project of technical support for the office of the high authority of Amir ul-Momenin,پروژه انکشافي حمایت تخنیکي برای دفتر مقام عالی امیرالمؤمنین,د امیر المؤمنین د عالي مقام د دفتر  تخنیکي ملاتړ لپاره پرمختیایي پروژه
+179,"790,007","Design, lightening, development and construction of urban roads",دیزاین، تنویر وساختمان سرکهای شهری,د ښاري سړکونو دیزاین، روښانه کول او جوړول
+,"790,104",The Remaining fund of Bread for Kabul Municipality,صندوق باقیمانده نان برای شهرداری کابل,
+182,"820,001",Supply of Drinking water for Farah Province,پروژه آبرسانی ولایت فراه,
+,"820,003",Water Distribution Network Of Andkhoy and maymana city,تامین آب اشامیدنی وشهر میمنه (شبکه برسانی),
+,"820,011","Drinking water supply in Sheberghan, Jawzjan and Takhta pule Mazar-e-Sharif (regarding account settlement of Mazar-e-Sharif and Shaberghan Takhta pul project)",تامین آب آشامیدنی شهر شبرغان، جوزجان و تخته پل مزار شریف(بابت تصفیه حساب پروژه تخته پل مزار شریف و شهر شبرغان),د شبرغان ښار ، جوزجان او د مزار شریف تخته پل د څښلو اوبو برابرول ( د مزار شریف تخته پل او شبرغان پروژو د حساب تصفیه)
+,"820,018","Remaining water supply projects in 14 towns of Charikar, Qalat, Mehtar Lam, Ghazni, Gardiz, Kandahar and Jalalabad.",باقی مانده پروژه های آبرسانی 14 شهرک چاریکار، قلات، مهتر لام، غزنی، گردیز، کندهار  و جلال آباد, د ۱۴ ښارونو چاريکار، قلات، مهتر لام ، غزنی ، گردیز ، کندهار او جلال آباد د اوبو رسولو پاتي پروژه
+183,"830,045",Rebuilding the internal electrical power turbine,بازسازی توربین بند برق درونته,د دورونټی د بریښنا بند د توربین بیارغونه
+,"830,054","Rehabilitation, Construction, Completion and Design of Micro Hydro electric stations in Charkh district Logar and Panjshir Province",احیاء - دیزاین - ساختمان دستگاه های کوچک برق آبی و تکمیل امور باقیمانده دستگاه برق آبی ولسوالی چرخ لوگر و ولایت پنجشیر, د بریښنا د تولید د کوچنیو دستګاوو دیزاین، بیارغونه او جوړول او دلوګر ولایت د چرخ ولسوالۍ او دپنجشیر ولایت د برښنا د پاتي چاري سرته رسول 
+,"830,056","Study, design and construction of Manogi power dam in Kunar province",مطالعه، دیزاین و ساختمان بند برق منوګی ولایت کنر,د کنړ ولایت د منوګی د بریښنا بند مطالعه، ډیزاین او ودانۍ جوړول
+,"830,060","Reconstruction, repairing and network extension of electric dam in Chak Wardak",باسازی و ترمیم بند برق چک وردک و توسعه شبکه توزیع آن,دچک وردک دبریشنا بند بیا جورول او دبریشنا توزیع کول 
+,"830,065",The project of activating electricity in five districts of Jawzjan province,پروژه فعال سازی برق پنج ولسوالی ولایت جوزجان,د جوزجان ولایت د پنځو ولسوالیو د برق فعالولو پروژه
+,"830,066","Preparation, design, assembly, testing and commissioning of 220 kV transmission line from Ghazni to Kandahar",تهیه، طرح، تدارک منتاژ، آزمایش و کمیشننګ لین انتقال ۲۲۰ کیلو ولت از غزنی به کندهار,له غزني څخه تر کندهاره د ۲۲۰ کیلو ولټ مزي ، تهیه، دمنتاژ نصب کول، ډیزاین، ازمایښت او کمیشنینګ
+,"830,067",Electrification Of Nimroz Province Airport Prison And Operational Reserve Battalion,,د نیمروز ولایت هوایی دگر محبس او دعملیاتی ریزف کندک ته دبرښنا رسولو پروژه 
+,"830,068",Electricity Supply Project To Shalak Paraw And Pyarokhel Villages Of Logar Province,,دلوګر ولایت دشلک پراو او پیارو خیلو دکلیو د برښنا رسولو پروژه
+,"830,069","Completion of Remaining Works of Sub-Stations of Qalat, Eastern of Kandahar, and Installation of SVC Sub-Station in the Eastern of Kandahar",نصب سب استیشن  در شرق قندهار و تکمیل کار باقیمانده سب استیشن در قلات مرکز ولایت زابل,د کندهار په ختیځ کې د سب ستیشن تبا سیستم نصبول او د قلات پاتې چارو بشپړول
+,"830,070","Electricity Supply to District Archi, Kunuz Province.",تامین برق ولسوالی دشت ارچی ولایت کندز,د کندز ولایت دشت ارچې ولسوالۍ ته د برښنا رسولو پروژه 
+,"830,071",Electricity Supply to Musa Kala District of Helmond Province,تامین برق ولسوالی موسی کلا ولایت هلمند,د هلمند ولایت موسی قلعه ولسوالی ته د برښنا رسولو پروژه
+,"830,051",Power transmission project of 21 villages of Badghis province,شبکه برق رسانی به 21 قریه ولسوالی سنگ آتیش ولایت بادغیس,پروژه برق رسانی 21 قریه ولایت بادغیس 
+189,"890,004",Tor Ghondi Railway Sations Building Constuction Progarm,اعمار تاسیسات استیشن خط آهن تورغندی,
+,"890,006",khawaf herat Railway (4th lot)Constriction,ساختمان خط آهن قطعه چهارم خواف هرات,
+,"890,014",Railways Operation and Maintenance Services,خدمات بهره برداری حفظ ومراقبت خطوط آهن,
+193,"930,001",Strengthening the financial and procurement system,تقویت سیستم مالی و تدارکاتی,د مالي او تدارکاتي سیسټم پیاوړتیا
+,"930,002",Building Prison Repair of Balkh Province (mention) project,اعمار تعمیر زندان ولایت بلخ ,
+,"260,337",Construction of the provincial detention houses,ولایتی توقیف خونی تعمیرونه جورول,
+,"260,295",Construction of Prison Buildings,اعمار تعمیرات زندان,
+190,"900,001",Policy Contingency code,کود احتیاطی  پالیسی,د پالیسۍ احتیاطي کوډونه
+,"900,002",Contingincy code for emergency situation,کود احتیاطی برای حالت اضطراری,د بیړني حالت لپاره احتیاطي کوډ
+,"900,020",Refunding the Revenue, برای بازپرداخت عواید, د عوایدو بیا ورکړه
+,"900,024",Contingency Funds for land purchase, وجوه برای خریداری زمین,د ځمکې د اخیستلو لپاره احتیاطي وجوه
+,"900,036",Funds for the safety of strategic projects, وجوه برای محافظت پروژه های استراتیژیک,د استراتیژيکو پروژو د ساتنې لپاره وجوه
+,"900,050",Funds for preserving and caring , وجوه  برای حفظ و مراقبت,د حفظ او مراقبت لپاره وجوه
+,"900,081",Funds for Emergency and Unpredictable Expenses, وجوه برای مصارف عاجل و پیشبینی نشده,د بېړنیو او نه وړاندوینه شویو لګښتونو لپاره وجوه
+,"900,008",Membership of ministries in international organizations, عضویت وزارت ها در سازمان های بین المللی , په نړیوالو سازمانونو کې د وزارتونو غړیتوب
+,"900,084",Paying  previous years' debts, پرداخت مقروضیت ها سال های گذشته, د تیرو کلونو د پورونو ورکړه
+,"900,085","Funds for the  non-recruited employees  of the General Directorate of Intelligence, Ministry of National Defense, Ministry of Interior Affairs and Ministry of Education for the fiscal year 1402",وجوه برای  تشکیل استخدام نه شده  سال مالی 1402  ریاست عمومی استخبارات و وزارتهای دفاع ملی، امور داخله و معارف , په 1402 مالي کال کې د استخباراتو لوی ریاست د ملي دفاع، کورنیو چارو او پوهنې وزارتونو د نه استخدام شوي تشکیل لپاره وجوه
+191,"910,033",Funds for currency balance (Development),وجوه  برای توازن اسعار (انکشافی), د انکشافی اسعارو توازن لپاره وجوه
+,"910,049",Development funds for provinces and districts,وجوه انکشافی برای ولایات و ولسوالیها,ولایاتو او ولسوالیو لپاره پرمختیایی وجوه
+,"910,058",Funds for printing of worthy Documents ,وجوه  برای مطبعه اوراق بهادار,د بیه لرونکی سندونو  د مطبعې لپاره وجوه
+,"910,066",Funds for development programs (Those income earning projects that are included in the budget document after the approval of the Ministry of Finance and the approval of the Economic Commission),وجوه برای برنامه های انکشافی  (پروژه های عایداتی که بعد از موافقه وزارت مالیه و  منظوری کمیسیون اقتصاد شامل سند بودجه میگردد ),د پرمختیایي پروګرامونو لپاره وجوه (هغه عایداتي پروژې چې د مالیې وزارت د موافقې او اقتصادي کمیسیون د منظورۍ وروسته د بودیجې سند کې شامیلیږي)
+,"910,067", Paying  previous years' debts,پرداخت مقروضیت ها سال های گذشته,د تیرو کلونو د مقروضیتونو ورکړه
+,"910,068",Salang Highway Renovation And Kabul – Jalalabad 2nd lane (Latah Band) Construction By Toll Plaza Contingency Code,کود احتیاط پرداخت وجوه ترمیم و بازسازی شاهراه سالنگ و اعمار سرک لین دوم کابل – جلال آباد (لته بند) توسط تولپلازا,د سالنګ د لویې لارې د ترمیم او بیارغونې او د کابل – جلال آباد دویم لین (لته بند) د تولپلازې په واسطه د جوړولو احتیاط کوډ
+,090001, Policy Reserved Fund,0,د پالیسۍ خوندي فنډ
+,090002, Disaster Contingency Fund,0,د ناورین بیړني فنډ
+,090020,Contingency fund for financial reimbursements.,0,د مالي تادیاتو لپاره بیړني فنډ.
+,"90,024",Contingency Fund for purchase of Land,0,د ځمکې پیرود لپاره د بیړني فنډ
+,090036,Contingency Fund for Protection of Strategic Projects,0,د ستراتیژیکو پروژو د ساتنې لپاره بودیجه
+,090050,Contingency fund for Operations and maintenance,0,د عملیاتو او ساتنې لپاره د بیړني فنډ
+,090081," 
+Contingency Fund For Urgent And Unpredicted Expenses",وجوه برای مصارف عاجل وپیشبینی شده,د بیړني او غیر متوقع لګښتونو لپاره د بیړني فنډ
+,090082,The Budget of Departments that Have Been Removed According to the Decision of the Cabinet,بودجه ادارت که نظر به فیصله کابینه خذف گردیده اند,د هغو ادارو بودیجه چې د کابینې د پرېکړې له مخې لغوه شوې ده
+,090086,Fund for printing of priced documents,,

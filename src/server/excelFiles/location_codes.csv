@@ -1,0 +1,443 @@
+﻿country,province,district_code,english_description,dari_description
+,01,,KABUL,کابل
+,,0101,PROVINCIAL CAPITAL OF  KABUL (KABUL),(مرکز ولایت کابل ( کابل
+,,0102,PAGHMAN,پغمان
+,,0103,CHAHAR ASYAB,چهارآسیاب
+,,0104,BAGRAMI,بگرامی
+,,0105,DEHSABZ,ده سبز
+,,0106,SHAKAR DARA,شکردره
+,,0107,MUSAHI,موسهی
+,,0108,MIR BACHA KOT,میر بچه کوت
+,,0109,KHAK-E-JABAR,خاک جبار
+,,0110,KALAKAN,کلکان
+,,0111,GULDARA,گلدره
+,,0112,FARZA,فرزه
+,,0113,ESTALEF,استالف
+,,0114,QARA BAGH,قره باغ
+,,0115,SURUBI,سروبی
+,02,,KAPISA,کاپیسا
+,,0201,PROVINCIAL CAPITAL OF KAPISA (MAHMUDI RAQI),( مرکز ولایت کاپیسا (محمود راقی
+,,0202,HISSA-E- DUWUMI KOHISTAN,حصه دوم کوهستان
+,,0203,KOH BAND,کوه بند
+,,0204,HISSA-E-AWALI KOHISTAN,حصه اول کوهستان
+,,0205,NIJRAB,نجراب
+,,0206,TAGAB,تگاب
+,,0207,ALASAY,اله سای
+,03,,PARWAN,پروان
+,,0301,PROVINCIAL CAPITAL OF PARWAN (CHARIKAR),( مرکز ولایت پروان ( چاریکار
+,,0302,BAGRAM,بگرام
+,,0303,SHINWARI,شینواری
+,,0304,SAYID KHAIL,سید خیل
+,,0305,JABULUSSARAJ,جبل السراج
+,,0306,SALANG,سالنگ
+,,0307,SYAHGIRDI GHORBAND,سیاه گرد غوربند
+,,0308,KOHI SAFI,کوه صافی
+,,0309,SURKHI PARSA,سرخ پارسا
+,,0310,SHAYKH ALI,شیخ علی
+,04,,WARDAK,وردک
+,,0401,PROVINCIAL CAPITAL OF WARDAK (MAYDAN SHAHR),( مرکز ولایت وردک ( میدان شهر
+,,0402,NERKH,نرخ
+,,0403,JALREZ,جلریز
+,,0404,CHAKI WARDAK,چک وردک
+,,0405,SAYYDABAD,سید آباد
+,,0406,DAYMIRDAD,دایمیرداد
+,,0407,HISSA-E-AWALI BIHSUD,حصه اول بهسود
+,,0408,JAGHATU,جغتو
+,,0409,MARKAZ-E-BEHSUD,مرکز بهسود
+,05,,LOGAR,لوگر
+,,0501,PROVINCIAL CAPITAL OF  LOGAR ( PULI ALAM ),(مرکز ولایت لوگر ( پل علم
+,,0502,BARAKI BARAK,برکی برک
+,,0503,CHARKH,چرخ
+,,0504,KHUSHI,خوشی
+,,0505,MOHAMMAD AGHA,محمد آغه
+,,0506,KHAR WAR,خروار
+,,0507,AZRA,ازره
+,06,,NANGARHAR,ننگرهار
+,,0601,PROVINCIAL CAPITAL OF  NANGARHAR ( JALALABAD ),(مرکز ولایت ننگرهار ( جلال آباد
+,,0602,BEHSUD,بهسود
+,,0603,SURKH RUD,سرخرود
+,,0604,CHAPARHAR,چپرهار
+,,0605,KAMA,کامه
+,,0606,KUZKUNAR,کوزکنر
+,,0607,RODAT,رودات
+,,0608,KHUGYANI,خوگیانی
+,,0609,BATI KOT,بتی کوت
+,,0610,DEH BALA,ده بالا
+,,0611,PACHIR WAGAM,پچیرواگام
+,,0612,DARAH-E-NOOR,دره نور
+,,0613,KOT,کوت
+,,0614,GOSHTA,گوشته
+,,0615,ACHIN,اچین
+,,0616,SHINWAR,شینوار
+,,0617,MUHMAND DARA,مهمنددره
+,,0618,LALPOOR,لعل پور
+,,0619,SHER ZAD,شیرزاد
+,,0620,NAZYAN,نازیان
+,,0621,HESARAK,حصارک
+,,0622,DUR BABA,دربابا
+,07,,LAGHMAN,لغمان
+,,0701,PROVINCIAL CAPITAL OF  LAGHMAN ( MEHTERLAM ),( مرکز ولایت لغمان ( مهترلام
+,,0702,QARGHAYEE,قرغیی
+,,0703,ALISHING,علیشنگ
+,,0704,ALINGAR,علینگار
+,,0705,DAWLAT SHAH,دولت شاه
+,08,,PANJSHER,پنجشیر
+,,0801,PROVINCIAL CAPITAL OF  PANJSHER ( BAZARAK ),( مرکز ولایت پنجشیر ( بازارک
+,,0802,RUKHA,رخه
+,,0803,DARAH,دره
+,,0804,HISSA-E-AWAL ( KHINJ ),حصه اول خنج
+,,0805,UNABA,عنابه
+,,0806,SHUTUL,شتل
+,,0807,PARYAN,پریان
+,09,,BAGHLAN,بغلان
+,,0901,PROVINCIAL CAPITAL OF  BAGHLAN ( PUL-I-KHUMRI ),( مرکز ولایت بغلان ( پلخمری
+,,0902,DAHANA-E-GHURI,دهنه غوری
+,,0903,DUSHI,دوشی
+,,0904,NAHREEN,نهرین
+,,0905,BAGHLAN-E-JADEED,بغلان جید
+,,0906,KHINJAN,خنجان
+,,0907,ANDARAB,اندراب
+,,0908,DEH SALAH,ده صلاح
+,,0909,BURKA,برکه
+,,0910,JALGA,جلگه
+,,0911,TALA WA BARFAK,تاله و برفک
+,,0912,PUL-E-HISAR,پل حصار
+,,0913,KHOST WA FIRING,خوست و فرنگ
+,,0914,GOZARGAH-E-NOOR,گذرگاه نور
+,,0915,FIRING WA GHARU,فرنگ وغارو
+,10,,BAMYAN,بامیان
+,,"1,001",PROVINCIAL CAPITAL OF  BAMYAN ( BAMYAN ),( مرکز ولایت بامیان ( بامیان
+,,"1,002",SHEBAR,شیبر
+,,"1,003",SAIGHAN,سیغان
+,,"1,004",KAHMARD,کهمزد
+,,"1,005",YAKAWLANG,یکاولنگ
+,,"1,006",PANJAB,پنجاب
+,,"1,007",WARAS,ورس
+,11,,GHAZNI,غزنی
+,,"1,101",PROVINCIAL CAPITAL OF  GHAZNI ( GHAZNI ),(مرکز ولایت غزنی ( غزنی
+,,"1,102",WALI MOHAMMAD SHAHID KHUGYANI,ولی محمد شهید خوگیانی
+,,"1,103",KHWAJA OMARI,خواجه عمری
+,,"1,104",WAGHAZ,واغظ
+,,"1,105",DEH YAK,ده یک
+,,"1,106",JAGHATU,جغتو
+,,"1,107",ANDAR,اندر
+,,"1,108",ZANAKHAN,زنخان
+,,"1,109",RASHIDAN,رشیدان
+,,"1,110",NAWUR,ناور
+,,"1,111",QARA BAGH,قره باغ
+,,"1,112",GIRO,گیرو
+,,"1,113",AB BAND,آب بند
+,,"1,114",JAGHURI,جاغوری
+,,"1,115",MUQUR,مقر
+,,"1,116",MALISTAN,مالستان
+,,"1,117",GELAN,گیلان
+,,"1,118",AJRISTAN,اجرستان
+,,"1,119",NAWA,ناوه
+,12,,PAKTIKA,پکتیکا
+,,"1,201",PROVINCIAL CAPITAL OF  PAKTIKA ( SHARAN ),( مرکز ولایت پکتیکا ( شرن
+,,"1,202",MATA KHAN,متاخان
+,,"1,203",YOSUF KHEL,یوسف خیل
+,,"1,204",YAHYA KHEL,یحیی خیل
+,,"1,205",SAR RAWZA,سرروضه
+,,"1,206",OMNA,اومنه
+,,"1,207",ZARGHUN SHAHR,زرغون شهر
+,,"1,208",GOMAL,گومل
+,,"1,209",JANI KHEL,جانی خیل
+,,"1,210",SURUBI,سروبی
+,,"1,211",URGOON,اورگون
+,,"1,212",ZIRUK,زیروک
+,,"1,213",NIKA,نیکه
+,,"1,214",BARMAL,برمل
+,,"1,215",GIYAN,گیان
+,,"1,216",DILA WA KHUSHAMAND,دیله و خوش امند
+,,"1,217",WAZAKHWAH,وازه خوا
+,,"1,218",WOR MAMAY,ورممی
+,,"1,219",TURWO,تروو
+,13,,PAKTYA,پکتیا
+,,"1,301",PROVINCIAL CAPITAL OF  PAKTYA ( GARDEZ ),(مرکز ولایت پکتیا ( گردیز
+,,"1,302",AHMADABA,احمدآبا
+,,"1,303",ZURMAT,زرمت
+,,"1,304",SHWAK,شواک
+,,"1,305",WUZA JADRAN,وزه حًدران
+,,"1,306",SAYYID KARAM,سیدکرم
+,,"1,307",JAJI,جاجی
+,,"1,308",LAJA AHMAD KHEL,لجه احمدخیل
+,,"1,309",JANI KHEL,جانی خیل
+,,"1,310",SAMKANI,حمکنی
+,,"1,311",DAND PATAN,دند پتان
+,14,,KHOST,خوست
+,,"1,401",PROVINCIAL CAPITAL OF  KHOST ( KHOST ),(مرکز ولایت خوست ( خوست
+,,"1,402",MANDUZAY (ESMAYEL KHEL),(مندوزی ( اسماعیل خیل
+,,"1,403",GURBUZ,گربز
+,,"1,404",TANAY,تنی
+,,"1,405",MUSA KHEL,موسی خیل
+,,"1,406",NADIRSHAH KOT,نادرشاه کوت
+,,"1,407",SABARI (YAQUBI),(صبری ( یعقوبی
+,,"1,408",ALI SHER,علی شیر
+,,"1,409",BAAK,باک
+,,"1,410",QALANDAR,قلندر
+,,"1,411",SPERA,اسپره
+,,"1,412",SHAMUL,شمل
+,,"1,413",JAJI MAIDAN,جاجی میدان
+,15,,KUNARHA,کنرها
+,,"1,501",PROVINCIAL CAPITAL OF  KUNARHA ( ASAD ABAD ),اسعد آباد
+,,"1,502",MARA WARA,مره وره
+,,"1,503",WATAPOOR,واته پور
+,,"1,504",NARANG WA BADIL,نرنگ و بادیل
+,,"1,505",SAR KANI,سرکانی
+,,"1,506",SHIGAL WA SHELTAN,شیگل و شیلتن
+,,"1,507",DARA-E-PECH,دره پیچ
+,,"1,508",BAR KUNAR,برکنر
+,,"1,509",SAWKAI,سوکی
+,,"1,510",KHAS KUNAR,خاص کنر
+,,"1,511",GHAZI ABAD,غازی آباد
+,,"1,512",DANGAM,دانگام
+,,"1,513",CHAPA DARA,چپه دره
+,,"1,514",NOOR GAL,نورگل
+,,"1,515",NARI,نری
+,16,,NOORISTAN,نورستان
+,,"1,601",PROVINCIAL CAPITAL OF  NOORISTAN ( PAROON ),( مرکز ولایت نورستان ( پارون
+,,"1,602",WAYGAL,وایگل
+,,"1,603",WAMA,واما
+,,"1,604",NOOR GRAM,نورگرام
+,,"1,605",DUAB,دوآب
+,,"1,606",KAMDESH,کامدیش
+,,"1,607",MANDOL,مندول
+,,"1,608",BARG-E-MATAL,برگ متال
+,17,,BADAKHSHAN,بدخشان
+,,"1,701",PROVINCIAL CAPITAL OF  BADAKHSHAN ( FAIZ ABAD ),( مرکز ولایت بدخشان ( فیض آباد
+,,"1,702",ARGO,ارگو
+,,"1,703",ARGHANJ KHWAH,ارغنجخواه
+,,"1,704",YAFTAL-E-SUFLA,یفتل سفلی
+,,"1,705",KHASH,خاش
+,,"1,706",BAHARAK,بهارک
+,,"1,707",DARAYIM,درایم
+,,"1,708",KOHISTAN,کوهستان
+,,"1,709",YAWAN,یاوان
+,,"1,710",JURM,جرم
+,,"1,711",TASHKAN,تشکان
+,,"1,712",SHUHADA,شهدا
+,,"1,713",SHAHR-E-BUZURG,شهر بزرگ
+,,"1,714",RAGHISTAN,راغستان
+,,"1,715",KISHM,کشم
+,,"1,716",WARDOOJ,وردوج
+,,"1,717",TAGAB,تگاب
+,,"1,718",YAMGAN,یمگان
+,,"1,719",SHIGHNAN,شغنان
+,,"1,720",KHWAHAN,خواهان
+,,"1,721",KUFAB,کوف آب
+,,"1,722",DARWAZ-E-PAYIN (MAMAY),درواز پائین مایمی
+,,"1,723",ESHKASHIM,اشکاشم
+,,"1,724",SHIKI,شکی
+,,"1,725",ZEBAK,زیباک
+,,"1,726",KIRAN WA MENJAN,کران و منجان
+,,"1,727",DARWAZ-E-BALA (NESAY),درواز بالا نسی
+,,"1,728",WAKHAN,واخان
+,18,,TAKHAR,تخار
+,,"1,801",PROVINCIAL CAPITAL OF  TAKHAR ( TALUQAN ),( مرکز ولایت تخار (  تالقان
+,,"1,802",HAZAR SUMUCH,هزار سمچ
+,,"1,803",BAHARAK,بهارک
+,,"1,804",BANGI,بنگی
+,,"1,805",CHAL,چال
+,,"1,806",NAMAK AB,نمک آب
+,,"1,807",KALAFGAN,کلفگان
+,,"1,808",FARKHAR,فرخار
+,,"1,809",KHWAJA GHAR,خواجه غار
+,,"1,810",RUSTAQ,رستاق
+,,"1,811",ESHKAMESH,اشکمش
+,,"1,812",DASHT-E-QALA,دشت قلعه
+,,"1,813",WARSAJ,ورسج
+,,"1,814",KHWAJA BAHAWUDDIN,خواجه بهاوالدین
+,,"1,815",DARQAD,درقد
+,,"1,816",CHAHAB,چاه آب
+,,"1,817",YANGI QALA,ینگی قلعه
+,19,,KUNDUZ,کندز
+,,"1,901",PROVINCIAL CAPITAL OF  KUNDUZ ( KUNDUZ ),( مرکز ولایت کندز ( کندز
+,,"1,902",CHAR DARAH,چاردره
+,,"1,903",ALI ABAD,علی آباد
+,,"1,904",KHAN ABAD,خان آباد
+,,"1,905",HAZRATI IMAM SAHIB,حضرت امام صاحب
+,,"1,906",DASHTI-E-ARCHI,دشت ارچی
+,,"1,907",QALA-E-ZAL,قلعه ذال
+,20,,SAMANGAN,سمنگان
+,,"2,001",PROVINCIAL CAPITAL OF  SAMANGAN ( AYBAK ),( مرکز ولایت سمنگان ( ایبک
+,,"2,002",HAZRAT-E-SULTAN,حضرت سلطان
+,,"2,003",KHURAM WA SARBAGH,خرم و سارباغ
+,,"2,004",FEROZ NAKHCHEER,فیروزنخچیر
+,,"2,005",ROI-DO-AB,روی دوآب
+,,"2,006",DARA-E-SOOF-E-PAYIN,دره صوف پائین
+,,"2,007",DARA-E-SOOF-E-BALA,دره صوف  بالا
+,,"2,008",KHULM,خلم
+,21,,BALKH,بلخ
+,,"2,101",PROVINCIAL CAPITAL OF  BALKH ( MAZAR-E-SHARIF ),( مرکز ولایت بلخ ( مزار شریف
+,,"2,102",NAHR-E-SHAHI,نهر شاهی
+,,"2,103",DEHDADI,دهدادی
+,,"2,104",CHAR KENT,چارکنت
+,,"2,105",MARMUL,مارمل
+,,"2,106",BALKH,بلخ
+,,"2,107",SHOLGARA,شولگره
+,,"2,108",CHIMTAL,چمتال
+,,"2,109",DAWLAT ABAD,دولت اباد
+,,"2,110",KHULM,خلم
+,,"2,111",CHAR BOLAK,چاربولک
+,,"2,112",SHORTEPA,شورتیپه
+,,"2,113",KALDAR,کلدار
+,,"2,114",KISHINDEH,کشنده
+,,"2,115",ZARI,زاری
+,22,,SAR-E- PUL,سرپل
+,,"2,201",PROVINCIAL CAPITAL OF  SAR-E-PUL ( SAR-E-PUL ),( مرکز ولایت سرپل ( سرپل
+,,"2,202",SAYYAD,صیاد
+,,"2,203",KOHISTANAT,کوهستانات
+,,"2,204",SOZMA QALA,سوزمه قلعه
+,,"2,205",SANGCHARAK,سنگ چارک
+,,"2,206",GOSFANDI,گوسفندی
+,,"2,207",BALKHAB,بلخاب
+,23,,GHOR,غور
+,,"2,301",PROVINCIAL CAPITAL OF  GHOR ( CHIGHCHERAN ),( مرکز ولایت غور ( چغچران
+,,"2,302",DULEENA,دولینه
+,,"2,303",DAWLATYAR,دولت یار
+,,"2,304",CHAR SADA,چارصده
+,,"2,305",PASABAND,پسابند
+,,"2,306",SHAHRAK,شهرک
+,,"2,307",LAL WA SARJANGAL,لعل وسرجنگل
+,,"2,308",TAYWARA,تیوره
+,,"2,309",TULAK,تولک
+,,"2,310",SAGHAR,ساغر
+,,"2,311",Marghab,مرغاب
+,24,,DAYKUNDI,دایکندی
+,,"2,401",PROVINCIAL CAPITAL OF  DAYKUNDI ( NILI ),(مرکز ولایت دایکندی (نیلی
+,,"2,402",SHAHRISTAN,شهرستان
+,,"2,404",ISHTERLAI,اشترلی
+,,"2,405",KHEDIR,خدیر
+,,"2,406",GETI,گیتی
+,,"2,407",MIRAMOR,میرامور
+,,"2,408",SANG-E-TAKHT,سنگ تخت
+,,"2,409",KEJRAN,کیجران
+,25,,UROZGAN,ارزگان
+,,"2,501",PROVINCIAL CAPITAL OF  UROZGAN ( TIRINKOT ),(مرکز ولایت ارزگان ( ترینکوت
+,,"2,502",DEHRAOUD,دهراود
+,,"2,503",CHORA,چوره
+,,"2,504",SHAHID-E-HASSAS,شهید حساس
+,,"2,505",KHAS UROZGAN,خاص ارزگان
+,,"2,506",GEZAB,گیزاب
+,,"2,507",CHENARTO,چنارتو
+,26,,ZABUL,زابل
+,,"2,601",PROVINCIAL CAPITAL OF  ZABUL ( QALAT ),( مرکز ولایت زابل (  قلات
+,,"2,602",TARANK WA JALDAK,ترنک وجلدک
+,,"2,603",SHINKAI,شینکی
+,,"2,604",MIZAN,میزان
+,,"2,605",ARGHANDAB,ارغنداب
+,,"2,606",SHAH JOI,شاه جوی
+,,"2,607",DAICHOPAN,دایچوپان
+,,"2,608",ATGHAR,اتغر
+,,"2,609",NAW BAHAR,نوبهار
+,,"2,610",SHEMEL ZAYI,شملزایی
+,,"2,611",KAKAR (KHAK-E-AFGHAN),(کاکری (خاک افغان
+,27,,KANDAHAR,کندهار
+,,"2,701",PROVINCIAL CAPITAL OF  KANDAHAR ( KANDAHAR ),(مرکز ولایت کندهار (کندهار
+,,"2,702",ARGHANDAB,ارغنداب
+,,"2,703",DAMAN,دامان
+,,"2,704",PANJWAYEE,پنجوائی
+,,"2,705",ZHIRE,ژیر
+,,"2,706",SHAH WALI KOT,شاه ولی کوت
+,,"2,707",KHAKREZ,خاکریز
+,,"2,708",ARGHISTAN,ارغستان
+,,"2,709",GHORAK,غورک
+,,"2,710",MAIWAND,میوند
+,,"2,711",SPIN BOLDAK,سپین بولدک
+,,"2,712",NESH,نیش
+,,"2,713",MIYANISHIN,میانشین
+,,"2,714",SHORABAK,شورابک
+,,"2,715",MARUF,معروف
+,,"2,716",REG (SHIGA),ریگ شگه
+,28,,JAWZJAN,جوزجان
+,,"2,801",PROVINCIAL CAPITAL OF  JAWZJAN [ SHEBERGHAN ],( مرکز ولایت جوزجان ( شبرغان
+,,"2,802",KHWAJA DUKOH,خواجه دوکوه
+,,"2,803",KHANAQA,خانقاً
+,,"2,804",MINGAJIK,منگجیک
+,,"2,805",QUSH TEPA,قوش تیپه
+,,"2,806",KHAMYAB,خم آب
+,,"2,807",AQCHAH,آقچه
+,,"2,808",FAIZABAD,فیض آباد
+,,"2,809",MARDYAN,مردیان
+,,"2,810",QARQIN,قرقین
+,,"2,811",DARZAB,درز آب
+,29,,FARYAB,فاریاب
+,,"2,901",PROVINCIAL CAPITAL OF  FARYAB ( MAIMANA ),( مرکز ولایت فاریاب ( میمنه
+,,"2,902",PASHTUN KOT,پشتون کوت
+,,"2,903",KHWAJA SABZ POSH-E-WALI,خواجه سبز پوش ولی
+,,"2,904",ALMAR,المار
+,,"2,905",BIL CHIRAGH,بل چراغ
+,,"2,906",SHIRIN TAGAB,شرین تگاب
+,,"2,907",QAISAR,قیصار
+,,"2,908",GURZIWAN,گرزیون
+,,"2,909",DAWLAT ABAD,دولت آباد
+,,"2,910",KOHISTAN,کوهستلن
+,,"2,911",QARAM QUL,قرم قل
+,,"2,912",QURGHAN,قر غان
+,,"2,913",ANDKHOY,اند خوی
+,,"2,914",KHANI CHARBAGH,خان چار باغ
+,,"2,915",Ghormach,غورماچ
+,30,,HELMAND,هلمند
+,,"3,001",PROVINCIAL CAPITAL OF  HELMAND (LASHKARGAH),( مرکز ولایت هلمند ( لشکرگاه
+,,"3,002",NAD ALI,نادعلی
+,,"3,003",NAWA-E-BARIKZAYI,ناوه بارکزائی
+,,"3,004",NAHR-E-SARAJ,نهر سراج
+,,"3,005",WASHER,وا شـــیــر
+,,"3,006",GARM SER,گرم سیر
+,,"3,007",NAWZAD,نوزاد
+,,"3,008",SANGIN QALA,سنگین قلعه
+,,"3,009",MUSA QALA,موسی قلعه
+,,"3,010",KAJAKI,کجکی
+,,"3,011",REG-E-KHAN NISHIN,ریک خـانـشین
+,,"3,012",BAGHRAN,باغران
+,,"3,013",DESHU,دیشو
+,,"3,014",Marja,مارجه
+,31,,BADGHIS,بادغیس
+,,"3,101",PROVINCIAL CAPITAL OF  BADGHIS ( QALA-E-NOW ),( مرکز ولایت بادغیس ( قلعه نو
+,,"3,102",AB KAMARI,آبکمری
+,,"3,103",MUQUR,مقر
+,,"3,104",QADIS,قادس
+,,"3,105",BALA MURGHAB,بالا مرغاب
+,,"3,106",JAWAND,جونـد
+,,"3,107",GHORMACH,غـورماچ
+,32,,HERAT,هرات
+,,"3,201",PROVINCIAL CAPITAL OF  HERAT (HERAT),( مرکز ولایت هرات ( هرات
+,,"3,202",ENJIL,انجیل
+,,"3,203",NIZAM-E-SHAHID (GUZARA),(نظام شهید (گذره
+,,"3,204",KARRUKH,کرخ
+,,"3,205",ZENDAJAN,زنده جان
+,,"3,206",PASHTUN ZARGHUN,پشتون زرغون
+,,"3,207",KUSHK (RUBAT-E-SANGI),( کشک ( رباط سنگی
+,,"3,208",GULRAN,گلران
+,,"3,209",ADRASKAN,ادرسکن
+,,"3,210",KUSHK-E-KUHNA,کشک کهنه
+,,"3,211",GHORYAN,غوریان
+,,"3,212",OBE,اوبه
+,,"3,213",KOHSAN,کهسان
+,,"3,214",SHINDAND,شیندند
+,,"3,215",FERSI,فرسی
+,,"3,216",CHISHT-E-SHARIF,چشت شریف
+,33,,FARAH,فراه
+,,"3,301",PROVINCIAL CAPITAL OF  FARAH (FARAH),( مرکز ولایت فراه ( فراه
+,,"3,302",PUSHTRUD,پشت رود
+,,"3,303",KHAK-E-SAFED,خاک سفید
+,,"3,304",QALA-E-KAH,قلعه کاه
+,,"3,305",SHIB KOH,شیب کوه
+,,"3,306",BALA BULUK,بالا بلوک
+,,"3,307",ANAR DARA,انار دره
+,,"3,308",BAKWA,بکواه
+,,"3,309",LASH-E-JUWAYN,لاش جوین
+,,"3,310",GULISTAN,گلستان
+,,"3,311",PUR CHAMAN,پر جمن
+,34,,NIMROZ,نیمروز
+,,"3,401",PROVINCIAL CAPITAL OF  NIMROZ (ZARANJ),( مرکز ولایت نیمروز ( زرنج
+,,"3,402",KANG,کنگ
+,,"3,403",ASL-E-CHAKHANSUR,اصل چخانسور
+,,"3,404",CHAR BURJAK,چهار برجک
+,,"3,405",KHASHROD,خاشرود
+,,"3,406",Dil Aram,دل آرام
+,90,,Central Ministries,وزارت های مرکزی
+,,"9,000",Central Ministries,وزارت های مرکزی
+,95,,Offshore Payments,تادیات خارجی 
+,,"9,500",Offshore Payments,تادیات خارجی 

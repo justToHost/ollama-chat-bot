@@ -113,6 +113,15 @@ nav{
     margin: 10px 17px;
     /* direction: rtl; */
 }
+
+.message.static_msg{
+    margin: 10px auto;
+    width: 100%;
+    color: #222;
+    text-transform: capitalize;
+    text-align: center;
+}
+
 .newChatBtn{
     margin: 18px 50px 0 50px;
     padding: 5px 9px;
