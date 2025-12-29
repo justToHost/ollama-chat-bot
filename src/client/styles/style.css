@@ -140,16 +140,51 @@ nav{
 
 .chats-area .systemMsg{
     margin-right: auto;
-    background-color: lightskyblue;
+    
 }
 
+.chats-area .systemMsg p{
+    margin-right: auto;
+    background: purple;
+}
+
+.chats-area .message .message-text{
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    
+}
 .chats-area .user-message{
     margin-left: auto;
-    background-color: orangered;
 }
+
+.message p{
+    padding: 5px;
+    border-radius: 5px;
+    /* text-align: center; */
+    margin: 0;
+    color: #fff;
+}
+
+
+.chats-area .user-message p{
+    background: #444;
+    
+}
+
+
+
 .message.rightSide{
     direction: rtl;
 }
+
+.message img{
+    max-width: 200px !important;
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}   
 
 .chat-input-panel{
     display: flex;

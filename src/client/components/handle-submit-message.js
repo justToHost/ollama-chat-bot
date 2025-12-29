@@ -73,11 +73,11 @@ function createMessage(chat,classes, lang = null){
      `
      <p class="message-text">${chat.message ? 
       formatMessage(chat.message) : '' }</p> 
-     <img class="message-image" style="width: 80px; height : 50px;" 
+     <img class="message-image"  
        src="${chat.image ? chat.image : ''}" />
       `:`
 
-        ${chat.message ? formatMessage(chat.message) : '' }
+        ${chat.message && `<p>${formatMessage(chat.message)} </p>` }
 
       `}
     `
@@ -86,7 +86,7 @@ function createMessage(chat,classes, lang = null){
 
   ` <p>${formatMessage(chat)}</p> ${feedBackUI()}` 
   : 
-  formatMessage(chat)}`;
+  `<p>${formatMessage(chat)}</p>`}`
 
   return userMsgEl
 }
