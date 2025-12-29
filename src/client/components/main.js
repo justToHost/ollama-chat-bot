@@ -24,7 +24,7 @@ if(performance.getEntriesByType('navigation')[0].type === 'navigate'){
 
 window.addEventListener('DOMContentLoaded', async(e)=>{
    localStorage.setItem('isFirstLoad', 'true')
-      const conversationId = localStorage.getItem('conversationId')
+   const conversationId = localStorage.getItem('conversationId')
    let chatArea = document.querySelector('.chats-area')
 
    console.log(chatArea, 'chat area')

@@ -16,20 +16,18 @@ export default function findBestMatch(question, codes) {
       code.district_code ? code.district_code.toString() : null,
       code.tasnif_code ? code.tasnif_code.toString() : null,
       code.province ? code.province.toString() : null
-    ].filter(term => term && (
-      term.english_description && term.english_description?.toLowerCase().includes(questionWords[0]) ||
-      term.dari_description && term.dari_description.includes(questionWords[0]) ||
-      term === questionWords[0]
-    ));
+    ].filter(term => term && term);
     
 
-    return searchTerms
-    
+    return searchTerms.some(term =>{
+      return questionWords.some(word => term.includes(word))
+    })
   }).slice(0, 3);
 
  console.log('matches ', matches, matches.length)
 
   if (matches.length === 0) return null;
+  
   return matches
 
   // STEP 2: Determine user intent MORE PRECISELY
