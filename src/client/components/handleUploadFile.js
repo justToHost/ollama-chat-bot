@@ -1,25 +1,31 @@
 
 import axios from "axios"
 import getBaseUrl from "./baseUrl.js"
-
+import handlesubmitBtn from "./submitBtnHandle.js"
 const baseUrl = getBaseUrl()
 
-
 const handleUploadFile = (element) => {
+const submitHandler = new handlesubmitBtn(document.querySelector('.submit-question-btn')) 
+
 
    element.addEventListener('click',()=>{
      console.log('file clicked')
+    // return console.log(submitHandler.disable(), 'submit handler in upload file')
+
      const fileInput = document.querySelector('.file-input')
      const file = fileInput.files
 
      fileInput.addEventListener('change', async(e)=>{
-        await pickAndParseFile(e)
-     })
+        console.log('file selected')
+        submitHandler.disable()
+        await pickAndParseFile(e, submitHandler)
+     }, {once: true})
+
      fileInput.click()
    })
 }
 
-async function pickAndParseFile(el){
+async function pickAndParseFile(el, submitHandler){
         const file = el.target.files[0]
 
           const chatInputPanel = document.querySelector('.chat-input-panel')
@@ -29,16 +35,22 @@ async function pickAndParseFile(el){
 
           preview.innerHTML = 'parsing ...'
 
+          console.log('before compressing file ')
           // first compress the file to get ready for server
         const compressedImage = await compressImage(file)
 
+        console.log('compressed done!')
         //bufferize the compressed file to be  accepted by api
         const base64 = await readAndBufferFile(compressedImage)
 
-        console.log('base 64 returned ', base64)
+        console.log('buffered done ! ')
 
-      // parsed text out of the file
+      // parsed text out of the file  
+
+        console.log('before parsing file to get text')
+
         const parsedText = await parseFile(base64,preview)
+        submitHandler.enable()
         sessionStorage.setItem('parsedText', parsedText)
     }
 
@@ -57,7 +69,7 @@ async function readAndBufferFile(compressedFile){
 
 async function parseFile(file,filePreview){
 
-  console.log(file, 'the sending file')
+  // console.log(file, 'the sending file')
   const response = await axios.post(`${baseUrl}/api/upload/doc`,{file})
 
   console.log(response, 'response')

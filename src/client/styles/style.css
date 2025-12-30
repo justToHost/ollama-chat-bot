@@ -262,6 +262,11 @@ nav{
     display: none;
 }
 
+.file-upload-buttons .submit-question-btn.disabled{
+    background: gray;
+    cursor: not-allowed;
+}
+
 .submit-question-btn.show{
     display: inline-block;
 }

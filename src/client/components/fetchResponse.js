@@ -3,26 +3,32 @@ import axios from "axios"
 import { sendAndDisplayMessage } from "./handle-submit-message"
 import getBaseUrl from "./baseUrl"
 import handleChatLanguage from "./handleChatLanguage.js"
-
+import handleSubmitBtn from "./submitBtnHandle.js"
 
 const baseUrl = getBaseUrl()
 
 
-console.log(baseUrl, 'base url')
-
 const fetchResponse = async(userQuestion) => {
+const submitBtn = document.querySelector('.submit-question-btn')
+const submitHandler = new handleSubmitBtn(submitBtn)
+
+
    const cl = handleChatLanguage()
    console.log(handleChatLanguage, cl, 'chat lang')
    createMessageLoading()
 const questionData = {question : userQuestion, selectedLang : cl}
 const conversationId = localStorage.getItem('conversationId')
 
+// disabling the submit button to avoid multiple submits    
+  submitHandler.disable()
   const response = 
   await axios.post(`${baseUrl}/api/submitQuestion?conversation_id=${conversationId}`, {questionData})
 
    console.log(response, 'response')
 
   if(response.status === 200 && response.data.success){
+   
+    submitHandler.enable()
 
     document.querySelector('.thinking').remove()
     const text = response.data.answer
@@ -60,6 +66,7 @@ function createMessageLoading(){
   document.querySelector('.chats-area').append(El)
   
 }
+
 
 
 
