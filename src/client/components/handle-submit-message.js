@@ -3,6 +3,7 @@ import fetchResponse from "./fetchResponse.js"
 
 import { toggleSendIcon } from "./handleSendIconToggle.js"
 import { createNewConversation } from "./handleNewConversation.js"
+import { marked } from "marked"
 
 export function sendQuestion(element){
 
@@ -70,23 +71,26 @@ function createMessage(chat,classes, lang = null){
     classes === 'user-message' ?
 
       `${chat.image ?
-     `
-     <p class="message-text">${chat.message ? 
-      formatMessage(chat.message) : '' }</p> 
-     <img class="message-image"  
-       src="${chat.image ? chat.image : ''}" />
+          `
+          ${chat.message ? 
+            formatMessage(chat.message) : '' }
+          <img class="message-image"  
+            src="${chat.image ? chat.image : ''}" />
       `:`
 
-        ${chat.message && `<p>${formatMessage(chat.message)} </p>` }
+            ${chat.message && `${formatMessage(chat.message)} ` }
 
-      `}
-    `
+        `}
+        
+        `
     :
       `${!chat.includes('thinking') ? 
 
-  ` <p>${formatMessage(chat)}</p> ${feedBackUI()}` 
-  : 
-  `<p>${formatMessage(chat)}</p>`}`
+        ` ${formatMessage(chat)} 
+            ${feedBackUI()}
+        ` 
+        : 
+        `${formatMessage(chat)}`}`
 
   return userMsgEl
 }
@@ -103,18 +107,7 @@ function feedBackUI(){
 export default function formatMessage(text) {
 
  console.log('formatting message text ', text)
-    return text
-        // Convert line breaks to <br> first
-        .replace(/\n/g, '<br>')
-        // Boldify text surrounded by <br><br> (headers)
-        .replace(/(<br><br>)([^<]+?)(<br><br>)/g, '$1<strong>$2</strong>$3')
-        // Boldify text after double line breaks (before conversion)
-        .replace(/(\n\n)([^\n]+?)(\n\n)/g, '$1<strong>$2</strong>$3')
-        // Boldify numbered steps
-        .replace(/(\d+\.\s+.+?)(?=<br>|$)/g, '<strong>$1</strong>')
-        // Convert **bold** to <strong>
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .trim()
+    return marked.parse(text)
 }
 
 export {sendAndDisplayMessage, scrollToBottom, createMessage, feedBackUI}

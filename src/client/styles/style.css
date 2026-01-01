@@ -143,10 +143,10 @@ nav{
     
 }
 
-.chats-area .systemMsg p{
+/* .chats-area .systemMsg p{
     margin-right: auto;
     background: purple;
-}
+} */
 
 .chats-area .message .message-text{
     margin: 0;
@@ -158,19 +158,15 @@ nav{
     margin-left: auto;
 }
 
-.message p{
-    padding: 5px;
-    border-radius: 5px;
-    /* text-align: center; */
-    margin: 0;
-    color: #fff;
+.message p, li{
+    /* color: #fff; */
+    font-weight: bolder;
 }
 
 
-.chats-area .user-message p{
+/* .chats-area .user-message p{
     background: #444;
-    
-}
+} */
 
 
 
@@ -270,9 +266,6 @@ nav{
 .submit-question-btn.show{
     display: inline-block;
 }
-
-
-
 
 @media (max-width: 728px) {
 
