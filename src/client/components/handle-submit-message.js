@@ -7,13 +7,24 @@ import { marked } from "marked"
 
 export function sendQuestion(element){
 
-   element.addEventListener('click', async()=>{
+  let input = document.querySelector('.inputMsg')
+  const inputPanel = document.querySelector('.chat-input-panel')
+
+   element.addEventListener('click', async(e)=>{
+    await sendM(input, inputPanel)
+    
+   })
+
+   document.addEventListener('keydown', async(e)=>{
+      if(e.key === 'Enter') await sendM(input, inputPanel)
+})
+}
 
 
-    let input = document.querySelector('.inputMsg')
-    const inputPanel = document.querySelector('.chat-input-panel')
 
-    const pt = sessionStorage.getItem('parsedText')
+
+const sendM = async(input,inputPanel)=>{
+  const pt = sessionStorage.getItem('parsedText')
 
     if(input.value  === '' && !pt ) return alert('please provide your question !')
         
@@ -44,8 +55,6 @@ export function sendQuestion(element){
       document.querySelector('.inputMsg'), 
       document.querySelector('.submit-question-btn')
     )
-
-   })
 }
 
 

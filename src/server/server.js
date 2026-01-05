@@ -15,6 +15,7 @@ import tasnifJson, { locationJson } from "./utils/readExcel.js"
 import { systemInfo } from "./systemInfo.js";
 import findBestMatch from "./utils/bestAnswer.js";
 import cors from "cors"
+import { createWorker } from "tesseract.js";
 
 
 dotenv.config()
@@ -31,6 +32,7 @@ app.use(express.json())
 
 let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
 
+console.log(process.env.OPEN_ROUTER_API, ' the env variables')
 
 const client = new OpenAI({
     apiKey: process.env.OPEN_ROUTER_API,
@@ -327,18 +329,31 @@ app.post('/api/upload/doc', async(req,res)=>{
 console.log('comming file')
   if(!file) return res.json({message : 'invalid or unknown file'})
 
-  const result = await Tesseract.recognize(
-    file,
-    'eng',
-    {
-    logger: m => console.log(m), // Keep logger for debugging
-    // Use CDN to avoid local file issues
-    corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.0.0/',
-  }
-  );
+    const worker = await createWorker('eng+fas+ara');
+
   
-  const text = result.data.text
-  // // return console.log(text)
+  // Optimize for mixed RTL/LTR text
+  await worker.setParameters({
+    tessedit_pageseg_mode: '3', // Auto page segmentation
+    preserve_interword_spaces: '1',
+    tessedit_ocr_engine_mode: '3', // Default OCR engine
+  });
+  
+  const { data: { text } } = await worker.recognize(file);
+  await worker.terminate();
+
+  // const result = await Tesseract.recognize(
+  //   file,
+  //   'eng',
+  //   {
+  //   logger: m => console.log(m), // Keep logger for debugging
+  //   // Use CDN to avoid local file issues
+  //   corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.0.0/',
+  // }
+  // );
+  
+  // const text = result.data.text
+  // // // return console.log(text)
   const cleanText = Buffer.from(text, 'binary').toString('utf8'); // Rarely needed
   // console.log(cleanText, 'clean text')
 
