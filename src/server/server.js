@@ -57,15 +57,9 @@ app.post('/api/submitQuestion', async(req,res)=>{
 
     const {question} = req.body.questionData
     const {selectedLang} = req.body.questionData
-
-    console.log('selected lang', selectedLang)
-
-    const codes = [...tasnifJson, ...locationJson]
-
     let conversation_id = parseInt(req.query.conversation_id)
-
-    
-
+     
+    const codes = [...tasnifJson, ...locationJson]
 
     createMessage(conversation_id, 'user', question)    
       
@@ -93,7 +87,7 @@ app.post('/api/submitQuestion', async(req,res)=>{
       createMessage(conversation_id, 'AI', cleanAnswer)
      console.log('ai answer = ', cleanAnswer)
 
-    res.json({
+    return res.json({
         success : true,
         answer :  cleanAnswer,
         lang : selectedLang,

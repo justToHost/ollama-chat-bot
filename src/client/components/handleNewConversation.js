@@ -7,6 +7,23 @@ const baseUrl = getBaseUrl()
 console.log(baseUrl, 'base url in new conversation ')
 const handleNewConversation = (newChatBtn) => {
   newChatBtn.addEventListener('click', async()=>{
+
+   const chatArea = document.querySelector('.chats-area')
+
+    chatArea.classList.contains('user-message')
+
+    const hasNoMessage = chatArea.children.length === 0 || 
+    !chatArea.classList.contains('message')
+
+      console.log('has no message ', hasNoMessage)
+     if(hasNoMessage){
+        console.log(chatArea.children.length, ' chats count')
+       alert('Its already is a new chat')
+       return;
+     }
+
+     
+      
     openNewConversationPage()
 
     localStorage.setItem('isFirstLoad', 'false')
@@ -15,7 +32,11 @@ const handleNewConversation = (newChatBtn) => {
 }
 
 function openNewConversationPage(){
-    document.querySelector('.chats-area').innerHTML = ''
+    const chatArea = document.querySelector('.chats-area')
+   //  console.log(chatArea.children, ' children of chat area')
+   //  if(chatArea.children.length === 0) return alert('Its already is a new chat')
+
+    chatArea.innerHTML = ''
     const conversationID = localStorage.getItem('conversationId')
      //  reset the local storage
     conversationID && localStorage.removeItem('conversationId')

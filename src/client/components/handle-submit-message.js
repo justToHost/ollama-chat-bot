@@ -11,8 +11,7 @@ export function sendQuestion(element){
   const inputPanel = document.querySelector('.chat-input-panel')
 
    element.addEventListener('click', async(e)=>{
-    await sendM(input, inputPanel)
-    
+      await sendM(input, inputPanel)
    })
 
    document.addEventListener('keydown', async(e)=>{
@@ -21,6 +20,10 @@ export function sendQuestion(element){
 }
 
 
+function deleteStaticMessage(){
+   const staticMsg = chatArea.querySelector('.static_msg')
+   staticMsg.remove()
+}
 
 
 const sendM = async(input,inputPanel)=>{
