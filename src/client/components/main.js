@@ -53,8 +53,16 @@ function homeFirstLoad(){
 
 sendQuestion(document.querySelector('.submit-question-btn'))
 
-handleUploadFile(document.querySelector('.upload-file'))
-handlePastedFile()
+handleUploadFile(
+  document.querySelector('.upload-file'),
+  document.querySelector('.submit-question-btn'),
+  document.querySelector('.chat-input-panel'),
+
+)
+handlePastedFile(
+  document.querySelector('.inputMsg'), 
+document.querySelector('.submit-question-btn')
+)
 handleVoiceRecord()
 handleNewConversation(
 document.querySelector('.new')

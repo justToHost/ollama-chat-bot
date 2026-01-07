@@ -4,13 +4,12 @@ import getBaseUrl from "./baseUrl.js"
 import handlesubmitBtn from "./submitBtnHandle.js"
 const baseUrl = getBaseUrl()
 
-const handleUploadFile = (element) => {
+const handleUploadFile = (uploadButtonEl, sendBtn, inputPanel) => {
 const submitHandler = new handlesubmitBtn(document.querySelector('.submit-question-btn')) 
 
 
-   element.addEventListener('click',()=>{
+   uploadButtonEl.addEventListener('click',()=>{
      console.log('file clicked')
-    // return console.log(submitHandler.disable(), 'submit handler in upload file')
 
      const fileInput = document.querySelector('.file-input')
      const file = fileInput.files
@@ -19,7 +18,12 @@ const submitHandler = new handlesubmitBtn(document.querySelector('.submit-questi
         console.log('file selected')
         submitHandler.disable()
         await pickAndParseFile(e, submitHandler)
-     }, {once: true})
+         sendBtn.classList.add('show')
+
+        //  for now 
+       inputPanel.style.height = '130px'
+
+     })
 
      fileInput.click()
    })

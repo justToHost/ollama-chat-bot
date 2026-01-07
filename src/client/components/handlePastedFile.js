@@ -3,20 +3,22 @@ import { compressImage } from "./handleUploadFile"
 import { readAndBufferFile } from "./handleUploadFile"
 import handleSubmitBtn from "./submitBtnHandle.js"
 import { toggleSendIcon } from "./handleSendIconToggle.js"
+import axios from "axios"
+import { translateT } from "./TranslateText.js"
 
 
-const handlePastedFile = () => {
-    const input = document.querySelector('.inputMsg')
+const handlePastedFile = (input, sendBtn) => {
     const submitHandler = new handleSubmitBtn(document.querySelector('.submit-question-btn'))
-    const sendBtn = document.querySelector('.submit-question-btn')
 
     if(!input || !submitHandler || !sendBtn) return console.log('either input , submit handler or enter btn is unknown !')
 
     input.addEventListener('paste', async(e)=>{
-        console.log(e.clipboardData.items[0].type, 
-            'type of the item pasted')
-            submitHandler.disable()
-            await handlePaste(e, submitHandler, input, sendBtn)
+            
+            const result = await handlePaste(e, submitHandler, input, sendBtn)
+
+            console.log(result, 'resut of pasete')
+            
+            sendBtn.classList.add('show')
     })
 }
 
@@ -24,6 +26,8 @@ async function handlePaste(e, submitHandler, input, sendBtn){
        const items = e.clipboardData.items
         for(let item of items){
             if(item.type.startsWith('image/')){
+                submitHandler.disable()
+
                 const file = item.getAsFile()
                  e.preventDefault()
                 // we are turning the file into url so we could display it on browser
@@ -40,7 +44,17 @@ async function handlePaste(e, submitHandler, input, sendBtn){
                   const base64 = await readAndBufferFile(compressedImage)
             
                     const parsedText = await parseFile(base64,preview)
-                    if(!parsedText) return console.log('failur while parsing the text')
+                    if(!parsedText){
+                         console.log('failur while parsing the text')
+
+                        const userChosenLang = document.querySelector('#lang').value
+                        
+                         const tText = await translateT('please paste a clearer screen shot', 'en', userChosenLang)
+                         
+                         
+                         alert(tText.translatedText)
+                         return
+                    } 
 
                     submitHandler.enable()
                      // THE BELOW SHOULD BE FIXED 

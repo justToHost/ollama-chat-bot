@@ -9,13 +9,25 @@ export function sendQuestion(element){
 
   let input = document.querySelector('.inputMsg')
   const inputPanel = document.querySelector('.chat-input-panel')
+  const sendBtn = document.querySelector('.submit-question-btn')
+
 
    element.addEventListener('click', async(e)=>{
       await sendM(input, inputPanel)
    })
 
    document.addEventListener('keydown', async(e)=>{
-      if(e.key === 'Enter') await sendM(input, inputPanel)
+      if(e.key === 'Enter') {
+
+        if(sendBtn.disabled){
+          // effect the enter key
+          return sendBtn.style.border = '1px solid #000'
+        }else{
+           await sendM(input, inputPanel)
+        }
+        
+       
+      }
 })
 }
 

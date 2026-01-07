@@ -7,9 +7,10 @@ const handleSendIconToggle = (inputMsg,sendBtn) => {
  })
 }
 
-function toggleSendIcon(inputMsg,sendBtn){
+function toggleSendIcon(input,sendBtn){
    
-    if(inputMsg.value){
+    if(input.value){
+       
     sendBtn.classList.add('show')
     }else{
     sendBtn.classList.remove('show')  

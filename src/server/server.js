@@ -51,7 +51,7 @@ function currentChatHistory(conversationId){
         
 
 let cachedAnswers = new Set()
-
+let cleanAnswer;
      
 app.post('/api/submitQuestion', async(req,res)=>{
 
@@ -82,10 +82,18 @@ app.post('/api/submitQuestion', async(req,res)=>{
       sources.conversation)
 
 // 
-    const cleanAnswer = aiResponse
+     cleanAnswer = aiResponse
     // return console.log(cleanAnswer, ' the')
       createMessage(conversation_id, 'AI', cleanAnswer)
      console.log('ai answer = ', cleanAnswer)
+
+     if(cleanAnswer === null || cleanAnswer === undefined){
+         cleanAnswer = await generateAiResponse(question,selectedLang,
+          sources.relevantInfo,
+          sources.systemInfoAnswers, 
+          sources.possibleCodeAnswer,
+          sources.conversation)
+     }
 
     return res.json({
         success : true,
