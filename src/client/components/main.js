@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', async(e)=>{
 
    if(!conversationId){
     chatArea.innerHTML = 
-      `<p class="systemMsg static_msg message"> How can i help you ?</p>`
+      `<p class="systemMsg static_msg"> How can i help you ?</p>`
 
    }else{
       scrollToBottom()
@@ -46,7 +46,6 @@ function homeFirstLoad(){
     
   <main>
     ${navbar()}
-    ${newChatBtn()}
       ${firstChatPageLoad()}
   </main>
 `

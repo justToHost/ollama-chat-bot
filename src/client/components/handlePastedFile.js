@@ -17,8 +17,6 @@ const handlePastedFile = () => {
             'type of the item pasted')
             submitHandler.disable()
             await handlePaste(e, submitHandler, input, sendBtn)
-           
-
     })
 }
 

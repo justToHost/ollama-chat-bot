@@ -12,6 +12,10 @@ body{
   background-color: #efefef;
 }
 
+p, li{
+  text-transform: math-auto;
+  font-family: sans-serif;
+}
 
 .bot{
     position: absolute;
@@ -29,7 +33,8 @@ nav{
     position: fixed;
     top: 0;
     left: 0;
-    background: #efefef;
+    background: lightgray;
+    height: 45px;
 }
 
 .innerNav{
@@ -40,7 +45,7 @@ nav{
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
-    background: #72729f;
+    background: lightgray;
     /* padding: 0 3px; */
 }
 
@@ -96,13 +101,18 @@ nav{
   margin-top: 30px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  border-top: 1px solid #000;
+  /* border-top: 1px solid #000; */
 }
 
 
 .chats-area{
     flex: 1;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scroll-snap-type: none;
+    scroll-behavior: smooth;
+    scrollbar-color: grey;
+
 }
 
 .chats-area .message{
@@ -114,12 +124,15 @@ nav{
     /* direction: rtl; */
 }
 
-.message.static_msg{
-    margin: 10px auto;
-    width: 100%;
+.static_msg{
+    margin: 30px auto;
+    font-size: 15px;
+    width: 50%;
     color: #222;
     text-transform: capitalize;
     text-align: center;
+    font-family: sans-serif;
+    text-transform: math-auto;
 }
 
 .newChatBtn{
@@ -187,7 +200,7 @@ nav{
     flex-direction: column;
     align-items: center;
     width: 95%;
-    border: 1px solid purple;
+    border: 1px solid lightgrey;
     border-radius: 20px;
     padding: 5px;
     margin-bottom: 10px;
@@ -226,7 +239,7 @@ nav{
 
 .chat-input-panel button{
     outline: none;
-    border: 1px solid purple;
+    border: 1px solid lightgrey;
     padding: 10px 17px;
     padding: 5px 7px;
     border-radius: 30px;

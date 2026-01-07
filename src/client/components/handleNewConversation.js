@@ -12,16 +12,13 @@ const handleNewConversation = (newChatBtn) => {
 
     chatArea.classList.contains('user-message')
 
-    const hasNoMessage = chatArea.children.length === 0 || 
-    !chatArea.classList.contains('message')
-
-      console.log('has no message ', hasNoMessage)
-     if(hasNoMessage){
-        console.log(chatArea.children.length, ' chats count')
-       alert('Its already is a new chat')
-       return;
-     }
-
+    if(chatArea.querySelector('.static_msg') && !chatArea.querySelector('p')){
+      alert('its already new chat')
+      return 
+    }else if(!chatArea.querySelector('p') && !chatArea.    querySelector('.static_msg')){
+      alert('its already new chat')
+      return 
+    }
      
       
     openNewConversationPage()
