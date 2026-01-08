@@ -15,7 +15,6 @@ import { searchKnowledgeBase } from "./utils/searchKnowledgeBase.js";
 import { createNewConversation } from "./utils/newConversation.js";
 import { getDetailedDataForQuestion } from "./utils/detailedData.js";
 import pingRouter from "./routes/ping.js"
-import axios from "axios"
 
 // routes
 
@@ -29,6 +28,10 @@ app.use(cors({
   credentials: true,
   methods  : 'GET, POST, PUT, PATCH, DELETE'
 }))
+
+app.use(express.json())
+app.use(express.urlencoded({extended : true}))
+
 
 app.use('/ping', pingRouter)
 const wakeupTime = 13 * 60 * 1000
