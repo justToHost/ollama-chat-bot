@@ -15,10 +15,8 @@ const handlePastedFile = (input, sendBtn) => {
     input.addEventListener('paste', async(e)=>{
             
             const result = await handlePaste(e, submitHandler, input, sendBtn)
-
-            console.log(result, 'resut of pasete')
-            
-            sendBtn.classList.add('show')
+            const previewImg = input.closest('.chat-input-panel')?.querySelector('img')            
+             previewImg && sendBtn.classList.add('show')
     })
 }
 
@@ -49,16 +47,19 @@ async function handlePaste(e, submitHandler, input, sendBtn){
 
                         const userChosenLang = document.querySelector('#lang').value
                         
-                         const tText = await translateT('please paste a clearer screen shot', 'en', userChosenLang)
+                         const tText = await translateT('please paste a clearer screen shot', 'en', `prs`)
                          
                          
                          alert(tText.translatedText)
+                         const inputpanelImg = input.closest('.chat-input-panel')?.querySelector('img')
+                         console.log(inputpanelImg, 'img ')
+                         inputpanelImg.remove()
+                         sendBtn.classList.remove('show')
                          return
                     } 
 
                     submitHandler.enable()
-                     // THE BELOW SHOULD BE FIXED 
-                      toggleSendIcon(input,sendBtn)
+                  
                     sessionStorage.setItem('parsedText', parsedText)
 
             }

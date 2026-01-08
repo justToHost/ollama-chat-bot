@@ -12,9 +12,9 @@ const navbar = () => {
 
         <div class="languageSelect">
            <select name="lang" id="lang">
-              <option value="dari AFG">Dari</option>
-              <option value="pashto">Pashto</option>
-              <option value="english">English</option>
+              <option value="prs">Dari</option>
+              <option value="ps">Pashto</option>
+              <option value="en">English</option>
             </select>
         </div>
 

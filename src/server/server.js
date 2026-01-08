@@ -1,60 +1,53 @@
 
 import express from "express"
 import dotenv from "dotenv"
-import OpenAI from "openai"
-import fs from "fs/promises"
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const {PDFParse} = require('pdf-parse');
-import path from "path"
-import Tesseract from "tesseract.js"
-import paymentSystemTrainingData from "./trainedData.js"
 import db from "./DB/seed.js"
 import { __dirname } from "./relativePath.js"
 import tasnifJson, { locationJson } from "./utils/readExcel.js"
-import { systemInfo } from "./systemInfo.js";
 import findBestMatch from "./utils/bestAnswer.js";
 import cors from "cors"
 import { createWorker } from "tesseract.js";
+import { currentChatHistory } from "./utils/currentChats.js";
+import { closestAnswersForSystemInfo } from "./utils/systemInfoAnswers.js";
+import { generateAiResponse } from "./utils/generateResponseContent.js";
+import { createMessage } from "./utils/createNewMessage.js";
+import { searchKnowledgeBase } from "./utils/searchKnowledgeBase.js";
+import { createNewConversation } from "./utils/newConversation.js";
+import { getDetailedDataForQuestion } from "./utils/detailedData.js";
+import pingRouter from "./routes/ping.js"
+import axios from "axios"
 
+// routes
 
 dotenv.config()
 const app = express()
 
+const baseUrl =  process.env.BASE_URL
+// middlewares
 app.use(cors({
-  origin: ['https://ollama-chat-bot.vercel.app', 'http://localhost:5173'],
+  origin: [baseUrl, 'http://localhost:5173'],
   credentials: true,
   methods  : 'GET, POST, PUT, PATCH, DELETE'
 }))
 
+app.use('/ping', pingRouter)
+const wakeupTime = 13 * 60 * 1000
 
-app.use(express.json())
+process.env.Env === 'production' && setInterval(async() => {
+await wakeUp()  
+}, wakeupTime);
 
-let currentModel = 'openai/gpt-oss-20b' || 'openai/gpt-4o' || 'ofOllamaONE'
-
-console.log(process.env.OPEN_ROUTER_API, ' the env variables')
-
-const client = new OpenAI({
-    apiKey: process.env.OPEN_ROUTER_API,
-    baseURL: 'https://openrouter.ai/api/v1' || "https://api.groq.com/openai/v1"
-});
-
-
-function currentChatHistory(conversationId){
-  const currentConversationMessages = 
-     db.prepare(`
-      SELECT content from messages WHERE conversation_id = ?`)
-      .all(conversationId)
-
-      return currentConversationMessages
+async function wakeUp(){
+  try {
+    const res = await fetch(`${baseUrl}/ping`)
+    console.log(res.status, 'wake up rendr !')
+  } catch (err) {
+    console.log('error waking up ping server', err)
+  }
 }
-        
 
-let cachedAnswers = new Set()
-let cleanAnswer;
-     
 app.post('/api/submitQuestion', async(req,res)=>{
-
+let cleanAnswer;
     const {question} = req.body.questionData
     const {selectedLang} = req.body.questionData
     let conversation_id = parseInt(req.query.conversation_id)
@@ -104,218 +97,10 @@ app.post('/api/submitQuestion', async(req,res)=>{
   
 })
 
-async function useAiWith(model,role, content) {
-  const completion = await client.chat.completions.create({
-    model: model,
-    messages: [
-      {
-        role: role,
-        content: content,
-      },
-    ],
-  });
-
-   console.log(completion.choices, ' choices', completion.usage, 'usage', completion.service_tier, ' service tier')
-   const answer = completion?.choices?.[0]?.message?.content;
-    
-    if (!answer) {
-      console.log('ai threw error ! ',  answer);
-      throw new Error('AI returned empty response');
-    }
-  console.log('the message ',  answer);
-  return answer
-}
-
-function closestAnswersForSystemInfo(question){
-  const questionWords =  question.toLowerCase().split(' ')
-
- return systemInfo.filter(info => {
-  const searchTerms = question.toLowerCase().split(' ');
-  
-  return info.key_points.some(point => {
-    const pointLower = point.toLowerCase();
-    return searchTerms.some(term => 
-      pointLower.includes(term) ||
-      info.title_dari.toLowerCase().includes(term) ||
-      info.title_english.toLowerCase().includes(term)
-    );
-  });
-}).slice(0,3)
-}
-
-
-const generateResponseContent = 
-(question,relevantInfo,systemInfoAnswers,
-  possibleCodeAnswer,conversation, askedLang)=>{
-return `You are a payroll system expert for Ministry of Finance.
-
-USER QUESTION: "${question}"
-
-ANSWER STRICTLY BASED ON THESE INFORMATIONS WITH NO SELF INFO: in this ${askedLang} language.
-
-1. ERROR/ISSUE:
-${JSON.stringify(relevantInfo, null, 2)}
-
-2. SYSTEM/MENU DATABASE:
-${JSON.stringify(systemInfoAnswers, null, 2)}
-
-3. CODE/LOCATION DATABASE (for codes, tasneef, districts, provinces): if three options check the question and the choose the best possible one otherwise say not found 
-   
-${JSON.stringify(possibleCodeAnswer, null, 2)}
-
-4: PREVOUS CHAT HISTORY: ${JSON.stringify(conversation, null, 2)}
-
-INSTRUCTIONS:
-
-1. CLASSIFY the question type:
-   - Type A: Error/Problem (e.g., "چرا معاش دانلود نمیشه؟", "error during save")
-   - Type B: System Navigation (e.g., "کجا امتیازات کارکن است؟", "where to create department")
-   - Type C: Codes/Locations (e.g., "کود دوشی چیست؟", "tasneef code for civilian")
-   - Type D: General/Other
-
-3. SEARCH CRITERIA:
-   For Type A: Match with "question_dari", "tags", "error_signature"
-   For Type B: Match with "title_dari", "key_points", "workflow"  
-   For Type C: Match exact code names/numbers
-   For Type D: Broad search in all sources
-
-4. IF NO MATCH in primary source, check OTHER sources.
-
-NOW ANSWER:`
-}
-
-
-
-async function generateAiResponse(question, askedLang, 
-  relevantInfo, 
-  systemInfoAnswers, 
-  possibleCodeAnswer,
-  conversation){
-
-    const content = 
-    generateResponseContent(
-      question, 
-      relevantInfo,
-      systemInfoAnswers,
-      possibleCodeAnswer,
-      conversation,
-      askedLang )
-    
-    try{
-      const result = await useAiWith(currentModel, 'user', content)
-
-      console.log(result, 'result of the anaswer generation')
-
-      return result;
-    }catch(err){
-      console.log(err)
-      throw err
-    }
-}
-
-function createMessage(conversationId, role, content){
-
-   console.log(conversationId, role, content, 'new conversation')
- try{
-   const message = db.prepare(`INSERT INTO messages 
-    (conversation_id,role,content)
-     VALUES(?, ? , ?)
-    `).run(conversationId,role,content)
-
-    return message
-
- }catch(err){
-  console.log(err)
-  throw err
- }
-
-}
-
-function searchKnowledgeBase(q){
-  const words = q.split(' ').filter(w => w.length > 1);
-  const query = q.toLowerCase();
-  
-  const scoredResults = paymentSystemTrainingData.map(data => {
-    let score = 0;
-    
-    // Check each word
-    words.forEach(word => {
-      if (data.question_dari?.includes(word)) score += 3;
-      if (data.tags?.some(tag => tag.includes(word))) score += 2;
-      if (data.user_friendly_title?.includes(word)) score += 2;
-      if (data.question_english?.includes(word)) score += 1;
-      if (data.error_signature?.includes(word)) score += 1;
-    });
-    
-    // Exact matches get bonus
-    if (data.question_dari?.includes(query)) score += 5;
-    
-    return { ...data, score };
-  })
-  .filter(item => item.score > 1) // Only items with some match
-  .sort((a, b) => b.score - a.score) // Highest score first
-  .slice(0, 3); // Top 3 matches
-  
-  return scoredResults;
-}
-
- async function translateText(askedText,targetLang) {  
-
-   const content = ` you are a master class translator and at the same time you are extremely good at slang and ususal language in persian and pashto languages,  
-    give me the translation of ${askedText} in ${targetLang}
-   `
-
-      const translatedText = await useAiWith(currentModel, 'user', content)
-
-    
-      return translatedText
-}
-
-
-
-async function getDetailedDataForQuestion() {
-  const fileBuffered = await fs.readFile(path.join(__dirname, '/pdfFiles/tpms.pdf'))
-console.log(fileBuffered, 'buffer of pdf file')
-const parser = new PDFParse({ data: fileBuffered }); // Use 'data' not 'url'
-
-const text = await parser.getText()
-  return text;
-
-}
-
-
-function createNewConversation(title){
- try{
-   db.prepare('BEGIN').run()
-
-  // new conversation
-  const newConversation = db.prepare(`INSERT INTO conversations (title)
-    VALUES(?)`)
-
-    const info = newConversation.run(title)
-    console.log(newConversation.columns.length, 'new one')
-
-     db.prepare('COMMIT').run()
-
-     const convs = db.prepare('SELECT * FROM conversations').all()
-
-     console.log('all conversations ', convs)
-     return info
- }catch(err){
-  console.log(err)
-      db.prepare('ROLLBACK')
-      throw err
- }
-}
-
-
 // new conversation
-
 app.post('/api/newConversation', (req, res)=>{
   const {title} = req.body
-
   const newConversation = createNewConversation(title)
-
   res.json({
     success : true,
     conversationId  : newConversation.lastInsertRowid
@@ -341,21 +126,10 @@ console.log('comming file')
     tessedit_ocr_engine_mode: '3', // Default OCR engine
   });
   
+  // THE BELOW TAKES THE text OUT OF response.data object
   const { data: { text } } = await worker.recognize(file);
   await worker.terminate();
 
-  // const result = await Tesseract.recognize(
-  //   file,
-  //   'eng',
-  //   {
-  //   logger: m => console.log(m), // Keep logger for debugging
-  //   // Use CDN to avoid local file issues
-  //   corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.0.0/',
-  // }
-  // );
-  
-  // const text = result.data.text
-  // // // return console.log(text)
   const cleanText = Buffer.from(text, 'binary').toString('utf8'); // Rarely needed
   // console.log(cleanText, 'clean text')
 
@@ -364,11 +138,9 @@ console.log('comming file')
     parsedText : text,
     message : 'success parse'
   })
-
 })
 
 // all messages of a conversation
-
 app.get('/api/conversation/:id/messages', async(req,res)=>{
    const conversationId = parseInt(req.params.id)
  console.log('the issue is : ',conversationId)
@@ -391,6 +163,6 @@ app.get('/api/conversation/:id/messages', async(req,res)=>{
 })
 
 const PORT = process.env.PORT || 3001
-app.listen(PORT, ()=>{
+app.listen(PORT, async()=>{
     console.log('now running on port 3001')
 })
