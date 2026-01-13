@@ -14,17 +14,35 @@ import { createMessage } from "./utils/createNewMessage.js";
 import { searchKnowledgeBase } from "./utils/searchKnowledgeBase.js";
 import { createNewConversation } from "./utils/newConversation.js";
 import { getDetailedDataForQuestion } from "./utils/detailedData.js";
-import pingRouter from "./routes/ping.js"
+import {Server} from "socket.io";
+import http from "http";
 
 // routes
 
 dotenv.config()
 const app = express()
 
-const baseUrl =  process.env.BASE_URL
-// middlewares
+const serverPORT = process.env.PORT || 3001
+const clientPORT = '5173'
+const server = http.createServer(app)
+
+// cors for guarding the web socket connections 
+const io = new Server(server, {
+  cors:{
+    origin: 'http://localhost:5173'
+  }
+});
+
+
+io.on('connection', (socket)=>{
+  console.log('a user connected via web socket:', socket.id)
+  socket.emit('ping', {message : 'pong from server'})
+ })
+
+
+// cors for guarding the rest api connections
 app.use(cors({
-  origin: [baseUrl, 'http://localhost:5173'],
+  origin: [`http://localhost:${clientPORT}`, `https://ollama-chat-bot.onrender.com`],
   credentials: true,
   methods  : 'GET, POST, PUT, PATCH, DELETE'
 }))
@@ -32,22 +50,6 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
-
-app.use('/ping', pingRouter)
-const wakeupTime = 13 * 60 * 1000
-
-process.env.Env === 'production' && setInterval(async() => {
-await wakeUp()  
-}, wakeupTime);
-
-async function wakeUp(){
-  try {
-    const res = await fetch(`${baseUrl}/ping`)
-    console.log(res.status, 'wake up rendr !')
-  } catch (err) {
-    console.log('error waking up ping server', err)
-  }
-}
 
 app.post('/api/submitQuestion', async(req,res)=>{
 let cleanAnswer;
@@ -166,6 +168,6 @@ app.get('/api/conversation/:id/messages', async(req,res)=>{
 })
 
 const PORT = process.env.PORT || 3001
-app.listen(PORT, async()=>{
+app.listen(PORT, ()=>{
     console.log('now running on port 3001')
 })

@@ -10,6 +10,14 @@ import handleSendIconToggle from './handleSendIconToggle.js'
 import loadPrevMessages from './loadPrevMessages.js'
 import { scrollToBottom } from './handle-submit-message.js'
 import handleChatLanguage from './handleChatLanguage.js'
+import {io} from 'socket.io-client'
+
+const socket = io('http://localhost:3001')
+
+console.log(socket, 'socket')
+socket.on('connect', (socket)=>{
+  console.log('we connected to the server', socket.id)
+})
 
 import navbar from './navbar.js'
 
