@@ -37,7 +37,7 @@ console.log(CLIENT_URL, SERVER_URL, 'client and server urls')
 
 const allowedOrigins = [
    `http://localhost:${clientPORT}`,
-   CLIENT_URL,
+   'ollama-chat-bot.vercel.app',
    'ollama-chat-ayosciqq6-justtohosts-projects.vercel.app',
    'ollama-chat-bot-git-main-justtohosts-projects.vercel.app',
    SERVER_URL
