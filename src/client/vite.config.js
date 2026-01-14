@@ -4,6 +4,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const url = process.env.VITE_API_URL || 'http://localhost:3000'
 
 export default defineConfig({
   root: __dirname,  // Absolute path to src/client
@@ -17,9 +18,16 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',  // Your Express server
+        target: url,
         changeOrigin: true,
+        secure: false
       },
+      // '/socket.io': {  // ⭐⭐⭐ Optional if the target added to io() in main ⭐⭐⭐
+      //   target: 'http://localhost:3000',
+      //   ws: true,  // CRITICAL for WebSocket
+      //   changeOrigin: true,
+      //   secure: false
+      // }
     }   
   },
   resolve: {

@@ -10,16 +10,16 @@ import handleSendIconToggle from './handleSendIconToggle.js'
 import loadPrevMessages from './loadPrevMessages.js'
 import { scrollToBottom } from './handle-submit-message.js'
 import handleChatLanguage from './handleChatLanguage.js'
-import {io} from 'socket.io-client'
+import navbar from './navbar.js'
+import socket from './handleSocket/handleSocket.js'
 
-const socket = io('http://localhost:3001')
-
-console.log(socket, 'socket')
-socket.on('connect', (socket)=>{
-  console.log('we connected to the server', socket.id)
+socket.on('connect', () => {
+  console.log('socket connected', socket.id)
 })
 
-import navbar from './navbar.js'
+ socket.on('connect_error', (err) => {
+   console.error('socket connect_error', err)
+ })
 
 document.querySelector('#app').innerHTML = homeFirstLoad()
 
@@ -31,6 +31,8 @@ if(performance.getEntriesByType('navigation')[0].type === 'navigate'){
 }
 
 window.addEventListener('DOMContentLoaded', async(e)=>{
+  
+
    localStorage.setItem('isFirstLoad', 'true')
    const conversationId = localStorage.getItem('conversationId')
    let chatArea = document.querySelector('.chats-area')
@@ -82,4 +84,3 @@ handleSendIconToggle(
 document.querySelector('.inputMsg'), 
 document.querySelector('.submit-question-btn')
 )
-

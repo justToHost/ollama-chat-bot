@@ -22,34 +22,64 @@ import http from "http";
 dotenv.config()
 const app = express()
 
-const serverPORT = process.env.PORT || 3001
-const clientPORT = '5173'
+ const serverPORT = process.env.PORT || 3000
+ const clientPORT = '5173'
+
+ const CLIENT_URL = process.env.CLIENT_URL 
+ || `http://localhost:${clientPORT}`
+
+ const SERVER_URL = process.env.RENDER_URL 
+ || `http://localhost:${clientPORT}`
+
 const server = http.createServer(app)
+console.log(CLIENT_URL, SERVER_URL, 'client and server urls')
 
-// cors for guarding the web socket connections 
+const allowedOrigins = [
+   CLIENT_URL,
+   SERVER_URL
+].filter(Boolean)
+
 const io = new Server(server, {
-  cors:{
-    origin: 'http://localhost:5173'
-  }
+  cors : {
+    origin: allowedOrigins,
+    credentials: true,
+  },
+  // socket keepalive / timeouts for production
+   pingInterval: 10 * 60 * 1000,
+   pingTimeout: 15 * 60 * 1000,
 });
-
-
-io.on('connection', (socket)=>{
-  console.log('a user connected via web socket:', socket.id)
-  socket.emit('ping', {message : 'pong from server'})
- })
-
 
 // cors for guarding the rest api connections
 app.use(cors({
-  origin: [`http://localhost:${clientPORT}`, `https://ollama-chat-bot.onrender.com`],
+  origin: [`http://localhost:${clientPORT}`, 
+    SERVER_URL],
   credentials: true,
   methods  : 'GET, POST, PUT, PATCH, DELETE'
 }))
 
+io.on('connection', (socket)=>{
+  console.log('a user connected via web socket:', socket.id)
+  
+  const socketPing = setInterval(()=>{
+    socket.emit('ping', 
+      {message : 'pong from server',
+        uptime : process.uptime()
+      })
+  }, 10 * 60 * 1000)
+
+  socket.on('disconnect', ()=>{
+    console.log('user disconnected:', socket.id)
+  })  
+
+ })
+
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
+
+app.get('/', (req,res)=>{
+  res.send('hello from server')
+})
 
 app.post('/api/submitQuestion', async(req,res)=>{
 let cleanAnswer;
@@ -167,7 +197,6 @@ app.get('/api/conversation/:id/messages', async(req,res)=>{
     })
 })
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, ()=>{
-    console.log('now running on port 3001')
+server.listen(serverPORT, ()=>{
+    console.log(`now running on port ${serverPORT}`)
 })
