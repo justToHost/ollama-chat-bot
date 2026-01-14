@@ -9,7 +9,7 @@ const isSecure = url.startsWith('https:')
 // establish socket connection (proxied by Vite)
 const socket = io(url, {
    path: '/socket.io',
-   transports: ['websocket', 'polling'],
+   transports: ['websocket'],
    withCredentials: true,
    secure: isSecure,
    reconnection: true,

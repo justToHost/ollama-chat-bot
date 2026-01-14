@@ -16,6 +16,7 @@ import { createNewConversation } from "./utils/newConversation.js";
 import { getDetailedDataForQuestion } from "./utils/detailedData.js";
 import {Server} from "socket.io";
 import http from "http";
+import { all } from "axios"
 
 // routes
 
@@ -29,33 +30,35 @@ const app = express()
  || `http://localhost:${clientPORT}`
 
  const SERVER_URL = process.env.RENDER_URL 
- || `http://localhost:${clientPORT}`
+ || `http://localhost:${serverPORT}`
 
 const server = http.createServer(app)
 console.log(CLIENT_URL, SERVER_URL, 'client and server urls')
 
 const allowedOrigins = [
-   CLIENT_URL,
-   SERVER_URL
+   `http://localhost:${clientPORT}`,
+   SERVER_URL,
+   CLIENT_URL
 ].filter(Boolean)
 
 const io = new Server(server, {
   cors : {
-    origin: allowedOrigins,
+    origin: 'http://localhost:5173',
     credentials: true,
   },
   // socket keepalive / timeouts for production
-   pingInterval: 10 * 60 * 1000,
-   pingTimeout: 15 * 60 * 1000,
+  //  pingInterval: 10 * 60 * 1000,
+  //  pingTimeout: 15 * 60 * 1000,
 });
 
+console.log('allowed origins:', allowedOrigins)
 // cors for guarding the rest api connections
 app.use(cors({
-  origin: [`http://localhost:${clientPORT}`, 
-    SERVER_URL],
+  origin: allowedOrigins,
   credentials: true,
   methods  : 'GET, POST, PUT, PATCH, DELETE'
 }))
+
 
 io.on('connection', (socket)=>{
   console.log('a user connected via web socket:', socket.id)
@@ -65,7 +68,7 @@ io.on('connection', (socket)=>{
       {message : 'pong from server',
         uptime : process.uptime()
       })
-  }, 10 * 60 * 1000)
+  }, 3000)
 
   socket.on('disconnect', ()=>{
     console.log('user disconnected:', socket.id)
