@@ -16,7 +16,6 @@ import { createNewConversation } from "./utils/newConversation.js";
 import { getDetailedDataForQuestion } from "./utils/detailedData.js";
 import {Server} from "socket.io";
 import http from "http";
-import { all } from "axios"
 
 // routes
 
@@ -26,7 +25,7 @@ const app = express()
  const serverPORT = process.env.PORT || 3000
  const clientPORT = '5173'
 
- const CLIENT_URL = process.env.CLIENT_URL 
+ const CLIENT_URL = process.env.VERCEL_URL 
  || `http://localhost:${clientPORT}`
 
  const SERVER_URL = process.env.RENDER_URL 
@@ -37,7 +36,7 @@ console.log(CLIENT_URL, SERVER_URL, 'client and server urls')
 
 const allowedOrigins = [
    `http://localhost:${clientPORT}`,
-   'ollama-chat-bot.vercel.app',
+   CLIENT_URL,
    'ollama-chat-ayosciqq6-justtohosts-projects.vercel.app',
    'ollama-chat-bot-git-main-justtohosts-projects.vercel.app',
    SERVER_URL
