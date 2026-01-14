@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client'
 
-const apiUrl = 
+const apiUrl = import.meta.env.VITE_API_URL || 
 'http://localhost:3000'
 
 const url = apiUrl.replace(/\/$/, '') // remove trailing slash

@@ -48,8 +48,8 @@ const io = new Server(server, {
     credentials: true,
   },
   // socket keepalive / timeouts for production
-  //  pingInterval: 10 * 60 * 1000,
-  //  pingTimeout: 15 * 60 * 1000,
+   pingInterval: 10 * 60 * 1000,
+   pingTimeout: 15 * 60 * 1000,
 });
 
 console.log('allowed origins:', allowedOrigins)
@@ -69,7 +69,7 @@ io.on('connection', (socket)=>{
       {message : 'pong from server',
         uptime : process.uptime()
       })
-  }, 3000)
+  }, 10 * 60 * 1000)
 
   socket.on('disconnect', ()=>{
     console.log('user disconnected:', socket.id)
