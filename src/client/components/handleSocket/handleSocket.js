@@ -1,13 +1,11 @@
 import { io } from 'socket.io-client'
 
-console.log(window.location.hostname ,
-    window.location.port, window.location.pathname)
-
-const apiUrl = window.location.hostname === 'localhost' ?
+const apiUrl = window.location.hostname !== 'localhost' ?
  import.meta.env.VITE_API_URL : 'http://localhost:3000'
 
-const url = apiUrl.replace(/\/$/, '') // remove trailing slash
-const isSecure = url.startsWith('https:')
+
+const url = apiUrl.replace(/\/$/, '')
+const isSecure = apiUrl.startsWith('https:')
 
 // establish socket connection (proxied by Vite)
 const socket = io(url, {
