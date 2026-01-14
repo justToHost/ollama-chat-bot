@@ -1,7 +1,10 @@
 import { io } from 'socket.io-client'
 
-const apiUrl = import.meta.env.VITE_API_URL || 
-'http://localhost:3000'
+console.log(window.location.hostname ,
+    window.location.port, window.location.pathname)
+
+const apiUrl = window.location.hostname === 'localhost' ?
+ import.meta.env.VITE_API_URL : 'http://localhost:3000'
 
 const url = apiUrl.replace(/\/$/, '') // remove trailing slash
 const isSecure = url.startsWith('https:')
