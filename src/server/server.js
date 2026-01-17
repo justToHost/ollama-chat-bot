@@ -47,6 +47,7 @@ const io = new Server(server, {
     origin: allowedOrigins,
     credentials: true,
   },
+  transports: ['websocket', 'polling'],
   // socket keepalive / timeouts for production
    pingInterval: 10 * 60 * 1000,
    pingTimeout: 15 * 60 * 1000,
