@@ -1148,6 +1148,27 @@ const paymentSystemTrainingData = [
   "technical_note": "",
   "reference_code": "UNREGISTERED-TASNIF-CODE-ERROR-003",
   "prevention_tip": "تمام کود های مربوط به اداره ذیل را هنگام ایجاد اداره و یا قبل از ثبت کارمندان و یا هر گزارش دیگر در کود تصنیف ثبت کنید. "
+},
+{
+  "type": "error",
+  "id": 1017,
+  "question_dari": "حاضری ذخیره نمی‌شود",
+  "question_english": "Input string was not in a correct format. EmployeeAttendanceController.Post",
+  "answer": "یکی از کارمندان جدید در این مؤسسه هنوز در حاضری مؤسسه قبلی ذخیره شده است، اگرچه از سیستم آنجا حذف شده ولی از حاضری حذف نشده است و این مانع ایجاد حاضری جدید می‌شود.",
+  "category": "attendance",
+  "tags": ["حاضری", "ذخیره", "فرمت", "کارمند جدید"],
+  "error_signature": "Input string was not in a correct format. EmployeeAttendanceController.Post",
+  "user_friendly_title": "خطا در ذخیره‌سازی حاضری کارمند جدید",
+  "simple_explanation": "کارمندی که اخیراً به این مؤسسه منتقل شده، هنوز در لیست حاضری مؤسسه قبلی موجود است و این باعث می‌شود حاضری جدید ذخیره نشود.",
+  "user_actions": [
+    "کارمند مورد نظر را در سیستم مؤسسه قبلی بررسی کنید",
+    "اطمینان حاصل کنید که کارمند از حاضری مؤسسه قبلی کاملاً حذف شده باشد",
+    "اگر کارمند در مؤسسه قبلی هنوز در حاضری موجود است، از آنجا حذف کنید",
+    "سپس دوباره در مؤسسه جدید حاضری را ذخیره کنید"
+  ],
+  "who_to_contact": "بخش تیم فنی (اگر مشکل ادامه دارد)",
+  "technical_note": "خطای format string به دلیل تلاش برای پردازش داده‌های کارمندی که در مؤسسه قبلی در جدول حاضری باقی مانده است رخ می‌دهد.",
+  "reference_code": "ATTENDANCE-FORMAT-001"
 }
 ];
 
